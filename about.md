@@ -25,3 +25,5 @@ titles:
   # @end locale config
 key: page-about
 ---
+
+Welcome to my blog!
