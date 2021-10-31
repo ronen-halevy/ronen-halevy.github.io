@@ -74,6 +74,11 @@ Eq. 1 present Gradient Descent update equation. It is followed by a flow diagram
 
 \\(w_t = w_{t-1}-\alpha \cdot \bigtriangledown_w f(w_{t-1}) \\)
 
+\\( w_t = w_{t-1}-\alpha \cdot \bigtriangledown_w f(w_{t-1}) \\)
+
+
+$w_t = w_{t-1}-\alpha \cdot \bigtriangledown_w f(w_{t-1})$
+
 **Where**:
 
 - \\(\textbf{t}\\) is step index
