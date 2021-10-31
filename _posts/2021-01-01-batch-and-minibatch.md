@@ -1,8 +1,8 @@
 ---
-layout: default
-title: Batch and Mini Batch
-nav_order: 11
+title: Batch and Minibatch
+tags: TeXt rrr
 ---
+
 # Batch and Minibatch
 ## Introduction
 
