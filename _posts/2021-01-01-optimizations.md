@@ -1,7 +1,6 @@
 ---
-layout: default
 title: Optimization Algorithms
-nav_order: 4
+tags: TeXt rrr
 ---
 
 # Optimization Algorithms - An overview of Gradient Descent and its variants
