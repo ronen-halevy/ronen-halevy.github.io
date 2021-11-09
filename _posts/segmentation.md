@@ -1,3 +1,9 @@
+---
+title: Optimization Algorithms
+tags: TeXt rrr
+---
+
+
 ##### Copyright 2019 The TensorFlow Authors.
 
 Licensed under the Apache License, Version 2.0 (the "License");
