@@ -4,12 +4,12 @@ tags: TeXt rrr
 ---
 
 
-# Image segmentation!!!!
+# Image segmentation!rr!!!
 
 <table class="tfo-notebook-buttons" align="left">
 
   <td>
-    <a target="_blank" href="https://colab.research.google.com/github/tensorflow/docs/blob/master/site/en/tutorials/images/segmentation.ipynb">
+    <a target="_blank" href="//https://colab.research.google.com/gist/ronen-halevy/34700e3e5b88cb46bb86ec0d92b0572e/optimizers_tensorflow_loop.ipynb">
     <img src="https://github.com/ronen-halevy/ai-notebooks/blob/main/image-segmentation.ipynb" />
     Run in Google Colab!</a>
   </td>
