@@ -10,7 +10,7 @@ tags: TeXt rrr
 
   <td>
     <a target="_blank" href="https://colab.research.google.com/github/tensorflow/docs/blob/master/site/en/tutorials/images/segmentation.ipynb">
-    <img src="https://www.tensorflow.org/images/colab_logo_32px.png" />
+    <img src="https://github.com/ronen-halevy/ai-notebooks/blob/main/image-segmentation.ipynb" />
     Run in Google Colab</a>
   </td>
 
