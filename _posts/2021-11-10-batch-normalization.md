@@ -14,12 +14,14 @@ Normalization is required not just at the input layer but also before each of th
 \\(\hat {x_i}^{(k)} = \frac{ {x_i}^{(k)}-\mu_B^{(k)}}{\sqrt{  {\sigma_B^{(k)}}^2   + \epsilon}}\\)
 
 Where:
-\\(k \epsilon [1,m]\\) denotes the \\(k{th} \\) examples within the batch of m examples.
+\\(k \. \epsilon [1,d]\\) denotes the \\(k{th} \\) eelement within the d elements example (e.g.  the \\(k{th} \\) pixel.
 
- \\(i \epsilon [1,d]\\) denotes the \\(i{th} \\) element within the d elements example (e.g.  the \\(i{th} \\) pixel within a single example image ).
+ \\(i \. \epsilon [1,m]\\) denotes the \\(i{th} \\) examples within the batch of m examples. within a single example image ).
 
-\\(\mu_B^{(k)}\\) denotes the mean of the \\(k_{th}\\) batch .
-\\({\sigma_B^{(k)}}^2\\) denotes the variance of the \\(k_{th}\\) batch.
+\\(\mu_B^{(k)}\\) denotes the mean of the \\(k_{th}\\) element, calculated for the batch.
+
+\\({\sigma_B^{(k)}}^2\\) denotes the variance of the \\(k_{th}\\) element, calculated for the batch.
+
 \\( \epsilon \\)is a stabilization factor, for the case \\(\sigma=0\\).
 
 Normalizing the input data values like so, would make data have the same zero mean and variance=1 for all hidden layers. To prevent this uniformity which might degenerate the network. To prevent that, the normalized data is passed through a linear operator like so:
@@ -29,7 +31,9 @@ Normalizing the input data values like so, would make data have the same zero me
 
 Where 
 
-\\( \gamma\\) and \\(beta\\) are learnable parameters in the model.
+\\( \gamma\\) and \\(\beta\\) are learnable parameters in the model.
+
+
 
 
 
