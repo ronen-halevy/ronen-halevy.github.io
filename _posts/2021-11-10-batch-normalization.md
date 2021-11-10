@@ -13,7 +13,7 @@ Normalizing input data can considerably accelatrate training rate. Normalization
 
 Where:
 
-\\(\{x_i}^{(k)} \textup{ denotes the ith element of the kth batch's example,}\\)
+\\({x_i}^{(k)} \textup{ denotes the ith element of the kth batch's example,}\\)
 
 \\(\textup{  i }\epsilon \textup{ [1,d] and k } \epsilon \textup{ [1,m]}\\)
 
