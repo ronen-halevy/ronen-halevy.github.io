@@ -18,7 +18,9 @@ Where:
 \\(\textup{  i }\epsilon \textup{ [1,d] and k } \epsilon \textup{ [1,m]}\\)
 
 
+$$\textup{  i }$$
 
+\\(\textup{  i }\\)
 Loffer and Szegedey (1) suggest that normalization is needed before each layer. The straight forward normalization formula is:
 
 
