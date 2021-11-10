@@ -15,11 +15,9 @@ Where:
 
 \\({x_i}^{(k)}\\) denotes the ith element of the kth batch's example,
 
-\\(i \epsilon [1,d]\\}  and \\(k  \epsilon \textup{ [1,m]}\\)
+\\(i \epsilon [1,d]\\}  and \\(k  \epsilon  [1,m]}\\)
 
 
-
-\\(\textup{  i }\\)
 Loffer and Szegedey (1) suggest that normalization is needed before each layer. The straight forward normalization formula is:
 
 
