@@ -24,7 +24,7 @@ Normalizing input data can considerably accelatrate training rate. Normalization
 
 Loffer and Szegedey (1) suggest that normalization is needed before each layer. The straight forward normalization formula is:
 
-\\(\hat {x_i}^{(k)} = \frac{ {x_i}^{(k)}-\mu_B^{(k)}}{\sqrt{{{\sigma_B}^{(k)}}^2 + \epsilon}}\\)
+\\(\hat {x_i}^{(k)} = \frac{ {x_i}^{(k)}-\mu_B^{(k)}}{}\\)
 
 Where:
 
