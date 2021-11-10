@@ -9,7 +9,7 @@ tags: Keras Normalization Knowledgebase
 
 Normalizing input data can considerably accelatrate training rate. Normalization is required not just at the input layer but also before each of the hidden layers. Normalize is commonly taken before the layer's activation stage. Here's the general 
 
-\\(\hat {x_i}^{(k)} = \frac{ {x_i}^{(k)}-\mu_B^{(k)}}{\sqrt{  {sigma_B^{(k)}}^2   + \epsilon}}\\)
+\\(\hat {x_i}^{(k)} = \frac{ {x_i}^{(k)}-\mu_B^{(k)}}{\sqrt{  {\sigma_B^{(k)}}^2   + \epsilon}}\\)
 
 Where:
 
