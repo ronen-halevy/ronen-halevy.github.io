@@ -13,6 +13,7 @@ Normalizing input data can considerably accelatrate training rate. Normalization
 
 Where:
 
+
 \\({x_i}^{(k)}\\) denotes the \\(i_{th}\\) element, \\(i \epsilon [1,d]\\),  of the \\(k_{th} \\) example oout of m examples batch's examples.
 
 \\(\mu_B^{(k)}\\) denotes the mean of the \\(k_{th}\\) batch  
