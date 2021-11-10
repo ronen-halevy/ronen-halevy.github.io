@@ -1,7 +1,7 @@
 
 ---
 title: Batch Normalizions
-tags: Keras Normalization Knowledgebase
+tags: Keras Normalization Knowledgebase TeXt rrr
 ---
 
 
