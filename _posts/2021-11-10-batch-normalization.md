@@ -13,12 +13,11 @@ Normalizing input data can considerably accelatrate training rate. Normalization
 
 Where:
 
-\\({x_i}^{(k)} \textup{ denotes the ith element of the kth batch's example,}\\)
+\\({x_i}^{(k)}\\) denotes the ith element of the kth batch's example,
 
-\\(\textup{  i }\epsilon \textup{ [1,d] and k } \epsilon \textup{ [1,m]}\\)
+\\(i \epsilon [1,d]\\}  and \\(k  \epsilon \textup{ [1,m]}\\)
 
 
-$$\textup{  i }$$
 
 \\(\textup{  i }\\)
 Loffer and Szegedey (1) suggest that normalization is needed before each layer. The straight forward normalization formula is:
