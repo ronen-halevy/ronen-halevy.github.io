@@ -1,6 +1,6 @@
 
 ---
-title: Batch-Normalized Convolutional Networks
+title: Batch-Normalizions
 tags: Keras Normalization Knowledgebase
 ---
 
