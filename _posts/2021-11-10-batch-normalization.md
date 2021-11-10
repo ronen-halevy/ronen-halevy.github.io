@@ -1,6 +1,6 @@
 
 ---
-title: Batch-Normalizions
+title: Batch Normalizions
 tags: Keras Normalization Knowledgebase
 ---
 
