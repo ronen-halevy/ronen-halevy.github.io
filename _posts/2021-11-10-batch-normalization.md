@@ -131,7 +131,7 @@ tf.keras.layers.BatchNormalization(
 )
 ```
 
-## A Note About Parameter Storage Requirements
+## A Note On Parameter Storage Requirements
 
 
 The calculation of batch normalization requires the storing og 4 parameters:
