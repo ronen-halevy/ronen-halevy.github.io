@@ -131,14 +131,14 @@ tf.keras.layers.BatchNormalization(
 )
 ```
 
-## Final Remarks
+## A Note About Parameter Storage Requirements
 
 
 The calculation of batch normalization requires the storing og 4 parameters:
 
 
-\\( \gamma\\) - the scaling factor, which is an optimization learned parameter.
-\\(\beta\\)  - the offset factor, an optimization learned parameter.
-E(x) - The mean averaged accross mini-batches - not a learned parameter, but still needed to be stored.
-Var(x) - The variance averaged accross mini-batches a - not a learned parameter, but still needed to be stored.
+1. \\( mathbf{\gamma}\\) - the scaling factor, which is an optimization learned parameter.
+2. \\(mathbf{\beta}\\)  - the offset factor, an optimization learned parameter.
+3. **E(x)** - The mean averaged accross mini-batches - not a learned parameter, but still needed to be stored.
+4. **Var(x)** - The variance averaged accross mini-batches a - not a learned parameter, but still needed to be stored.
 
