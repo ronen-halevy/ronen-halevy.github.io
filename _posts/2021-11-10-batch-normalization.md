@@ -77,8 +77,7 @@ Eq.3 averages the the mini-batches' means.
 
 \\(Var(x) = \frac{m}{m-1}E_B[{\sigma_B}^2]\\)
 
-
-Where the well-known unbiased variance estimate formula is deployed.
+Eq. 4 is the unbiased variance estimate formula.
 
 Note that  m is the size of each of the averaged mini-batches while \\({\sigma_B}^2\\) is the variance of a single mini-batch.
 
