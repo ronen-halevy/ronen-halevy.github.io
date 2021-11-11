@@ -27,7 +27,6 @@ The block diagram which follows, presents the DNN modules, as they are arranged 
 ![Cover of my book]({{ site.baseurl }}/assets/images/gd_optimizations/Training-Phase.png)
 
 
-![Training-Phase](https://github.com/ronen-halevy/ronen-halevy.github.io/blob/master/assets/images/gd_optimizations/Training-Phase.png)
 
 As depicted by the diagram, the following occurs at each update cycle:
 1. **Forwad Propogation**,  based on the new set of updated coefficients (=weights), produces a new set of predicted output.
@@ -93,7 +92,7 @@ To provide a clearer picture of Gradient Descent functionality, here below is th
 
 ### Gradient Descent Flow Diagram
 
-![gradient decent diagram](../assets/images/gd_optimizations/gradient-descent-flow.png)
+![gradient decent diagram]({{ site.baseurl }}/assets/images/gd_optimizations/gradient-descent-flow.png)
 
 **Note** (*): The termination criteria in the above diagram is \\(|\Delta w_t| < \epsilon\\), where \\(\epsilon\\) is a small constant. Sometimes the termination is the number of update step, or a combination of both. 
 
@@ -111,7 +110,7 @@ So we did:  the below **Figure 1** illustrates gradient descent convergence base
 ### Figure 1: Gradient Descent 1D. Convergence is at \\(w=w1\\)
 
 
-![gradient decent example](../assets/images/gd_optimizations/sgd_1d_intro_converge.gif)
+![gradient decent example]({{ site.baseurl }}/assets/images/gd_optimizations/sgd_1d_intro_converge.gif)
 
  BTW, since it's a 1D equation - it has a single variable - the gradient degenerates to a simple derivative like so:
 
@@ -124,21 +123,21 @@ Below is a list of Gradient Descent convergence challenge
 
 ***Local Minimun trap***: 
 
-![gradient decent example](../assets/images/gd_optimizations/local_minima.png)
+![gradient decent example]({{ site.baseurl }}/assets/images/gd_optimizations/local_minima.png)
 
 
 The algorithm may be trapped in a local minimum, missing the global minimum. However that, following researches, it is commonly claimed that the intuition behind "local minimum", which is valid for low dimenssions problems, is misleading for high dimensional topologies: highly none-linear networks are seem to not be affected by local minimum. So we assume only saddle points and global minimum. I may get deeper on that in a later post - TBD. 
 
 ***Saddle Point***: 
 
-![gradient decent example](../assets/images/gd_optimizations/saddle_point.png)
+![gradient decent example]({{ site.baseurl }}/assets/images/gd_optimizations/saddle_point.png)
 
 Saddle points are points where gradient is 0, though are not minimum. The algorithm may get stuck here. Algorithm with a momentum capabilities  may answer this challenge - we'll see such algorithms later on.
 
 
 ***Overshooting***: 
 
-![gradient decent example](../assets/images/gd_optimizations/sgd_1d_intro_overshoot.gif)
+![gradient decent example]({{ site.baseurl }}/assets/images/gd_optimizations/sgd_1d_intro_overshoot.gif)
 
 
 Overshooting is the phenomena of passing over the desired convergence point, as a result of a too large steps along the gradient direction. Reason for that large step is a too large learning rate for the given topology. The problem could be prevented by selecting an as small as desired learning rate. But here's te trade-off - that would be on the expese of convergence speed. We will get to that later on, and present solutions for this issue. Anyway, overshoots may lead to back and forth oscliations - like in the illustration animation above, depending on the topology.
@@ -146,7 +145,7 @@ Overshooting is the phenomena of passing over the desired convergence point, as 
 
 ***Oscillations***: 
 
-![gradient decent example](../assets/images/gd_optimizations/sgd_1d_intro_oscilations.gif)
+![gradient decent example]({{ site.baseurl }}/assets/images/gd_optimizations/sgd_1d_intro_oscilations.gif)
 
 
 This phenomenon can occure not only when gradient changes significantly in high curvaturs as depicted by Figure 4, but in a plateau, where gradient is negligible, but still may have slight sporadic differences which lead to oscliations. The attached animation is of none converging oscilations.
@@ -178,19 +177,19 @@ Each of the 3 test cases is depicted by a set of animated plots attached below, 
 
 #### 2a: 2D Contour
 
-![gradient decent example](../assets/images/gd_optimizations/demo/2d_contour_sgd_converge.gif)
+![gradient decent example]({{ site.baseurl }}/assets/images/gd_optimizations/demo/2d_contour_sgd_converge.gif)
 
 #### 2b: 3D Surface (camera position: azumuth 0, elevation:0)
-![gradient decent example](../assets/images/gd_optimizations/demo/3d_contour_sgd_converge_azim_0_elev_0.gif)
+![gradient decent example]({{ site.baseurl }}/assets/images/gd_optimizations/demo/3d_contour_sgd_converge_azim_0_elev_0.gif)
 
 #### 2c: 3D Surface (camera position: azumuth 30, elevation:0)
 
-![gradient decent example](../assets/images/gd_optimizations/demo/3d_contour_sgd_converge_azim_30_elev_0.gif)
+![gradient decent example]({{ site.baseurl }}/assets/images/gd_optimizations/demo/3d_contour_sgd_converge_azim_30_elev_0.gif)
 
 
 #### 2d: 3D Surface (camera position: azumuth 30, elevation:90)
 
-![gradient decent example](../assets/images/gd_optimizations/demo/3d_contour_sgd_converge_azim_30_elev_90.gif)
+![gradient decent example]({{ site.baseurl }}/assets/images/gd_optimizations/demo/3d_contour_sgd_converge_azim_30_elev_90.gif)
 
 
 Now look at Figure 3, which is similar to Figure 2, except that the gradient is steepper in w2 direction. The resultant step size in the w2 direction at the begining is too large, which leads to some overshoots, but the algorithm converges eventually.
@@ -199,19 +198,19 @@ Now look at Figure 3, which is similar to Figure 2, except that the gradient is 
 
 #### 3a: 2D Contour
 
-![gradient decent example](../assets/images/gd_optimizations/demo/2d_contour_sgd_stable.gif) 
+![gradient decent example]({{ site.baseurl }}/assets/images/gd_optimizations/demo/2d_contour_sgd_stable.gif) 
 
 #### 3b: 3D Surface (camera position: azumuth 0, elevation:0)
-![gradient decent example](../assets/images/gd_optimizations/demo/3d_contour_sgd_stable_azim_0_elev_0.gif)
+![gradient decent example]({{ site.baseurl }}/assets/images/gd_optimizations/demo/3d_contour_sgd_stable_azim_0_elev_0.gif)
 
 #### 3c: 3D Surface (camera position: azumuth 30, elevation:0)
 
-![gradient decent example](../assets/images/gd_optimizations/demo/3d_contour_sgd_stable_azim_30_elev_0.gif)
+![gradient decent example]({{ site.baseurl }}/assets/images/gd_optimizations/demo/3d_contour_sgd_stable_azim_30_elev_0.gif)
 
 
 #### 3d: 3D Surface (camera position: azumuth 30, elevation:90)
 
-![gradient decent example](../assets/images/gd_optimizations/demo/3d_contour_sgd_stable_azim_30_elev_90.gif)
+![gradient decent example]({{ site.baseurl }}/assets/images/gd_optimizations/demo/3d_contour_sgd_stable_azim_30_elev_90.gif)
 
 
 Figure 4 however, presents an even steepper gradient in w2 direction. Now we get oscilations in w2 direction, which never converge. 
@@ -220,19 +219,19 @@ Figure 4 however, presents an even steepper gradient in w2 direction. Now we get
 
 #### 4a: 2D Contour
 
-![gradient decent example](../assets/images/gd_optimizations/demo/2d_contour_sgd_steep.gif)
+![gradient decent example]({{ site.baseurl }}/assets/images/gd_optimizations/demo/2d_contour_sgd_steep.gif)
 
 #### 4b: 3D Surface (camera position: azumuth 0, elevation:0)
-![gradient decent example](../assets/images/gd_optimizations/demo/3d_contour_sgd_steep_azim_0_elev_0.gif)
+![gradient decent example]({{ site.baseurl }}/assets/images/gd_optimizations/demo/3d_contour_sgd_steep_azim_0_elev_0.gif)
 
 #### 4c: 3D Surface (camera position: azumuth 30, elevation:0)
 
-![gradient decent example](../assets/images/gd_optimizations/demo/3d_contour_sgd_steep_azim_30_elev_0.gif)
+![gradient decent example]({{ site.baseurl }}/assets/images/gd_optimizations/demo/3d_contour_sgd_steep_azim_30_elev_0.gif)
 
 
 #### 4d: 3D Surface (camera position: azumuth 30, elevation:90)
 
-![gradient decent example](../assets/images/gd_optimizations/demo/3d_contour_sgd_steep_azim_30_elev_90.gif)
+![gradient decent example]({{ site.baseurl }}/assets/images/gd_optimizations/demo/3d_contour_sgd_steep_azim_30_elev_90.gif)
 
 
 **Some Conclusions**:
@@ -339,7 +338,7 @@ Accordingly:
 
 ### Momentum Gradient Descent Flow Diagram
 
-![gradient decent diagram](../assets/images/gd_optimizations/momentum-gradient-descent-flow.png)
+![gradient decent diagram]({{ site.baseurl }}/assets/images/gd_optimizations/momentum-gradient-descent-flow.png)
 
 Where:
 
@@ -374,25 +373,25 @@ Here, in the begining,  momentum runs much faster than the reference SGD, but th
 
 #### SGD 2D Contour (reference)
 
-![gradient decent diagram](../assets/images/gd_optimizations/demo/2d_contour_sgd_converge.gif)
+![gradient decent diagram]({{ site.baseurl }}/assets/images/gd_optimizations/demo/2d_contour_sgd_converge.gif)
 
 #### Momentum Moderate gradient: 2D Contour 
 
-![gradient decent diagram](../assets/images/gd_optimizations/demo/2d_contour_momentum_sgd_converge.gif)
+![gradient decent diagram]({{ site.baseurl }}/assets/images/gd_optimizations/demo/2d_contour_momentum_sgd_converge.gif)
 
 **Momentum Moderate gradient, 3D surface from 3 Camera positions:**
 
 
 #### Momentum Moderate gradient, 3D surface  (camera position: azimuth 0 elevation 0)
-![gradient decent diagram](../assets/images/gd_optimizations/demo/3d_contour_momentum_sgd_converge_azim_0_elev_0.gif)
+![gradient decent diagram]({{ site.baseurl }}/assets/images/gd_optimizations/demo/3d_contour_momentum_sgd_converge_azim_0_elev_0.gif)
 
 
 #### Momentum Moderate gradient, 3D Surface  (camera position: azimuth 30 elevation 0)
-![gradient decent diagram](../assets/images/gd_optimizations/demo/3d_contour_momentum_sgd_converge_azim_30_elev_0.gif)
+![gradient decent diagram]({{ site.baseurl }}/assets/images/gd_optimizations/demo/3d_contour_momentum_sgd_converge_azim_30_elev_0.gif)
 
 
 #### Momentum Moderate gradient, 3D surface (camera position: azimuth 30 elevation 90)
-![gradient decent diagram](../assets/images/gd_optimizations/demo/3d_contour_momentum_sgd_converge_azim_30_elev_90.gif)
+![gradient decent diagram]({{ site.baseurl }}/assets/images/gd_optimizations/demo/3d_contour_momentum_sgd_converge_azim_30_elev_90.gif)
 
 
 
@@ -404,25 +403,25 @@ Now, with the steeper gradient, momentum algorithm diverges quite chaoticly in t
 
 #### SGD 2D Contour (reference)
 
-![gradient decent diagram](../assets/images/gd_optimizations/demo/2d_contour_sgd_stable.gif)
+![gradient decent diagram]({{ site.baseurl }}/assets/images/gd_optimizations/demo/2d_contour_sgd_stable.gif)
 
 #### Momentum Steeper gradient: 2D Contour 
 
-![gradient decent diagram](../assets/images/gd_optimizations/demo/2d_contour_momentum_sgd_stable.gif)
+![gradient decent diagram]({{ site.baseurl }}/assets/images/gd_optimizations/demo/2d_contour_momentum_sgd_stable.gif)
 
 **Momentum Steeper gradient, 3D surface from 3 Camera positions:**
 
 #### Momentum Steeper gradient, 3D surface (camera position: azimuth 0 elevation 0)
 
-![gradient decent diagram](../assets/images/gd_optimizations/demo/3d_contour_momentum_sgd_stable_azim_0_elev_0.gif)
+![gradient decent diagram]({{ site.baseurl }}/assets/images/gd_optimizations/demo/3d_contour_momentum_sgd_stable_azim_0_elev_0.gif)
 
 
 #### Momentum Steeper gradient, 3D surface (camera position: azimuth 30 elevation 0)
-![gradient decent diagram](../assets/images/gd_optimizations/demo/3d_contour_momentum_sgd_stable_azim_30_elev_0.gif)
+![gradient decent diagram]({{ site.baseurl }}/assets/images/gd_optimizations/demo/3d_contour_momentum_sgd_stable_azim_30_elev_0.gif)
 
 
 #### Momentum Steeper gradient, 3D surface (camera position: azimuth 30 elevation 90)
-![gradient decent diagram](../assets/images/gd_optimizations/demo/3d_contour_momentum_sgd_stable_azim_30_elev_90.gif)
+![gradient decent diagram]({{ site.baseurl }}/assets/images/gd_optimizations/demo/3d_contour_momentum_sgd_stable_azim_30_elev_90.gif)
 
 
 
@@ -433,25 +432,25 @@ Similar to the less steep gradient scenario, momentum algorithm diverges quite c
 
 #### SGD 2D Contour (reference)
 
-![gradient decent diagram](../assets/images/gd_optimizations/demo/2d_contour_sgd_steep.gif)
+![gradient decent diagram]({{ site.baseurl }}/assets/images/gd_optimizations/demo/2d_contour_sgd_steep.gif)
 
 #### Momentum More Steeper gradient: 2D Contour 
 
-![gradient decent diagram](../assets/images/gd_optimizations/demo/2d_contour_momentum_sgd_steep.gif)
+![gradient decent diagram]({{ site.baseurl }}/assets/images/gd_optimizations/demo/2d_contour_momentum_sgd_steep.gif)
 
 **Momentum More Steeper gradient, 3D surface from 3 Camera positions:**
 
 
 #### Momentum More Steeper gradient, 3D surface (camera position:  azimuth 0 elevation 0)
-![gradient decent diagram](../assets/images/gd_optimizations/demo/3d_contour_momentum_sgd_steep_azim_0_elev_0.gif)
+![gradient decent diagram]({{ site.baseurl }}/assets/images/gd_optimizations/demo/3d_contour_momentum_sgd_steep_azim_0_elev_0.gif)
 
 
 #### Momentum More Steeper gradient, 3D surface (camera position: azimuth 30 elevation 0)
-![gradient decent diagram](../assets/images/gd_optimizations/demo/3d_contour_momentum_sgd_steep_azim_30_elev_0.gif)
+![gradient decent diagram]({{ site.baseurl }}/assets/images/gd_optimizations/demo/3d_contour_momentum_sgd_steep_azim_30_elev_0.gif)
 
 
 #### Momentum More Steeper gradient, 3D surface (camera position:azimuth 30 elevation 90)
-![gradient decent diagram](../assets/images/gd_optimizations/demo/3d_contour_momentum_sgd_steep_azim_30_elev_90.gif)
+![gradient decent diagram]({{ site.baseurl }}/assets/images/gd_optimizations/demo/3d_contour_momentum_sgd_steep_azim_30_elev_90.gif)
 
 
 
@@ -472,18 +471,18 @@ Nesterov momentum algorithm (aka NAG) is a variation of the momentum algorithm, 
 
 ### Nesterov Momentum Flow Diagram
 
-![gradient decent diagram](../assets/images/gd_optimizations/nesterov-momentum-gradient-descent-flow.png)
+![gradient decent diagram]({{ site.baseurl }}/assets/images/gd_optimizations/nesterov-momentum-gradient-descent-flow.png)
 
 
 Nesterov equations (Eq. 3) are quite alike Momentum (Eq. 2), actually the same. The difference is just within the gradient calculation. The 2 diagrams below, are assumed to crystallize Nesterov functionality vs Momentum's in the DNN context. 
 
 ### Momentum in DNN context
 
-![gradient decent diagram](../assets/images/gd_optimizations/momentum-training-flow.png)
+![gradient decent diagram]({{ site.baseurl }}/assets/images/gd_optimizations/momentum-training-flow.png)
 
 ### Nesterov in DNN context
 
-![gradient decent diagram](../assets/images/gd_optimizations/nesterov-training-flow.png)
+![gradient decent diagram]({{ site.baseurl }}/assets/images/gd_optimizations/nesterov-training-flow.png)
 
 
 ### Notes on Momentum Performance
@@ -508,24 +507,24 @@ Here, in the begining, Nesterove runs much faster than the reference SGD, but th
 
 #### SGD 2D Contour (reference)
 
-![gradient decent diagram](../assets/images/gd_optimizations/demo/2d_contour_sgd_converge.gif)
+![gradient decent diagram]({{ site.baseurl }}/assets/images/gd_optimizations/demo/2d_contour_sgd_converge.gif)
 
 #### Nesterov Moderate gradient: 2D Contour 
 
-![gradient decent diagram](../assets/images/gd_optimizations/demo/2d_contour_nesterov_sgd_converge.gif)
+![gradient decent diagram]({{ site.baseurl }}/assets/images/gd_optimizations/demo/2d_contour_nesterov_sgd_converge.gif)
 
 **Nesterov Moderate gradient, 3D surface from 3 Camera positions:**
 
 #### Nesterov Moderate gradient, 3D surface (camera position: azimuth 0 elevation 0)
-![gradient decent diagram](../assets/images/gd_optimizations/demo/3d_contour_nesterov_sgd_converge_azim_0_elev_0.gif)
+![gradient decent diagram]({{ site.baseurl }}/assets/images/gd_optimizations/demo/3d_contour_nesterov_sgd_converge_azim_0_elev_0.gif)
 
 
 #### Momentum Moderate gradient, 3D surface (camera position: azimuth 30 elevation 0)
-![gradient decent diagram](../assets/images/gd_optimizations/demo/3d_contour_nesterov_sgd_converge_azim_30_elev_0.gif)
+![gradient decent diagram]({{ site.baseurl }}/assets/images/gd_optimizations/demo/3d_contour_nesterov_sgd_converge_azim_30_elev_0.gif)
 
 
 #### Nesterov Moderate gradient, 3D surface (camera position: azimuth 30 elevation 90)
-![gradient decent diagram](../assets/images/gd_optimizations/demo/3d_contour_nesterov_sgd_converge_azim_30_elev_90.gif)
+![gradient decent diagram]({{ site.baseurl }}/assets/images/gd_optimizations/demo/3d_contour_nesterov_sgd_converge_azim_30_elev_90.gif)
 
 
 
@@ -536,11 +535,11 @@ In this scenario, Nesterov is not stable and it never converges. Clearly, the le
 
 #### SGD 2D Contour (reference)
 
-![gradient decent diagram](../assets/images/gd_optimizations/demo/2d_contour_sgd_stable.gif)
+![gradient decent diagram]({{ site.baseurl }}/assets/images/gd_optimizations/demo/2d_contour_sgd_stable.gif)
 
 #### Nesterov Steeper gradient: 2D Contour 
 
-![gradient decent diagram](../assets/images/gd_optimizations/demo/2d_contour_nesterov_sgd_stable.gif)
+![gradient decent diagram]({{ site.baseurl }}/assets/images/gd_optimizations/demo/2d_contour_nesterov_sgd_stable.gif)
 
 
 ### More steeper gradient: \\(J(w)=\frac{1}{2} \cdot (w1^2+20 \cdot w2^2)\\)
@@ -551,11 +550,11 @@ Similar to previous scenario, Nesterov is not stable and it doesn't  converge. C
 
 #### SGD 2D Contour (reference)
 
-![gradient decent diagram](../assets/images/gd_optimizations/demo/2d_contour_sgd_steep.gif)
+![gradient decent diagram]({{ site.baseurl }}/assets/images/gd_optimizations/demo/2d_contour_sgd_steep.gif)
 
 #### Nesterov More Steeper gradient: 2D Contour 
 
-![gradient decent diagram](../assets/images/gd_optimizations/demo/2d_contour_nesterov_sgd_steep.gif)
+![gradient decent diagram]({{ site.baseurl }}/assets/images/gd_optimizations/demo/2d_contour_nesterov_sgd_steep.gif)
 
 
 
@@ -587,7 +586,7 @@ The Adagrad update formula is:
 
 ### Adagrad Flow Diagram
 
-![gradient decent diagram](../assets/images/gd_optimizations/adagrad-gradient-descent-flow.png)
+![gradient decent diagram]({{ site.baseurl }}/assets/images/gd_optimizations/adagrad-gradient-descent-flow.png)
 
 
 Still, Adagrad has 2 drawbacks:
@@ -614,24 +613,24 @@ AdaGrad is the first in the adaptive learning rate algorithms category list. It 
 
 #### SGD 2D Contour (reference)
 
-![gradient decent diagram](../assets/images/gd_optimizations/demo/2d_contour_sgd_converge.gif)
+![gradient decent diagram]({{ site.baseurl }}/assets/images/gd_optimizations/demo/2d_contour_sgd_converge.gif)
 
 #### AdaGrad Moderate gradient: 2D Contour 
 
-![gradient decent diagram](../assets/images/gd_optimizations/demo/2d_contour_adagrad_converge.gif)
+![gradient decent diagram]({{ site.baseurl }}/assets/images/gd_optimizations/demo/2d_contour_adagrad_converge.gif)
 
 **AdaGrad Moderate gradient, 3D surface from 3 Camera positions:**
 
 #### AdaGrad Moderate gradient, 3D surface (camera position: azimuth 0 elevation 0)
-![gradient decent diagram](../assets/images/gd_optimizations/demo/3d_contour_adagrad_converge_azim_0_elev_0.gif)
+![gradient decent diagram]({{ site.baseurl }}/assets/images/gd_optimizations/demo/3d_contour_adagrad_converge_azim_0_elev_0.gif)
 
 
 #### AdaGrad Moderate gradient, (camera position: 3D  azimuth 30 elevation 0 )
-![gradient decent diagram](../assets/images/gd_optimizations/demo/3d_contour_adagrad_converge_azim_30_elev_0.gif)
+![gradient decent diagram]({{ site.baseurl }}/assets/images/gd_optimizations/demo/3d_contour_adagrad_converge_azim_30_elev_0.gif)
 
 
 #### AdaGrad Moderate gradient, (camera position: 3D  azimuth 30 elevation 90)
-![gradient decent diagram](../assets/images/gd_optimizations/demo/3d_contour_adagrad_converge_azim_30_elev_90.gif)
+![gradient decent diagram]({{ site.baseurl }}/assets/images/gd_optimizations/demo/3d_contour_adagrad_converge_azim_30_elev_90.gif)
 
 
 
@@ -642,26 +641,26 @@ Similar to the previous Adagrad test case, due to the well known continuesly gro
 
 #### SGD 2D Contour (reference)
 
-![gradient decent diagram](../assets/images/gd_optimizations/demo/2d_contour_sgd_stable.gif)
+![gradient decent diagram]({{ site.baseurl }}/assets/images/gd_optimizations/demo/2d_contour_sgd_stable.gif)
 
 #### AdaGrad Steeper gradient: 2D Contour 
 
-![gradient decent diagram](../assets/images/gd_optimizations/demo/2d_contour_adagrad_stable.gif)
+![gradient decent diagram]({{ site.baseurl }}/assets/images/gd_optimizations/demo/2d_contour_adagrad_stable.gif)
 
 
 **Nesterov Steeper gradient, 3D surface from 3 Camera positions:**
 
 #### AdaGrad Steeper gradient, 3D surface (camera position: azimuth 0 elevation 0)
 
-![gradient decent diagram](../assets/images/gd_optimizations/demo/3d_contour_adagrad_stable_azim_0_elev_0.gif)
+![gradient decent diagram]({{ site.baseurl }}/assets/images/gd_optimizations/demo/3d_contour_adagrad_stable_azim_0_elev_0.gif)
 
 
 #### AdaGrad Steeper gradient, 3D surface (camera position: azimuth 30 elevation 0)
-![gradient decent diagram](../assets/images/gd_optimizations/demo/3d_contour_adagrad_stable_azim_30_elev_0.gif)
+![gradient decent diagram]({{ site.baseurl }}/assets/images/gd_optimizations/demo/3d_contour_adagrad_stable_azim_30_elev_0.gif)
 
 
 #### AdaGrad Steeper gradient, 3D surface (camera position: azimuth 30 elevation 90)
-![gradient decent diagram](../assets/images/gd_optimizations/demo/3d_contour_adagrad_stable_azim_30_elev_90.gif)
+![gradient decent diagram]({{ site.baseurl }}/assets/images/gd_optimizations/demo/3d_contour_adagrad_stable_azim_30_elev_90.gif)
 
 
 
@@ -672,24 +671,24 @@ Similar to the previous Adagrad test cases, due to the well known continuesly gr
 
 #### SGD 2D Contour (reference)
 
-![gradient decent diagram](../assets/images/gd_optimizations/demo/2d_contour_sgd_steep.gif)
+![gradient decent diagram]({{ site.baseurl }}/assets/images/gd_optimizations/demo/2d_contour_sgd_steep.gif)
 
 #### AdaGrad More Steeper gradient: 2D Contour 
 
-![gradient decent diagram](../assets/images/gd_optimizations/demo/2d_contour_adagrad_steep.gif)
+![gradient decent diagram]({{ site.baseurl }}/assets/images/gd_optimizations/demo/2d_contour_adagrad_steep.gif)
 
 **AdaGrad More Steeper gradient, 3D surface from 3 Camera positions:**
 
 #### AdaGrad More Steeper gradient, 3D surace (camera position: azimuth 0 elevation 0)
-![gradient decent diagram](../assets/images/gd_optimizations/demo/3d_contour_adagrad_steep_azim_0_elev_0.gif)
+![gradient decent diagram]({{ site.baseurl }}/assets/images/gd_optimizations/demo/3d_contour_adagrad_steep_azim_0_elev_0.gif)
 
 
 #### AdaGrad More Steeper gradient, 3D surface (camera position: azimuth 30 elevation 0)
-![gradient decent diagram](../assets/images/gd_optimizations/demo/3d_contour_adagrad_steep_azim_30_elev_0.gif)
+![gradient decent diagram]({{ site.baseurl }}/assets/images/gd_optimizations/demo/3d_contour_adagrad_steep_azim_30_elev_0.gif)
 
 
 #### AdaGrad More Steeper gradient, 3D surface (camera position: azimuth 30 elevation 90)
-![gradient decent diagram](../assets/images/gd_optimizations/demo/3d_contour_adagrad_steep_azim_30_elev_90.gif)
+![gradient decent diagram]({{ site.baseurl }}/assets/images/gd_optimizations/demo/3d_contour_adagrad_steep_azim_30_elev_90.gif)
 
 
 
@@ -768,7 +767,7 @@ Zeiler reported tests set the hyperparameters to \\(\rho=0.95\\) and \\(\epsilon
 
 ### Adadelta Flow Diagram
 
-![gradient decent diagram](../assets/images/gd_optimizations/adadelta-gradient-descent-flow.png)
+![gradient decent diagram]({{ site.baseurl }}/assets/images/gd_optimizations/adadelta-gradient-descent-flow.png)
 
 ## Note on Keras AdaDelta API
 
@@ -809,7 +808,7 @@ Recommended values for the global learning rate \\(\alpha \\) and the decay cons
 
 ### RmsProp Flow Diagram
 
-![gradient decent diagram](../assets/images/gd_optimizations/rmsprop-gradient-descent-flow.png)
+![gradient decent diagram]({{ site.baseurl }}/assets/images/gd_optimizations/rmsprop-gradient-descent-flow.png)
 
 ## Demo - RMSprop over various Loss Function scenarios
 
@@ -829,11 +828,11 @@ RMSprop is a member of the adaptive learning rate algorithms category. As such, 
 
 #### SGD 2D Contour (reference)
 
-![gradient decent diagram](../assets/images/gd_optimizations/demo/2d_contour_sgd_converge.gif)
+![gradient decent diagram]({{ site.baseurl }}/assets/images/gd_optimizations/demo/2d_contour_sgd_converge.gif)
 
 #### RMSprop Moderate gradient: 2D Contour 
 
-![gradient decent diagram](../assets/images/gd_optimizations/demo/2d_contour_rmsprop_converge.gif)
+![gradient decent diagram]({{ site.baseurl }}/assets/images/gd_optimizations/demo/2d_contour_rmsprop_converge.gif)
 
 
 #### RMSprop Moderate gradient, 3D surface (camera position: azimuth 0 elevation 0)
