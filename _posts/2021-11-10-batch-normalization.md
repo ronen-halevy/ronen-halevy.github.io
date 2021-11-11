@@ -11,14 +11,16 @@ Normalizing input data can considerably accelatrate training rate. Keras impleme
 
 ## The Algorithm 
 
-Normalization is required not just at the input layer but also before each of the hidden layers. Normalize is commonly taken at each of the network's layers. For layers with a d-dimensional input \\(x=(x^{(1)}....x^{(d)})\\), normalization is calculated per each dimension, as shown in Eq. 1:
+Normalization is required not just at the input layer but also before each of the hidden layers. Normalize is commonly taken at each of the network's layers. 
+For layers with a d-dimensional input \\(x=(x^{(1)}....x^{(d)})\\), normalization is calculated per each dimension, as shown in Eq. 1:
 
 ### Eq. 1: Normalization
 
 \\(\hat {x_i}^{(k)} = \frac{ {x_i}^{(k)}-\mu_B^{(k)}}{\sqrt{  {\sigma_B^{(k)}}^2   + \epsilon}}\\)
 
 Where:
-- \\(k \ \epsilon \ [1,d]\\) denotes the \\(k{th} \\) input dimension.
+
+- \\(k \ \epsilon \ [1,d]\\) denotes the dimension index within a single input example.
 
 - \\(i \ \epsilon \ [1,m]\\) denotes the \\(i{th} \\) example within the m examples mini-batch.
 
@@ -26,7 +28,7 @@ Where:
 
 - \\({\sigma_B^{(k)}}^2\\) denotes the variance calculated for the \\(k_{th}\\) dimension -see details below.
 
-- \\( \epsilon \\)is a stabilization factor, for the case \\(\sigma=0\\).
+- \\( \epsilon \\) is a stabilization factor, needed for the case \\(\sigma=0\\), negligible otherwise.
 
 
 ## Add Scaling and Offset Factors
@@ -38,9 +40,9 @@ Implementing the described above plain baNormalizing the input data values like 
 
 Where:
 
--\\( \gamma\\) is a learned scaling factor.
+- \\( \gamma\\) is a learned scaling factor.
 
--\\(\beta\\)  is a learned offset factor.
+- \\(\beta\\)  is a learned offset factor.
 
 Both \\( \gamma\\) and \\(\beta\\)  are learned by the optimizer during the parameters fitting stage, along with other model's parameters.
 
@@ -77,6 +79,7 @@ Eq.3 averages the the mini-batches' means.
 
 
 Where the well-known unbiased variance estimate formula is deployed.
+
 Note that  m is the size of each of the averaged mini-batches while \\({\sigma_B}^2\\) is the variance of a single mini-batch.
 
 
@@ -90,11 +93,11 @@ Keras uses moving average formula to calculate mean and variance over the mini-b
 
 Where:
 
--E(x) is the moving average **Mean** over the mini-batches
+- E(x) is the moving average **Mean** over the mini-batches
 
--\\(\mu_B\\) is the momentum of a single mini-batch.
+- \\(\mu_B\\) is the momentum of a single mini-batch.
 
--momentum - is a constant coefficient, determined by the API. default to 0.99
+- momentum - is a constant coefficient, determined by the API. default to 0.99
 
 ### Eq. 6: Keras  moving average calculation of Variance
 
@@ -103,11 +106,11 @@ Where:
 
 Where:
 
--Var(x) is is the moving average **Variance** over the mini-batches.
+- Var(x) is is the moving average **Variance** over the mini-batches.
 
--\\({\sigma_B}^2 \\) is the variance of a single mini-batch.
+- \\({\sigma_B}^2 \\) is the variance of a single mini-batch.
 
--momentum - (same as above), is a constant coefficient, determined by the API. default to 0.99
+- momentum - (same as above), is a constant coefficient, determined by the API. default to 0.99
 
 
 ## Keras API
