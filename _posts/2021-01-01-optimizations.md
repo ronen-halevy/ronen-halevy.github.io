@@ -24,7 +24,7 @@ The block diagram which follows, presents the DNN modules, as they are arranged 
 
 ### Figure 0: Deep Neural Network Block Diagram - Training Phase
 
-![Training-Phase](../assets/images/gd_optimizations/Training-Phase.png)
+![Training-Phase](https://github.com/ronen-halevy/ronen-halevy.github.io/blob/master/assets/images/gd_optimizations/Training-Phase.png)
 
 As depicted by the diagram, the following occurs at each update cycle:
 1. **Forwad Propogation**,  based on the new set of updated coefficients (=weights), produces a new set of predicted output.
