@@ -31,7 +31,7 @@ Normalizing the input data values like so, would make data have the same zero me
 
 Where 
 
-\\( \gamma\\) and \\(\beta\\) are learnable parameters in the model.
+\\( \gamma\\) and \\(\beta\\) are learnable parameters in the model, i.e. they are learned by the optimizer during the parameters fitting stage, along with other model's parameters.
 
 
 
