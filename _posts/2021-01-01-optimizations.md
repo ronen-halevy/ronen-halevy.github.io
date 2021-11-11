@@ -24,6 +24,9 @@ The block diagram which follows, presents the DNN modules, as they are arranged 
 
 ### Figure 0: Deep Neural Network Block Diagram - Training Phase
 
+![Cover of my book]({{ site.baseurl }}/assets/images/gd_optimizations/Training-Phase.png)
+
+
 ![Training-Phase](https://github.com/ronen-halevy/ronen-halevy.github.io/blob/master/assets/images/gd_optimizations/Training-Phase.png)
 
 As depicted by the diagram, the following occurs at each update cycle:
