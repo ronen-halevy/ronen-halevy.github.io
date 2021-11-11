@@ -36,10 +36,10 @@ Implementing the described above plain baNormalizing the input data values like 
 
 \\(y^{(k)} =  \gamma^{(k)}  \hat {x_i}+ \beta^{(k)} \\)
 
-Where 
+Where:
 
-\\( \gamma\\) is a learned scaling factor
-\\(\beta\\)  is a learned offset factor.
+-\\( \gamma\\) is a learned scaling factor
+-\\(\beta\\)  is a learned offset factor.
 
 Both \\( \gamma\\) and \\(\beta\\)  are learned by the optimizer during the parameters fitting stage, along with other model's parameters.
 
@@ -74,37 +74,39 @@ Eq.3 averages the the mini-batches' means.
 
 \\(Var(x) = \frac{m}{m-1}E_B[{\sigma_B}^2]\\)
 
-Eq. 4 uses the well-known unbiased variance estimate formula, , where m is the mini-batch size and \\({\sigma_B}^2\\) is the variance of a single mini-batch.
+
+Where the well-known unbiased variance estimate formula is deployed.
+Note that  m is the size of each of the averaged mini-batches while \\({\sigma_B}^2\\) is the variance of a single mini-batch.
 
 
 Keras uses moving average formula to calculate mean and variance over the mini-batches, as shown by Eq. 5 and 6:
 
 
-### Eq. 5: Keras caluclation of mean over mini-batches
+### Eq. 5: Keras moving average calculation of Mean
 
 
 \\(E(x) = E(x) * momentum + \mu_B * (1 - momentum)\\)
 
-Where"
+Where:
 
-E(x) is the over mini-batches moving average mean
+-E(x) is the moving average **Mean** over the mini-batches
 
-\\(\mu_B\\) is the momentum of a single mini-batch.
+-\\(\mu_B\\) is the momentum of a single mini-batch.
 
-momentum - is a constant coefficient, determined by the API. default to 0.99
+-momentum - is a constant coefficient, determined by the API. default to 0.99
 
-### Eq. 6: Keras caluclation of variance over mini-batches
+### Eq. 6: Keras  moving average calculation of Variance
 
 
 \\(Var(x) = Var(x) * momentum + {\sigma_B}^2 * (1 - momentum)\\)
 
-Where"
+Where:
 
-Var(x) is the over mini-batches moving average variance
+-Var(x) is is the moving average **Variance** over the mini-batches.
 
-\\({\sigma_B}^2 \\) is the variance of a single mini-batch.
+-\\({\sigma_B}^2 \\) is the variance of a single mini-batch.
 
-momentum - (same as above), is a constant coefficient, determined by the API. default to 0.99
+-momentum - (same as above), is a constant coefficient, determined by the API. default to 0.99
 
 
 ## Keras API
