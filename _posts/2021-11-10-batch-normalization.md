@@ -18,15 +18,15 @@ Normalization is required not just at the input layer but also before each of th
 \\(\hat {x_i}^{(k)} = \frac{ {x_i}^{(k)}-\mu_B^{(k)}}{\sqrt{  {\sigma_B^{(k)}}^2   + \epsilon}}\\)
 
 Where:
-\\(k \ \epsilon \ [1,d]\\) denotes the \\(k{th} \\) input dimension.
+- \\(k \ \epsilon \ [1,d]\\) denotes the \\(k{th} \\) input dimension.
 
- \\(i \ \epsilon \ [1,m]\\) denotes the \\(i{th} \\) example within the m examples mini-batch.
+- \\(i \ \epsilon \ [1,m]\\) denotes the \\(i{th} \\) example within the m examples mini-batch.
 
-\\(\mu_B^{(k)}\\) denotes the mean calculated for the \\(k_{th}\\) dimension - find details below.
+- \\(\mu_B^{(k)}\\) denotes the mean calculated for the \\(k_{th}\\) dimension - find details below.
 
-\\({\sigma_B^{(k)}}^2\\) denotes the variance calculated for the \\(k_{th}\\) dimension -see details below.
+- \\({\sigma_B^{(k)}}^2\\) denotes the variance calculated for the \\(k_{th}\\) dimension -see details below.
 
-\\( \epsilon \\)is a stabilization factor, for the case \\(\sigma=0\\).
+- \\( \epsilon \\)is a stabilization factor, for the case \\(\sigma=0\\).
 
 
 ## Add Scaling and Offset Factors
@@ -38,12 +38,13 @@ Implementing the described above plain baNormalizing the input data values like 
 
 Where:
 
--\\( \gamma\\) is a learned scaling factor
+-\\( \gamma\\) is a learned scaling factor.
+
 -\\(\beta\\)  is a learned offset factor.
 
 Both \\( \gamma\\) and \\(\beta\\)  are learned by the optimizer during the parameters fitting stage, along with other model's parameters.
 
-- see detailed formula below.
+
 
 ##  Mean and Variance Calculation within a mini-batch
 
