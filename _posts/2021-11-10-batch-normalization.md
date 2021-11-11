@@ -129,7 +129,7 @@ tf.keras.layers.BatchNormalization(
     gamma_constraint=None,
     **kwargs
 )
-
+```
 
 ## Final Remarks
 
