@@ -7,12 +7,13 @@ tags: Keras Normalization
 
 
 
-Normalizing input data can considerably accelatrate training rate. Keras implements Batch Normalization follows the scheme described in this [paper](https://arxiv.org/abs/1502.03167). Let's review the details.
+The goal to perform data normalization is to all input features to a common scale - mean 0 and varianc 1. Normalizing input data can considerably accelatrate training rate. This post follows a [paper](https://arxiv.org/abs/1502.03167) by Ioffe and Szegedy which BatchNormalization API is based on. Let's review the details.
 
 ## The Algorithm 
 
-Normalization is required not just at the input layer but also before each of the hidden layers. Normalize is commonly taken at each of the network's layers. 
-For layers with a d-dimensional input \\(x=(x^{(1)}....x^{(d)})\\), normalization is calculated per each dimension, as shown in Eq. 1:
+It is evident that nNormalization is required not just before the first input layer, but also before each hidden layers which follow. To start with, Eq. 1 presents the straight forward normalization formula.
+
+Regarding the indices \\(i\\) and \\(k\\) - input example \\(x=(x^{(1)}....x^{(d)})\\) has d dimenssions (e.g. an image with d pixels). Minibatch holds m examples.
 
 ### Eq. 1: Normalization
 
