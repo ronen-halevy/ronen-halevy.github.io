@@ -33,13 +33,19 @@ pip install kaggle
 
 ## Authentication
 
-To authenticate, one should generate a token json file and store it under  ~/.kaggle (in linux/osx) or under C:\Users<Windows-username>.kaggle\ in windows. So do as follows:
+To authenticate, one should generate a token json file - as detailed next -  and store it under
+```python
+~/.kaggle
+```
+in linux/osx or under
+```python
+C:\Users<Windows-username>.kaggle\ 
+```
 
-
-### Token Generation
+So do as follows:
 
 1. Login to your Kaggle Account
-2. Click on user profile picture (upper right) -> Account -> Create New API Token
+2. In Kaggle web page click: user profile picture (upper right) -> Account -> Create New API Token
 3. The kaggle.json token file should be downloaded to your local storage. 
 4. Create a directory:  
   ```python
@@ -56,7 +62,7 @@ Now Kaggle API is ready for use.
 
 ## Kaggle API Usage Examples
 
-(In the below comands the extrac exclamation sign prefix is needed to run commands from within a jupyter notebook)/
+(In the below comands the extrac exclamation sign prefix is needed to run commands from within a jupyter notebook).
 
 - List Kaggle datasets:
 
