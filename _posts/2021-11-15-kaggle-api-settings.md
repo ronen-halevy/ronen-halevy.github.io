@@ -5,7 +5,10 @@ tags: Kaggle Settings Guides
 
 ## Introduction
 
-Kaggle API are so useful, and can save so much efforts, e.g. access to Kaggle datasets is trivial using the API as demonstrated here below. 
+
+This post describes the setup steps required before using Kaggle API. These settins are needed when Kaggle API is used outside Kaggle Kernel pllatform, e.g. in Colab or from a private platform. When in Kaggle Kernel pllatform, Kaggle API is ready to use without  these settings. 
+
+Kaggle API can be so useful, and save much efforts that would otherwise be required , e.g. when using Kaggle datasets - it is trivial by using the API but would have required a private storage for the used dataset otherwise. 
 
 Before one can interact with public Kaggle API, 2 actions should be taken:
 - Package Instalation
