@@ -33,7 +33,9 @@ pip install kaggle
 
 ## Authentication
 
-To authenticate, one should generate a token json file - as detailed next -  and store it under
+To authenticate, one should do 2 actions:
+1. Generate a token file - as detailed next.
+2. Store the token file under
 ```python
 ~/.kaggle
 ```
@@ -42,21 +44,48 @@ in linux/osx or under
 C:\Users<Windows-username>.kaggle\ 
 ```
 
-So do as follows:
+Here are details instructions for doing that:
+
+### Generate a token file
 
 1. Login to your Kaggle Account
 2. In Kaggle web page click: user profile picture (upper right) -> Account -> Create New API Token
 3. The kaggle.json token file should be downloaded to your local storage. 
-4. Create a directory:  
+
+
+### Store the token
+
+
+- Create a directory:  
   ```python
   mkdir ~/.kaggle
   ```
-5. Copy token file to the created directory:
+- Copy token file to the created directory:
    ```python
   cp ~/Downloads/kaggle.json  ~/.kaggle
   ```
- 
-Now Kaggle API is ready for use.
+Beware! the token file is now exposed, so you might want to change it's permissions:
+
+```python
+chmod 600 ~/.kaggle/kaggle.json
+```
+
+***Notes on setting the token in Colab***
+
+
+If running in Colab, then the token file should be uploaded to the platform. Here below is a section of code that should be addd to the Colab notebook. This section provides an iteractive file upload button for uploading `kaggle.json`.
+
+```python
+from google.colab import files
+
+uploaded = files.upload()
+  
+# Move kaggle.json into ~/.kaggle:
+!mkdir -p ~/.kaggle/ && mv kaggle.json ~/.kaggle/ && chmod 600 ~/.kaggle/kaggle.json
+```
+
+
+Now Kaggle API is ready to go.
 
 
 
