@@ -48,18 +48,18 @@ Here are details instructions for doing that:
 ### Generate a token file
 
 1. Login to your Kaggle Account
-2. In Kaggle web page click: user profile picture (upper right) -> Account -> Create New API Token
+2. In Kaggle web page click: `user profile picture (upper right of page)` -> `Account` -> `Create New API Token`
 3. The kaggle.json token file should be downloaded to your local storage. 
 
 
 ### Store the token
 
 
-- Create a directory:  
+1. Create a directory:  
   ```python
   mkdir ~/.kaggle
   ```
-- Copy token file to the created directory:
+2. Copy token file to the created directory:
    ```python
   cp ~/Downloads/kaggle.json  ~/.kaggle
   ```
