@@ -1,5 +1,5 @@
 ---
-title: Batch Normalizions
+title: Batch Normalizations
 tags: Keras Normalization guides
 ---
 
