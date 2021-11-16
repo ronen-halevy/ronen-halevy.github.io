@@ -113,7 +113,7 @@ Where:
 - momentum - (same as above), is a constant coefficient, determined by the API. default to 0.99
 
 
-## Keras API
+## Keras API - BatchNormalization
 
 
 Here's the signiture of keras API
