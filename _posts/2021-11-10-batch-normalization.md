@@ -11,7 +11,7 @@ The goal to perform data normalization is to all input features to a common scal
 
 ## The Algorithm 
 
-It is evident that nNormalization is required not just before the first input layer, but also before each hidden layers which follow. To start with, Eq. 1 presents the straight forward normalization formula.
+It is evident that normalization is required not just before the first input layer, but also before each hidden layers which follow. To start with, Eq. 1 presents the straight forward normalization formula.
 
 Regarding the indices \\(i\\) and \\(k\\) - input example \\(x=(x^{(1)}....x^{(d)})\\) has d dimenssions (e.g. an image with d pixels). Minibatch holds m examples.
 
