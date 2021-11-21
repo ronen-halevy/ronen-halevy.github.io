@@ -5,9 +5,6 @@ tags: Kaggle Settings Guides
 
 ## Introduction
 
-Find more details on Kaggle API setup here <a target="_blank" href="https://ronen-halevy.github.io/2021/11/15/kaggle-api-settings.html">here.</a>.
-
-
 This post describes the setup steps required before using `Kaggle API`. These settins are required to execute Kaggle API outside the `Kaggle Kernel pllatform`, e.g. in `Colab` or in a private computing platform. When executing a notebook inside Kaggle Kernel platform, the described settings are not needed. Issue is presented [here](/guides/content/editing-an-existing-page).
 
 
