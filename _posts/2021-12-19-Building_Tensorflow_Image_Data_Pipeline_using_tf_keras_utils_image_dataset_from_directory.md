@@ -204,7 +204,10 @@ for i, class_name in enumerate(class_names):
 
 Having downloaded and extracted the source data files, we we start the creation of data pipeline. 
 In this post example, we use the `tf.keras.utils.image_dataset_from_directory` method.
-Important note - the data pipeline operates in the graph mode - see details in the corresponding post (TBD). Accordingly, we first construct the graph which later be triggered with data.
+
+This methods creates a dataset data. The labels are obtained automatically according to the subdirectory name, as shown next. This in addition to more data transformation goodies (detailed next).
+
+**Important note** - the data pipeline operates in the graph mode - see details in the corresponding post (TBD). Accordingly, we first construct the graph which later be triggered with data.
 
 
 
