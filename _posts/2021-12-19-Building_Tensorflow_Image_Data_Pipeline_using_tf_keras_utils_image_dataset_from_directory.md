@@ -14,7 +14,8 @@ This page is part of the `Building Tensorflow Image Pipeline` series.
 
 A major part in the bring up of any Neural Network, besides setting the model itself, is the setting of an efficient data pipeline.
 
-The costruction of input data pipeline is an Extract, Transform, Load (ETL) task, where since our focus here is on image networks, the source data for the Extraction task will commonly be either conventional Image Files, or a TFRecord format saved data, (this is the data saved format when using tf.tfds.load), or any any other plane data format such as numpy array or Image.PIL data.
+The costruction of input data pipeline is an Extract, Trans
+m, Load (ETL) task, where since our focus here is on image networks, the source data for the Extraction task will commonly be either conventional Image Files, or a TFRecord format saved data, (this is the data saved format when using tf.tfds.load), or any any other plane data format such as numpy array or Image.PIL data.
 The Transform task relates to the data adaptation tasks required such as data batching, normalizing, resizing, shuffling, augmentating, and so forth.
 The Load task is the insertion of the resultant data into the model.
 
@@ -324,7 +325,7 @@ the first epoch.
 
 
 
-**Cache**, **Shuffle** (train data only) and **Prefetch**:
+**Cache**, **Shuffle** (for train data only) and **Prefetch**:
 
 
 ```python
