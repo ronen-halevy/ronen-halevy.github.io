@@ -652,7 +652,7 @@ Here below inference is executed.
 2. Run `evaluate` using the same dataset as in 1.
 3. Run `predict` over interactively uploaded test images. 
 
-**Upploa Kaggle Auth Token**
+**Uppload Kaggle Auth Token**
 
 For above listed sessions 1 and 2, you need to download the test dataset from Kaggle. 
 
@@ -660,7 +660,7 @@ To do that, you need to upload the kaggle auth token (**kaggle.json** file).
 
 Find a detailed explaination on setting Kaggle API in [this post](https://ronen-halevy.github.io/2021/11/15/kaggle-api-settings.html).
 
-
+Anyway, to run the prediction and evaluation sessions with the kaggle stored database, it is required to generate an auth token file, named kaggle.json, and upload it to colab, by running the next section.**bold text**
 
 ```python
 from google.colab import files
