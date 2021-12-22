@@ -1,3 +1,9 @@
+---
+layout: default
+nav_order: 6
+title: Building Tensorflow Image Pipeline
+
+---
 # Building Tensorflow Image Pipeline
 
 
