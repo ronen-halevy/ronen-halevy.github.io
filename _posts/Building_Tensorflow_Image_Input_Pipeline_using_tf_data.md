@@ -1,3 +1,5 @@
+"<a href=\"https://colab.research.google.com/github/ronen-halevy/ai-notebooks/blob/main/notebooks/Building_Tensorflow_Image_Input_Pipeline_using_tfds.ipynb\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+
 # Building Tensorflow Image Pipeline - tf.data
 
 This page is part of the `Building Tensorflow Image Pipeline` series.
