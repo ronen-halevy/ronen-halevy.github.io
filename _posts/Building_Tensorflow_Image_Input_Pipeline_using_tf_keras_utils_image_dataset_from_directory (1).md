@@ -235,7 +235,7 @@ For Labels `Inferred` Mode (which deployed here)- It is assumed that source imag
 
 **Image Source File Arrangement**
 
-![Resnet Residual Block]({{ site.baseurl }}/assets/images/classification/image source files arrangment.drawio.png)
+![Resnet Residual Block]({{ site.baseurl }}/assets/images/classification/image-source-files-arrangment.drawio.png)
 
 
 
