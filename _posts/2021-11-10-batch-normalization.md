@@ -147,4 +147,20 @@ The calculation of batch normalization requires the storing og 4 parameters:
 2. \\(\mathbf{\beta}\\)  - the offset factor, an optimization trainable parameter.
 3. **E(x)** - The mean averaged accross mini-batches - not a trainable parameter , but still needed to be stored.
 4. **Var(x)** - The variance averaged accross mini-batches a - not a trainable parameter, but still needed to be stored.
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1111
 
+
+ADD CODE:
+https://keras.io/guides/transfer_learning/
+
+**Example: the BatchNormalization layer has 2 trainable weights and 2 non-trainable weights**
+
+layer = keras.layers.BatchNormalization()
+layer.build((None, 4))  # Create the weights
+
+print("weights:", len(layer.weights))
+print("trainable_weights:", len(layer.trainable_weights))
+print("non_trainable_weights:", len(layer.non_trainable_weights))
+weights: 4
+trainable_weights: 2**
+non_trainable_weights: 2
