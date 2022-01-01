@@ -1,2 +1,3 @@
 Well explained here
 https://www.tensorflow.org/api_docs/python/tf/keras/layers/Layer
+https://keras.io/guides/making_new_layers_and_models_via_subclassing/
