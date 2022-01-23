@@ -1,1 +1,2 @@
 
+sparsecategorylogicalentropy vs none sparse (i.e. one hot)
