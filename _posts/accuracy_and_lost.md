@@ -1,2 +1,3 @@
 
 sparsecategorylogicalentropy vs none sparse (i.e. one hot)
+...keras metrics...
