@@ -8,3 +8,5 @@ In spite of that, one of the major shortcomings of R-CNN was the speed with whic
 Follow-up work sought to reduce the runtime of the model, especially time spent on computing region proposals. We will discuss these improved algorithms including Fast R-CNN, Faster R-CNN, and YOLO in subsequent blog posts.
 
 In the meantime, if you are interested in further checking out some of R-CNN’s implementation details, you can see the original repo.
+https://medium.com/@selfouly/r-cnn-3a9beddfd55a
+https://learnopencv.com/selective-search-for-object-detection-cpp-python/
