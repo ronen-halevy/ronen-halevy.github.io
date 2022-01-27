@@ -1,0 +1,4 @@
+https://medium.com/ml-research-lab/what-is-object-detection-51f9d872ece7#:~:text=You%20can%20think%20of%20Object,object%20using%20a%20bounding%20box.&text=Problem%20of%20Object%20detection%20has,an%20image%20at%20same%20time.
+An image classification or image recognition model simply detect the probability of an object in an image. In contrast to this, object localization refers to identifying the location of an object in the image. An object localization algorithm will output the coordinates of the location of an object with respect to the image. In computer vision, the most popular way to localize an object in an image is to represent its location with the help of bounding boxes.
+
+coursera 'computer vision with embedded machine learning': (w 3) classification can handle a single object - (capacitor and resistor example)
