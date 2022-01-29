@@ -10,3 +10,10 @@ Follow-up work sought to reduce the runtime of the model, especially time spent 
 In the meantime, if you are interested in further checking out some of R-CNN’s implementation details, you can see the original repo.
 https://medium.com/@selfouly/r-cnn-3a9beddfd55a
 https://learnopencv.com/selective-search-for-object-detection-cpp-python/
+
+https://towardsdatascience.com/faster-rcnn-object-detection-f865e5ed7fc4#:~:text=Faster%20RCNN%20is%20an%20object,SSD%20(%20Single%20Shot%20Detector).
+
+https://medium.com/@selfouly/r-cnn-3a9beddfd55a
+
+
+https://www.mihaileric.com/posts/object-detection-with-rcnn/
