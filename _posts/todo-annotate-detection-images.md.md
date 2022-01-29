@@ -6,3 +6,7 @@ https://blog.roboflow.com/vott/
 
 
 https://www.udemy.com/course/create-custom-object-detector-for-games-and-news-stories/learn/lecture/29740772#overview
+
+samed as the udemy course instructor:
+
+https://www.burningalice.com/products/creating-custom-object-detector-for-games-and-news-sites-yolov3-tiny/categories/2149263448/posts/2153817277
