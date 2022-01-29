@@ -10,3 +10,5 @@ https://www.udemy.com/course/create-custom-object-detector-for-games-and-news-st
 samed as the udemy course instructor:
 
 https://www.burningalice.com/products/creating-custom-object-detector-for-games-and-news-sites-yolov3-tiny/categories/2149263448/posts/2153817277
+
+https://docs.google.com/document/d/1_K_iQLuvpa3t2JCsAb6TWGN1u7ZCDXknYJ81bP6-YBc/edit#
