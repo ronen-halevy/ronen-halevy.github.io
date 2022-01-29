@@ -22,3 +22,5 @@ https://medium.com/@selfouly/r-cnn-3a9beddfd55a
 
 
 https://www.mihaileric.com/posts/object-detection-with-rcnn/
+
+https://lilianweng.github.io/lil-log/2017/12/31/object-recognition-for-dummies-part-3.html
