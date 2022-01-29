@@ -1,3 +1,8 @@
+paper:
+chrome-extension://gphandlahdpffmccakmbngmbjnjiiahp/https://arxiv.org/pdf/1311.2524.pdf
+
+https://colab.research.google.com/drive/1n8f7K0D2kckp9llr9h98j5CrTpJmo1vi#scrollTo=hDbpHkiWWKMX
+
 https://www.mihaileric.com/posts/object-detection-with-rcnn/
 from there:
 Final Thoughts
