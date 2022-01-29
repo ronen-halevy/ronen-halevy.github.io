@@ -19,5 +19,8 @@ Repeat untill there are no more unselected rectangles.
 
 
 
-
+tf.image.non_max_suppression(
+    boxes, scores, max_output_size, iou_threshold=0.5,
+    score_threshold=float('-inf'), name=None
+)
 
