@@ -24,3 +24,6 @@ https://medium.com/@selfouly/r-cnn-3a9beddfd55a
 https://www.mihaileric.com/posts/object-detection-with-rcnn/
 
 https://lilianweng.github.io/lil-log/2017/12/31/object-recognition-for-dummies-part-3.html
+
+https://vivek-yadav.medium.com/part-1-generating-anchor-boxes-for-yolo-like-network-for-vehicle-detection-using-kitti-dataset-b2fe033e5807 :
+, YOLOv2 does not assume the aspect ratios or shapes of the boxes. 
