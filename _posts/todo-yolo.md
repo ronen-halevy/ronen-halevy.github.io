@@ -8,3 +8,4 @@ https://vivek-yadav.medium.com/part-1-generating-anchor-boxes-for-yolo-like-netw
 https://machinelearningmastery.com/how-to-perform-object-detection-with-yolov3-in-keras/
 
 
+http://christopher5106.github.io/object/detectors/2017/08/10/bounding-box-object-detectors-understanding-yolo.html
