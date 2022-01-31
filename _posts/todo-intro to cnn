@@ -8,3 +8,6 @@ feature map
 chrome-extension://gphandlahdpffmccakmbngmbjnjiiahp/http://www.cs.columbia.edu/~kathy/cs4701/documents/jason_svm_tutorial.pdf
 
 
+the output dense layer which sits : each neuron at the output computes a weighted sum of activations from convolution layers, adding a bias term.
+
+
