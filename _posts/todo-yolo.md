@@ -9,3 +9,6 @@ https://machinelearningmastery.com/how-to-perform-object-detection-with-yolov3-i
 
 
 http://christopher5106.github.io/object/detectors/2017/08/10/bounding-box-object-detectors-understanding-yolo.html
+
+
+effectively splits the image into grids of arbitrary size
