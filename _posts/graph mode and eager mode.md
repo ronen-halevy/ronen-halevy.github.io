@@ -21,4 +21,18 @@ tf.function only supports singleton variable creations on the first call. To enf
 ...
 The most straightfoward solution is ensuring that the variable creation and dataset creation are both outside of the tf.funciton call. For example:
 
+from https://github.com/zzh8829/yolov3-tf2 :
 
+
+
+@tf.function
+@tf.function is very cool. It's like an in-between version of eager and graph. You can step through the function by disabling tf.function and then gain performance when you enable it in production. Important note, you should not pass any non-tensor parameter to @tf.function, it will cause re-compilation on every call. I am not sure whats the best way other than using globals.
+
+GradientTape
+Extremely useful for debugging purpose, you can set breakpoints anywhere. You can compile all the keras fitting functionalities with gradient tape using the run_eagerly argument in model.compile. From my limited testing, all training methods including GradientTape, keras.fit, eager or not yeilds similar performance. But graph mode is still preferred since it's a tiny bit more efficient.
+
+model(x) vs. model.predict(x)
+When calling model(x) directly, we are executing the graph in eager mode. For model.predict, tf actually compiles the graph on the first run and then execute in graph mode. So if you are only running the model once, model(x) is faster since there is no compilation needed. Otherwise, model.predict or using exported SavedModel graph is much faster (by 2x). For non real-time usage, model.predict_on_batch is even faster as tested by @AnaRhisT94)
+
+
+model(x) vs. model.predict(x)
