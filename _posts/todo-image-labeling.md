@@ -18,4 +18,12 @@ https://docs.google.com/document/d/1_K_iQLuvpa3t2JCsAb6TWGN1u7ZCDXknYJ81bP6-YBc/
 https://github.com/microsoft/VoTT#download-and-install-a-release-package-for-your-platform-recommended
 
 
+python : labelimage (find under develope
+https://pypi.org/project/labelImg/
+
+
+microsoft/VoTT: Visual Object Tagging Tool - GitHub
+
+
+
 
