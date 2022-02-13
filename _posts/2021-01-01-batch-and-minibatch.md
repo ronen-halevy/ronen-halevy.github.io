@@ -62,6 +62,11 @@ Let's see that:
 
 
 
+++Later: Notes on Batch Size Selection
+
+A large batch size would consume more memory
+A small batch size would give an oscilated error merging...
+
 
 
 
