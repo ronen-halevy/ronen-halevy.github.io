@@ -1,3 +1,11 @@
+https://morioh.com/p/9bca8f92d016 :
+How does YOLO work?
+
+YOLO is based on a single Convolutional Neural Network (CNN). The CNN divides an image into regions and then it predicts the boundary boxes and probabilities for each region. It simultaneously predicts multiple bounding boxes and probabilities for those classes. YOLO sees the entire image during training and test time so it implicitly encodes contextual information about classes as well as their appearance.
+
+
+
+
 https://towardsdatascience.com/yolo-v3-object-detection-53fb7d3bfe6b#:~:text=More%20bounding%20boxes%20per%20image&text=On%20the%20other%20hand%20YOLO,it's%20slower%20than%20YOLO%20v2.
 
 https://lilianweng.github.io/lil-log/2017/12/31/object-recognition-for-dummies-part-3.html
