@@ -10,14 +10,38 @@ YOLOv3 predicts bounding boxes and class probabilities of an entire image in a u
 
 Here's an illustration - 
 
-The input is an image of some shapes:
+**The input** is an image of some shapes:
+
+![alt text](https://github.com/ronen-halevy/ronen-halevy.github.io/blob/master/assets/images/yolo/input-image-shapes.jpg)
+
+**Expected Output**:
+![alt text](https://github.com/ronen-halevy/ronen-halevy.github.io/blob/master/assets/images/yolo/image--shapes-annotations.jpg)
+
+
+
+To do so, the input image is divided into an $size_x * size_y$ grid cells. Each grid cell is responsible for detecting objects which centers falls within it's bounderies. like so (images are resized to a uniform 415*416 size):
+
+![alt text](https://github.com/ronen-halevy/ronen-halevy.github.io/blob/master/assets/images/yolo/yolov3-input-image-cells-shapes.jpg)
+
+
+The grid effect is achieved by passing the image thru a FuLL CNN,  with 32 strides, such that the 416*416*3 input image results in a 13*13*N shape output.
+
+The resultant output size is 13*13*N, where each of the 1*1*N cells corresponds to a division within the image.
+The cells' width are:
+
+$N=3*(5+N_{classes})$ - we will get to that structure soon.
+
+Diagrams below illustrate YOLOv3 Forwarding path:
+
+![alt text](https://github.com/ronen-halevy/ronen-halevy.github.io/blob/master/assets/images/yolo/yolov3-Flow%20Forward%20Path.jpg)
 
 
 
 
 
+ We will get 
 
-To do so, the input image is divided into an $size_x * size_y$ grid cells. Each grid cell is responsible for detecting objects which centers falls within it's bounderies.
+
 
 
 
