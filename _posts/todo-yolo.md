@@ -1,3 +1,61 @@
+# A Guide To YOLOv3
+
+##Introduction
+
+This post describes YOLOv3, but focuses mainly on implementation aspects.
+
+# How YOLOv3 Works
+.
+YOLOv3 predicts bounding boxes and class probabilities of an entire image in a unified convolution network computation pass. That means, the predictions process is executed over the entire image at the same pass.
+
+Here's an illustration - 
+
+The input is an image of some shapes:
+
+
+
+
+
+
+To do so, the input image is divided into an $size_x * size_y$ grid cells. Each grid cell is responsible for detecting objects which centers falls within it's bounderies.
+
+
+
+
+
+Let's ilustrate it with diagrams:
+
+Suppose we have this image:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 https://morioh.com/p/9bca8f92d016 :
 How does YOLO work?
 
