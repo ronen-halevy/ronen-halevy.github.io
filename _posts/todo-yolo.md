@@ -14,7 +14,10 @@ Here's an illustration -
 
 ![alt text](https://github.com/ronen-halevy/ronen-halevy.github.io/blob/master/assets/images/yolo/input-image-shapes.jpg)
 
+
 **Expected Output**:
+
+
 ![alt text](https://github.com/ronen-halevy/ronen-halevy.github.io/blob/master/assets/images/yolo/image--shapes-annotations.jpg)
 
 
@@ -24,22 +27,33 @@ To do so, the input image is divided into an $size_x * size_y$ grid cells. Each 
 ![alt text](https://github.com/ronen-halevy/ronen-halevy.github.io/blob/master/assets/images/yolo/yolov3-input-image-cells-shapes.jpg)
 
 
-The grid effect is achieved by passing the image thru a FuLL CNN,  with 32 strides, such that the 416*416*3 input image results in a 13*13*N shape output.
+The grid effect is achieved by passing the image thru a FuLL CNN,  with 32 strides, such that the 416*416*3 input image results in a 13x 13 x N shape output.
 
-The resultant output size is 13*13*N, where each of the 1*1*N cells corresponds to a division within the image.
+The resultant output size is 13 x 13 x N, where each of the 1 x 1 x N cells corresponds to a division within the image.
 The cells' width are:
 
-$N=3*(5+N_{classes})$ - we will get to that structure soon.
+$N=3 x (5+N_{classes})$ - we will get to that structure soon.
 
 Diagrams below illustrate YOLOv3 Forwarding path:
 
 ![alt text](https://github.com/ronen-halevy/ronen-halevy.github.io/blob/master/assets/images/yolo/yolov3-Flow%20Forward%20Path.jpg)
 
 
+Let's zoom into YOLO CNN output - it is illustrated in the following diagram:
+
+
+![alt text](https://github.com/ronen-halevy/ronen-halevy.github.io/blob/master/assets/images/yolo/yolov3%20output%20-cube-13.jpg)
+
+
+As depicted by the diagram, each of the grid cells holds 3 records of information, each corresponds to a detected object bounding box, i.e. YOLOv3 supports up to 3 bounding boxes per cell.
+
+Next diagram drills deeper into the structure of the bounding boxes records:
+
+![alt text](https://github.com/ronen-halevy/ronen-halevy.github.io/blob/master/assets/images/yolo/yolov3%20output-cell-with-fields.jpg)
 
 
 
- We will get 
+
 
 
 
