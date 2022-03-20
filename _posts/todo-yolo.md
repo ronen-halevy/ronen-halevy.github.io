@@ -2,6 +2,16 @@
 
 ##Introduction
 
+## Background
+
+Object detection 
+https://bdtechtalks.com/2021/06/21/object-detection-deep-learning/
+While an image classification network can tell whether an image contains a certain object or not, it won’t say where in the image the object is located. Object detection networks provide both the class of objects contained in an image and a bounding box that provides the coordinates of that object.
+
+## Models For Object Detection
+
+
+
 This post describes YOLOv3, but focuses mainly on implementation aspects.
 
 # How YOLOv3 Works
