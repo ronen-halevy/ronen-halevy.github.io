@@ -18,7 +18,7 @@ Here's an illustration -
 **Expected Output**:
 
 
-![alt text](https://github.com/ronen-halevy/ronen-halevy.github.io/blob/master/assets/images/yolo/image--shapes-annotations.jpg)
+![alt text](https://github.com/ronen-halevy/ronen-halevy.github.io/blob/master/assets/images/yolo/image-shapes-annotations.jpg)
 
 
 
