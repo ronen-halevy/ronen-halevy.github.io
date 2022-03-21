@@ -31,9 +31,9 @@ Such detection models, with a detection capability of a sinlge object are often 
 ### Sliding Window Model
 
 In this model, the CNN is activated in the bounderies of a square windows which slides in straight lines along the image as illustrated in the animation diagram below.
-To fit various object size, various windows sizes should be activated, as depicted in the animation, and/or sliding window should run over various image scales.
+To fit various object size, multiple window sizes should be activated, as depicted in the animation, and/or multiple image scales.
 
-Objects location can be determined by window's position, and the offset of the bounding box within the sliding window position.
+Location can be determined by window's region, and the offset of the bounding box within the sliding window position.
 
 ![alt text](https://github.com/ronen-halevy/ronen-halevy.github.io/blob/master/assets/images/yolo/sliding-window-detection.gif)
 
@@ -51,38 +51,19 @@ This is just a brief description of the algorithm, which at that time, contribut
 
 ## YOLO
 
-YOLO (`You Only Look Once`), and specifically its 3rd version YOLOv3,  which is i is the model 
-## Background
+This article is about YOLO (`You Only Look Once`), and specifically its 3rd version YOLOv3.
 
+The model effectively divides the image into a grid of cells and predicts bounding boxes and probabilities for each cell. Still, a single neural network is applied on the image, in a single pass.
 
+It's 1000 times faster than R-CNN.
+The rest of the article describes YOLOv3, 
 
-For example, image classification is straight forward, but the differences between object localization and object detection can be confusing, especially when all three tasks may be just as equally referred to as object recognition.
-
-Image classification involves assigning a class label to an image, whereas object localization involves drawing a bounding box around one or more objects in an image. Object detection is more challenging and combines these two tasks and draws a bounding box around each object of interest in the image and assigns them a class label. Together, all of these problems are referred to as object recognition.
-
-
-
-
-Object detection 
-https://bdtechtalks.com/2021/06/21/object-detection-deep-learning/
-While an image classification network can tell whether an image contains a certain object or not, it won’t say where in the image the object is located. Object detection networks provide both the class of objects contained in an image and a bounding box that provides the coordinates of that object.
-
-## Models For Object Detection
-
-### Conventional CNN
-
-### sliding Window
-
-### R-CNN
-
-
-
-
-This post describes YOLOv3, but focuses mainly on implementation aspects.
 
 # How YOLOv3 Works
 .
-YOLOv3 predicts bounding boxes and class probabilities of an entire image in a unified convolution network computation pass. That means, the predictions process is executed over the entire image at the same pass.
+YOLOv3 classifies objects within an image and predicts their location, or more precisely, the location of their bounding boxes, as depicted by the image which follows.
+
+
 
 Here's an illustration - 
 
