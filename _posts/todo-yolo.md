@@ -29,14 +29,14 @@ See illustrative diagram below: The image consists of 3 shape objects. Assume th
 
 ### Sliding Window Model
 
+In this model, the CNN is activated in the bounderies of a square windows which slides in straight lines along the image as illustrated in the animation diagram below.
+To fit various object size, various windows sizes should be activated, as depicted in the animation, and/or sliding window should run over various image scales.
 
+Objects location can be determined by window's position, and the offset of the bounding box within the sliding window position.
 
+![alt text](https://github.com/ronen-halevy/ronen-halevy.github.io/blob/master/assets/images/yolo/sliding-window-detection.gif)
 
-Object detection reffers to the consists of 2 tasks:
-- Classication of objects within an image to one of the dataset's label.
-- Prediction of object location, by providing the location of a bounding box which encloses the object.
-
-The output of the classification task is a vector which holds the 
+There are drawbacks to this model: The repeated convolutions per each window position costs in a heavy computation load. But not only that, the convolution span is limitted by the window size and position, which may be uncorrelated with the objects position and size. This may effect detection performance.
 
 
 
