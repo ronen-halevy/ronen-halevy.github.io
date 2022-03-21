@@ -49,7 +49,9 @@ The idea of R-CNN in essence is of a 3 steps process:
 This is just a brief description of the algorithm, which at that time, contributed to a dramatic improvement of CNN detection models performance. R-CNN was later followed by improvments variants such as FASTR-CNN, [Girshick, Ross. "Fast r-cnn." Proceedings of the IEEE international conference on computer vision, 2015](https://arxiv.org/abs/1504.08083), FASTRR-CNN, [Shaoqing Ren, Kaiming He, Ross Girshick, Jian Sun, 2016](https://arxiv.org/abs/1506.01497). These models aimed to address R-CNN problems, amongst are real time performance issues,long training time for the 2000 regions and region selection process.
 
 
+## YOLO
 
+YOLO (`You Only Look Once`), and specifically its 3rd version YOLOv3,  which is i is the model 
 ## Background
 
 
