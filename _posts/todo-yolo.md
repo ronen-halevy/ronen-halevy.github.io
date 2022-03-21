@@ -21,6 +21,14 @@ Accordingly, the model outputs 2 vectors per a detected object:
 
 ### Plain CNN Model
 
+Using a conventional CNN classification model, by adding a regression predictor to it is a straight forward implementation. However, it is limitted to detect a single object only.
+See illustrative diagram below: The image consists of 3 shape objects. Assume that the dataset set of labels is: ['square', 'ellipse', 'triangle', 'hexagon', 'circle']. The model, at the best case, will detect one of the object shapes only.
+
+![alt text](https://github.com/ronen-halevy/ronen-halevy.github.io/blob/master/assets/images/yolo/image-classification.jpg)
+
+
+### Sliding Window Model
+
 
 
 
