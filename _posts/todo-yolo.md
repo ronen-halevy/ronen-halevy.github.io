@@ -40,7 +40,20 @@ Objects location can be determined by window's position, and the offset of the b
 There are drawbacks to this model: The repeated deployment of the CNN model per each window position, constraints a heavy computation load. But not only that - since convolution span regions are limitted by window's size and position, which may be uncorrelated with image's regions of interest postion and sizes, objects may be cropped or missed by the model.
 
 ### R-CNN
-R-CNN ([by Ross Girshick et al](https://arxiv.org/abs/1311.2524)), which stands `Regions with CNN features`, addresses drawbacks of `Sliding Window` model. 
+R-CNN ([by Ross Girshick et al, UC Berkely, 2014](https://arxiv.org/abs/1311.2524)), which stands `Regions with CNN features`, addresses drawbacks of `Sliding Window` model. 
+The idea of R-CNN in essence is of a 3 steps process:
+1. Extract region proposals - 2000 regions were stated n original paper. The farther process is limitted to proposed regions. There are a number of algorithm which can make region proposals. The authors used [selective search by J. Uijlings, K. van de Sande, T. Gevers, and A. Smeulders.Selective search for object recognition.IJCV, 2013.](https://www.researchgate.net/publication/262270555_Selective_Search_for_Object_Recognition)
+2. Deploy CNN with bounding box regression over each proposed region.
+3. Classify each region - originally using Linear SVM, in later model's variants e.g. `Fast R-CNN`, `Softmax` was deployed.
+
+This is just a brief description of the algorithm, which contributed to dramatic improvement of CNN detection models at time of publication, and evoluted by improving variants such as FASTR-CNN, [Girshick, Ross. "Fast r-cnn." Proceedings of the IEEE international conference on](https://arxiv.org/abs/1504.08083)
+
+
+
+
+R-CNN fundamentally changed the landscape of object detection at the time of its conception, and it has radically influenced the design of modern-day detection algorithms.
+
+In spite of that, one of the major shortcomings of R-CNN was the speed with which it worked. For example, as the original paper noted, simply computing region proposals and features would take 13 seconds per image on a GPU. This is clearly too slow for a real-time object detection algorithm.
 
 
 ## Background
