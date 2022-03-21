@@ -23,6 +23,7 @@ Accordingly, the model outputs 2 vectors per a detected object:
 
 Using a conventional CNN classification model, by adding a regression predictor to it is a straight forward implementation. However, it is limitted to detect a single object only.
 See illustrative diagram below: The image consists of 3 shape objects. Assume that the dataset set of labels is: ['square', 'ellipse', 'triangle', 'hexagon', 'circle']. The model, at the best case, will detect one of the object shapes only.
+Such detection models, with a detection capability of a sinlge object are often reffered to as `Object Localization` models.
 
 ![alt text](https://github.com/ronen-halevy/ronen-halevy.github.io/blob/master/assets/images/yolo/image-classification.jpg)
 
@@ -36,8 +37,10 @@ Objects location can be determined by window's position, and the offset of the b
 
 ![alt text](https://github.com/ronen-halevy/ronen-halevy.github.io/blob/master/assets/images/yolo/sliding-window-detection.gif)
 
-There are drawbacks to this model: The repeated convolutions per each window position costs in a heavy computation load. But not only that, the convolution span is limitted by the window size and position, which may be uncorrelated with the objects position and size. This may effect detection performance.
+There are drawbacks to this model: The repeated deployment of the CNN model per each window position, constraints a heavy computation load. But not only that - since convolution span regions are limitted by window's size and position, which may be uncorrelated with image's regions of interest postion and sizes, objects may be cropped or missed by the model.
 
+### R-CNN
+R-CNN ([by Ross Girshick et al](https://arxiv.org/abs/1311.2524)), which stands `Regions with CNN features`, addresses drawbacks of `Sliding Window` model. 
 
 
 ## Background
