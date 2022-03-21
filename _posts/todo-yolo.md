@@ -1,13 +1,27 @@
 # A Guide To YOLOv3
 
-## Introduction to Object Detection with CNN
+## Introduction to Object Detection
 
-An object detection model classifies objects within an image to a label in its dataset, and also provides an estimation for the objects location.
-So accordingly, an object detection output consists of 2 vectors:
-- A Classification output vector, which holds the estimated probability of each dataset label. Length of this vector equals the length of dataset's labels vector. Decision is normally taken by applying Softmax.
-- 
+The task of a CNN object detection model is dual: It provides both classifies objects within an image to dataset labels, and also provides an estimation to objects locations.
 
-and a bounding box that provides the coordinates of that object.
+Accordingly, the model outputs 2 vectors per a detected object:
+
+- A Classification output vector, with estimated probabilities of each dataset label. Vector length is \\(N_classes\\), i.e. number of classes in sdataset. Decision is mostly taken by applying a softmax operator on the vector.
+- A vector with the predicted location of a bounding box which encloses the object. The location can be presented in various formats as illustrated in the diagram below.
+
+**Bounding Box Annotation Formats**: 
+
+- Image on the left: The image contains a circle object
+- Annotations(1): Bounding Box annotated by corners coordinates.
+- Annotations(2): Bounding Box annotated by center coordinates and boxe's dimenssions.
+
+![alt text](https://github.com/ronen-halevy/ronen-halevy.github.io/blob/master/assets/images/yolo/circle-image.jpg)
+
+## Object Detection Models
+
+### Plain CNN Model
+
+
 
 
 Object detection reffers to the consists of 2 tasks:
