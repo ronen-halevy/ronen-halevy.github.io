@@ -1,14 +1,46 @@
 # A Guide To YOLOv3
 
-##Introduction
+## Introduction to Object Detection with CNN
+
+An object detection model classifies objects within an image to a label in its dataset, and also provides an estimation for the objects location.
+So accordingly, an object detection output consists of 2 vectors:
+- A Classification output vector, which holds the estimated probability of each dataset label. Length of this vector equals the length of dataset's labels vector. Decision is normally taken by applying Softmax.
+- 
+
+and a bounding box that provides the coordinates of that object.
+
+
+Object detection reffers to the consists of 2 tasks:
+- Classication of objects within an image to one of the dataset's label.
+- Prediction of object location, by providing the location of a bounding box which encloses the object.
+
+The output of the classification task is a vector which holds the 
+
+
 
 ## Background
+
+
+
+For example, image classification is straight forward, but the differences between object localization and object detection can be confusing, especially when all three tasks may be just as equally referred to as object recognition.
+
+Image classification involves assigning a class label to an image, whereas object localization involves drawing a bounding box around one or more objects in an image. Object detection is more challenging and combines these two tasks and draws a bounding box around each object of interest in the image and assigns them a class label. Together, all of these problems are referred to as object recognition.
+
+
+
 
 Object detection 
 https://bdtechtalks.com/2021/06/21/object-detection-deep-learning/
 While an image classification network can tell whether an image contains a certain object or not, it won’t say where in the image the object is located. Object detection networks provide both the class of objects contained in an image and a bounding box that provides the coordinates of that object.
 
 ## Models For Object Detection
+
+### Conventional CNN
+
+### sliding Window
+
+### R-CNN
+
 
 
 
