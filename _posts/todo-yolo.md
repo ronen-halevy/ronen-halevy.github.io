@@ -2,9 +2,11 @@
 
 ## Introduction to Object Detection
 
-The task of a CNN object detection model is dual: It provides both classifies objects within an image to dataset labels, and also provides an estimation to objects locations.
+The task of a CNN object detection model is dual: It provides both classifies objects within an image to dataset labels, and also provides an estimation to objects' bounding boxes locations. The diagram below illustrates an input image on the left, and classification with bounding box annotations results on the right.
 
-Accordingly, the model outputs 2 vectors per a detected object:
+![alt text](https://github.com/ronen-halevy/ronen-halevy.github.io/blob/master/assets/images/yolo/image-shapes-annotations.jpg)
+
+A detection model normally outputs 2 vectors per each detected object:
 
 - A Classification output vector, with estimated probabilities of each dataset label. Vector length is \\(N_classes\\), i.e. number of classes in sdataset. Decision is mostly taken by applying a softmax operator on the vector.
 - A vector with the predicted location of a bounding box which encloses the object. The location can be presented in various formats as illustrated in the diagram below.
@@ -19,6 +21,7 @@ Accordingly, the model outputs 2 vectors per a detected object:
 
 ## Object Detection Models
 
+As a baground to the presentation of YOLOv3 model, this section presents 
 ### Plain CNN Model
 
 Using a conventional CNN classification model, by adding a regression predictor to it is a straight forward implementation. However, it is limitted to detect a single object only.
@@ -59,27 +62,16 @@ It's 1000 times faster than R-CNN.
 The rest of the article describes YOLOv3, 
 
 
-# How YOLOv3 Works
-.
-YOLOv3 classifies objects within an image and predicts their location, or more precisely, the location of their bounding boxes, as depicted by the image which follows.
+# YOLOv3 Overview
+
+YOLOv3 classifies objects within an image and predicts their location, or more precisely, the location of their bounding boxes. Here's an image which illustrates an input image and the output results annotated on it.
+
+**Input and Annotated Output** is an image of some shapes:
 
 
 
-Here's an illustration - 
 
-**The input** is an image of some shapes:
-
-![alt text](https://github.com/ronen-halevy/ronen-halevy.github.io/blob/master/assets/images/yolo/input-image-shapes.jpg)
-
-
-**Expected Output**:
-
-
-![alt text](https://github.com/ronen-halevy/ronen-halevy.github.io/blob/master/assets/images/yolo/image-shapes-annotations.jpg)
-
-
-
-To do so, the input image is divided into an $size_x * size_y$ grid cells. Each grid cell is responsible for detecting objects which centers falls within it's bounderies. like so (images are resized to a uniform 415*416 size):
+YOLOv3 model input image is divided into an $size_x * size_y$ grid cells. Each grid cell is responsible for detecting objects which centers falls within it's bounderies. like so (images are resized to a uniform 415*416 size):
 
 ![alt text](https://github.com/ronen-halevy/ronen-halevy.github.io/blob/master/assets/images/yolo/yolov3-input-image-cells-shapes.jpg)
 
