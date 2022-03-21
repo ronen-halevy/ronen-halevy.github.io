@@ -46,14 +46,8 @@ The idea of R-CNN in essence is of a 3 steps process:
 2. Deploy CNN with bounding box regression over each proposed region.
 3. Classify each region - originally using Linear SVM, in later model's variants e.g. `Fast R-CNN`, `Softmax` was deployed.
 
-This is just a brief description of the algorithm, which contributed to dramatic improvement of CNN detection models at time of publication, and evoluted by improving variants such as FASTR-CNN, [Girshick, Ross. "Fast r-cnn." Proceedings of the IEEE international conference on](https://arxiv.org/abs/1504.08083)
+This is just a brief description of the algorithm, which at that time, contributed to a dramatic improvement of CNN detection models performance. R-CNN was later followed by improvments variants such as FASTR-CNN, [Girshick, Ross. "Fast r-cnn." Proceedings of the IEEE international conference on computer vision, 2015](https://arxiv.org/abs/1504.08083), FASTRR-CNN, [Shaoqing Ren, Kaiming He, Ross Girshick, Jian Sun, 2016](https://arxiv.org/abs/1506.01497). These models aimed to address R-CNN problems, amongst are real time performance issues,long training time for the 2000 regions and region selection process.
 
-
-
-
-R-CNN fundamentally changed the landscape of object detection at the time of its conception, and it has radically influenced the design of modern-day detection algorithms.
-
-In spite of that, one of the major shortcomings of R-CNN was the speed with which it worked. For example, as the original paper noted, simply computing region proposals and features would take 13 seconds per image on a GPU. This is clearly too slow for a real-time object detection algorithm.
 
 
 ## Background
