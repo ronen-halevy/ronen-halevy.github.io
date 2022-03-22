@@ -123,6 +123,18 @@ $N=3 x (5+N_{classes})$
 To enhence detection performance for smaller objects, YOLOv3 CNN generates simultaneously output in 3 grid scales: 13 x 13 (as depicted above), and also 26 x 26 and 52 x 52.
 
 
+### YOLOv3 Block Diagrams
+
+The below block diagrams describe YOLOv3 Forwarding and Training operation.
+Following chapters of this article present a detailed description of the 2 operation modes.
+
+
+
+
+
+
+
+
 
 
 ![alt text](https://github.com/ronen-halevy/ronen-halevy.github.io/blob/master/assets/images/yolo/yolov3-Flow%20Forward%20Path.jpg)
@@ -131,9 +143,6 @@ To enhence detection performance for smaller objects, YOLOv3 CNN generates simul
 Let's zoom into YOLO CNN output - it is illustrated in the following diagram:
 
 
-As depicted by the diagram, each of the grid cells holds 3 records of information, each corresponds to a detected object bounding box, i.e. YOLOv3 supports up to 3 bounding boxes per cell.
-
-Next diagram drills deeper into the structure of the bounding boxes records:
 
 
 
@@ -144,10 +153,6 @@ Next diagram drills deeper into the structure of the bounding boxes records:
 
 
 
-
-
-
-Let's ilustrate it with diagrams:
 
 Suppose we have this image:
 
