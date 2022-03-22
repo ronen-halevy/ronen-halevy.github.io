@@ -125,8 +125,9 @@ To enhence detection performance for smaller objects, YOLOv3 CNN generates simul
 
 ### YOLOv3 Block Diagrams
 
-The below block diagrams describe YOLOv3 Forwarding and Training operation.
+The below block diagrams describe YOLOv3 `Forwarding` and `Training` operation.
 Following chapters of this article present a detailed description of the 2 operation modes.
+
 
 
 
