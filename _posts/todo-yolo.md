@@ -14,7 +14,7 @@ A detection model normally outputs 2 vectors per each detected object:
 **Bounding Box Annotation Formats**: 
 
 - Image on the left: The image contains a circle object
-- Annotations(1): Bounding Box annotated by corners coordinates.
+- Annotations(1): $((x_1, y1), (x_2,y2))$
 - Annotations(2): Bounding Box annotated by center coordinates and boxe's dimenssions.
 
 ![alt text](https://github.com/ronen-halevy/ronen-halevy.github.io/blob/master/assets/images/yolo/circle-image.jpg)
@@ -27,6 +27,8 @@ As a baground to the presentation of YOLOv3 model, this section presents
 Using a conventional CNN classification model, by adding a regression predictor to it is a straight forward implementation. However, it is limitted to detect a single object only.
 See illustrative diagram below: The image consists of 3 shape objects. Assume that the dataset set of labels is: ['square', 'ellipse', 'triangle', 'hexagon', 'circle']. The model, at the best case, will detect one of the object shapes only.
 Such detection models, with a detection capability of a sinlge object are often reffered to as `Object Localization` models.
+
+**Plain CNN Model**
 
 ![alt text](https://github.com/ronen-halevy/ronen-halevy.github.io/blob/master/assets/images/yolo/image-classification.jpg)
 
