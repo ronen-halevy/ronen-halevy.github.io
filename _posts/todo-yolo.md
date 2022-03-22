@@ -63,38 +63,67 @@ The idea of R-CNN in essence is of a 3 steps process:
 This is just a brief description of the algorithm, which at that time, contributed to a dramatic improvement of CNN detection models performance. R-CNN was later followed by improvments variants such as FASTR-CNN, [Girshick, Ross. "Fast r-cnn." Proceedings of the IEEE international conference on computer vision, 2015](https://arxiv.org/abs/1504.08083), FASTRR-CNN, [Shaoqing Ren, Kaiming He, Ross Girshick, Jian Sun, 2016](https://arxiv.org/abs/1506.01497). These models aimed to address R-CNN problems, amongst are real time performance issues,long training time for the 2000 regions and region selection process.
 
 
-## YOLO
+## A Brief Introduction to YOLOv3
 
 This article is about YOLO (`You Only Look Once`), and specifically its 3rd version YOLOv3. [YOLOv3: An Incremental Improvement, Joseph Redmon, Ali Farhadi, 2018](https://arxiv.org/abs/1804.02767)
 
-The model effectively divides the image into a grid of cells and predicts bounding boxes and probabilities for each cell. Still, a single neural network is applied on the image, in a single pass.
+The dominant common practice of CNN object detecton models before YOLO (e.g. Sliding Window and R-CNN), was to divide the image to regions, and run CNN on each. The computation cost required is huge.
 
-It's 1000 times faster than R-CNN.
-The rest of the article describes YOLOv3, 
+YOLO also uses the practice of segmentig the image, as due to that segmantation it can detect many objects in an image.
+However, YOLO's way of segmenting the image is entirely different: Rather than running CNN over thousands of regions seperately, it runs CNN only once over the entire image.
+This is a huge difference, which makes YOLO so much faster - YOLOv3 is 1000 times faster than R-CNN.
 
+So how is segmentation still achieved?
 
-# YOLOv3 Overview
-
-YOLOv3 classifies objects within an image and predicts their location, or more precisely, the location of their bounding boxes. Here's an image which illustrates an input image and the output results annotated on it.
-
-**Input and Annotated Output** is an image of some shapes:
+Let's see...
 
 
+As the illustrated gridded image below depicts, the detected objects are referenced to the grid cell which contain their center is. 
 
-
-YOLOv3 model input image is divided into an $size_x * size_y$ grid cells. Each grid cell is responsible for detecting objects which centers falls within it's bounderies. like so (images are resized to a uniform 415*416 size):
+**Gridded Image**
 
 ![alt text](https://github.com/ronen-halevy/ronen-halevy.github.io/blob/master/assets/images/yolo/yolov3-input-image-cells-shapes.jpg)
 
 
-The grid effect is achieved by passing the image thru a FuLL CNN,  with 32 strides, such that the 416*416*3 input image results in a 13x 13 x N shape output.
+The CNN assigns a detection descriptor to each grid cell. The descriptor combines 2 vectors
+1. A Classification result vector with predicted probabilty for each dataset's class
+2. Bounding Box Location - $x_1, x1, w, ,h$, and also an Objective Prediction which indicates probabilty of an object in the cell.
 
-The resultant output size is 13 x 13 x N, where each of the 1 x 1 x N cells corresponds to a division within the image.
-The cells' width are:
+Diagram below illustrates that.
 
-$N=3 x (5+N_{classes})$ - we will get to that structure soon.
+**Detection Descriptor**
 
-Diagrams below illustrate YOLOv3 Forwarding path:
+![alt text](https://github.com/ronen-halevy/ronen-halevy.github.io/blob/master/assets/images/yolo/yolov3-single-output-cell-fields.jpg)
+
+
+
+As a matter of fact, YOLOv3 supports 3 detections per a cell - the corrected descriptors illustration diagram follows.
+
+**Detection 3 Descriptors**
+
+![alt text](https://github.com/ronen-halevy/ronen-halevy.github.io/blob/master/assets/images/yolo/yolov3%20output-cell-with-fields.jpg)
+
+
+Now let's combine the descriptors with the entire grid of cells:
+
+The CNN assigns a detection descriptor to each grid cell, so for a 13x13 grid, the CNN output looks like this:
+
+**YOLOv3 - CNN Output**
+
+![alt text](https://github.com/ronen-halevy/ronen-halevy.github.io/blob/master/assets/images/yolo/yolov3%20output%20-cube-13.jpg)
+
+
+### Achieving the Grid Effect
+
+So, how is the grid effect achieved?
+
+The grid effect is achieved by passing the image thru a FuLL CNN,  with 32 strides, such that the 416*416*3 input image results in a 13 x 13 x N shape output - this is the strcture illustrated in the above cube diagram, and 
+$N=3 x (5+N_{classes})$ 
+
+To enhence detection performance for smaller objects, YOLOv3 CNN generates simultaneously output in 3 grid scales: 13 x 13 (as depicted above), and also 26 x 26 and 52 x 52.
+
+
+
 
 ![alt text](https://github.com/ronen-halevy/ronen-halevy.github.io/blob/master/assets/images/yolo/yolov3-Flow%20Forward%20Path.jpg)
 
@@ -102,14 +131,11 @@ Diagrams below illustrate YOLOv3 Forwarding path:
 Let's zoom into YOLO CNN output - it is illustrated in the following diagram:
 
 
-![alt text](https://github.com/ronen-halevy/ronen-halevy.github.io/blob/master/assets/images/yolo/yolov3%20output%20-cube-13.jpg)
-
-
 As depicted by the diagram, each of the grid cells holds 3 records of information, each corresponds to a detected object bounding box, i.e. YOLOv3 supports up to 3 bounding boxes per cell.
 
 Next diagram drills deeper into the structure of the bounding boxes records:
 
-![alt text](https://github.com/ronen-halevy/ronen-halevy.github.io/blob/master/assets/images/yolo/yolov3%20output-cell-with-fields.jpg)
+
 
 
 
