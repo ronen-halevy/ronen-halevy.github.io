@@ -4,24 +4,26 @@
 
 The task of a CNN object detection model is dual: It provides both classifies objects within an image to dataset labels, and also provides an estimation to objects' bounding boxes locations. The diagram below illustrates an input image on the left, and classification with bounding box annotations results on the right.
 
+**Input Image (Left), Output Annotation (Right)**
+
 ![alt text](https://github.com/ronen-halevy/ronen-halevy.github.io/blob/master/assets/images/yolo/image-shapes-annotations.jpg)
 
 A detection model normally outputs 2 vectors per each detected object:
 
 - A Classification output vector, with estimated probabilities of each dataset label. Vector length is \\(N_classes\\), i.e. number of classes in sdataset. Decision is mostly taken by applying a softmax operator on the vector.
-- A vector with the predicted location of a bounding box which encloses the object. The location can be presented in various formats as illustrated in the diagram below.
+- A vector with the predicted location of a bounding box which encloses the object. The location can be represented in various formats as illustrated in the diagram below.
 
-**Bounding Box Annotation Formats**: 
+**Representation Formats**: 
 
-- Image on the left: The image contains a circle object
-- Annotations(1): $((x_1, y1), (x_2,y2))$
-- Annotations(2): Bounding Box annotated by center coordinates and boxe's dimenssions.
+- (1): $((x_1,y_1), (x_2,y_2))$
+- (2): $((x_c,y_c), (w,h))$
 
 ![alt text](https://github.com/ronen-halevy/ronen-halevy.github.io/blob/master/assets/images/yolo/circle-image.jpg)
 
 ## Object Detection Models
 
 As a baground to the presentation of YOLOv3 model, this section presents 
+
 ### Plain CNN Model
 
 Using a conventional CNN classification model, by adding a regression predictor to it is a straight forward implementation. However, it is limitted to detect a single object only.
@@ -40,23 +42,30 @@ To fit various object size, multiple window sizes should be activated, as depict
 
 Location can be determined by window's region, and the offset of the bounding box within the sliding window position.
 
+**Sliding Window**
+
 ![alt text](https://github.com/ronen-halevy/ronen-halevy.github.io/blob/master/assets/images/yolo/sliding-window-detection.gif)
 
 There are drawbacks to this model: The repeated deployment of the CNN model per each window position, constraints a heavy computation load. But not only that - since convolution span regions are limitted by window's size and position, which may be uncorrelated with image's regions of interest postion and sizes, objects may be cropped or missed by the model.
 
 ### R-CNN
+
 R-CNN ([by Ross Girshick et al, UC Berkely, 2014](https://arxiv.org/abs/1311.2524)), which stands `Regions with CNN features`, addresses drawbacks of `Sliding Window` model. 
 The idea of R-CNN in essence is of a 3 steps process:
 1. Extract region proposals - 2000 regions were stated n original paper. The farther process is limitted to proposed regions. There are a number of algorithm which can make region proposals. The authors used [selective search by J. Uijlings, K. van de Sande, T. Gevers, and A. Smeulders.Selective search for object recognition.IJCV, 2013.](https://www.researchgate.net/publication/262270555_Selective_Search_for_Object_Recognition)
 2. Deploy CNN with bounding box regression over each proposed region.
 3. Classify each region - originally using Linear SVM, in later model's variants e.g. `Fast R-CNN`, `Softmax` was deployed.
 
+**Region Proposals**
+
+![alt text](https://github.com/ronen-halevy/ronen-halevy.github.io/blob/master/assets/images/yolo/image-classification-rcnn.jpg)
+
 This is just a brief description of the algorithm, which at that time, contributed to a dramatic improvement of CNN detection models performance. R-CNN was later followed by improvments variants such as FASTR-CNN, [Girshick, Ross. "Fast r-cnn." Proceedings of the IEEE international conference on computer vision, 2015](https://arxiv.org/abs/1504.08083), FASTRR-CNN, [Shaoqing Ren, Kaiming He, Ross Girshick, Jian Sun, 2016](https://arxiv.org/abs/1506.01497). These models aimed to address R-CNN problems, amongst are real time performance issues,long training time for the 2000 regions and region selection process.
 
 
 ## YOLO
 
-This article is about YOLO (`You Only Look Once`), and specifically its 3rd version YOLOv3.
+This article is about YOLO (`You Only Look Once`), and specifically its 3rd version YOLOv3. [YOLOv3: An Incremental Improvement, Joseph Redmon, Ali Farhadi, 2018](https://arxiv.org/abs/1804.02767)
 
 The model effectively divides the image into a grid of cells and predicts bounding boxes and probabilities for each cell. Still, a single neural network is applied on the image, in a single pass.
 
