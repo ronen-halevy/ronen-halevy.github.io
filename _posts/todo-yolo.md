@@ -152,8 +152,8 @@ Note: `tf.resize` has a `preserve_aspect_ratio` attribute, so one could consider
     padded_image = np.full(shape=[yolo_h, yolo_w, 3], fill_value=128.0)
     d_w, d_h = (yolo_w - orig_w) // 2, (yolo_h - orig_h) // 2
     padded_image[d_h:orig_h+d_h, d_w:orig_w+d_w, :] = resized_image
-    
-`
+`    
+
 
 **Example**
 
@@ -173,19 +173,19 @@ scaled_w, scaled_h  = 416, 277
 
 **Scaled Image**
 
-![alt text]((https://github.com/ronen-halevy/ronen-halevy.github.io/blob/master/assets/images/yolo/image-resize-2.jpg)
+[alt text](https://github.com/ronen-halevy/ronen-halevy.github.io/blob/master/assets/images/yolo/image-resize-2.jpg)
 
 
 **Padded Image Template**
 
-![alt text]((https://github.com/ronen-halevy/ronen-halevy.github.io/blob/master/assets/images/yolo/image-resize-3.jpg)
+![alt text](https://github.com/ronen-halevy/ronen-halevy.github.io/blob/master/assets/images/yolo/image-resize-3.jpg)
 
 
 d_w, d_h = 0, 69
 
 **Padded Image**
 
-![alt text]((https://github.com/ronen-halevy/ronen-halevy.github.io/blob/master/assets/images/yolo/image-resize-4.jpg)
+![alt text](https://github.com/ronen-halevy/ronen-halevy.github.io/blob/master/assets/images/yolo/image-resize-4.jpg)
 
 
 
