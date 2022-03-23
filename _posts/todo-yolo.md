@@ -195,7 +195,25 @@ d_w, d_h = 0, 69
 
 
 
+## YOLOv3 CNN
 
+The network is FCN - Fully Convolution, so it is composed of convolution modules only, without any fully connected component. 
+
+As mentioned before, the network generates outputs in 3 scales, with a 13x13, a 26x26 and a 52x52 grid size for the coarse, medium and fine grid scales respectively.
+
+The backbone of YOLOv3 network is Darknet-53. The later is a cascade of 52 fully convolutional layers. Why named `53`? Because it originally had 53 layers, but the fully connected output layer was omitted. The conv blocks are residual blocks - we'll see that shortly.
+
+So here's a higher level block scheme of the CNN:
+
+**CNN Higer Level Diagram**
+
+![alt text](https://github.com/ronen-halevy/ronen-halevy.github.io/blob/master/assets/images/yolo/yolov3-cnn-higer-level.jpg)
+
+
+Let's now drill in towards the presentation of a more detailed diagram of the CNN.
+Still, for the sake of simplicity, we'll present it gradually. We start with the 13x13 output path. After that, we will add the rest of the network and present the entire picture.
+
+Here below is a detailed diagram of the 13 x 13 grid path. It is followed by explainations on the main building blocks. Still, the reader is assumed to be familiar with standard Conv Net standard modules - `Relu` and `Batch Normalization` otherwise the reader can look those up.
 
 
 
