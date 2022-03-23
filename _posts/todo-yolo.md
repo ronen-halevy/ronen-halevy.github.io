@@ -180,6 +180,7 @@ scaled_w, scaled_h  = 416, 277
 ![alt text](https://github.com/ronen-halevy/ronen-halevy.github.io/blob/master/assets/images/yolo/image-resize-2.jpg)
 
 
+
 **Padded Image Template**
 
 ![alt text](https://github.com/ronen-halevy/ronen-halevy.github.io/blob/master/assets/images/yolo/image-resize-3.jpg)
