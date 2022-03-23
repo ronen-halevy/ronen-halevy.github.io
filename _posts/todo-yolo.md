@@ -14,7 +14,7 @@ A detection model normally outputs 2 vectors per each detected object:
 - A vector with the predicted location of a bounding box which encloses the object. The location can be represented in various formats as illustrated in the diagram below.
 
 **Representation Formats**: 
-
+ins
 - (1): $((x_1,y_1), (x_2,y_2))$
 - (2): $((x_c,y_c), (w,h))$
 
@@ -158,8 +158,6 @@ Note: `tf.resize` has a `preserve_aspect_ratio` attribute, so one could consider
 
 <ins>Example</ins>
 
-<u>Example</u>
-
 
 Here's an illustration of the above pseudo code.
 
@@ -167,6 +165,7 @@ Here's an illustration of the above pseudo code.
 
 ![alt text](https://github.com/ronen-halevy/ronen-halevy.github.io/blob/master/assets/images/yolo/image-resize-1.jpg)
 
+`python
 orig_h, orig_w _  = 200, 300
 
 scale = min(416/300, 416/200)
@@ -174,18 +173,20 @@ scale = 1.386666667
 
 scaled_w, scaled_h  = int(1.386666667 * 300), int(1.386666667 * 200)
 scaled_w, scaled_h  = 416, 277
+`
 
 **Scaled Image**
 
-[alt text](https://github.com/ronen-halevy/ronen-halevy.github.io/blob/master/assets/images/yolo/image-resize-2.jpg)
+![alt text](https://github.com/ronen-halevy/ronen-halevy.github.io/blob/master/assets/images/yolo/image-resize-2.jpg)
 
 
 **Padded Image Template**
 
 ![alt text](https://github.com/ronen-halevy/ronen-halevy.github.io/blob/master/assets/images/yolo/image-resize-3.jpg)
 
-
+`python
 d_w, d_h = 0, 69
+`
 
 **Final Resized Input Image**
 
