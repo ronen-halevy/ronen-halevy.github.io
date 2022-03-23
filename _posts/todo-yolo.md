@@ -155,7 +155,11 @@ Note: `tf.resize` has a `preserve_aspect_ratio` attribute, so one could consider
 `    
 
 
-**Example**
+
+<ins>Example</ins>
+
+<u>Example</u>
+
 
 Here's an illustration of the above pseudo code.
 
@@ -183,7 +187,7 @@ scaled_w, scaled_h  = 416, 277
 
 d_w, d_h = 0, 69
 
-**Padded Image**
+**Final Resized Input Image**
 
 ![alt text](https://github.com/ronen-halevy/ronen-halevy.github.io/blob/master/assets/images/yolo/image-resize-4.jpg)
 
