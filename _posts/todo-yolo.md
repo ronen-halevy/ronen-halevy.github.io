@@ -70,7 +70,7 @@ This article is about YOLO (`You Only Look Once`), and specifically its 3rd vers
 The dominant common practice of CNN object detecton models before YOLO (e.g. Sliding Window and R-CNN), was to divide the image to regions, and run CNN on each. The computation cost required is huge.
 
 YOLO also uses the practice of segmentig the image, as due to that segmantation it can detect many objects in an image.
-However, YOLO's way of segmenting the image is entirely different: Rather than running CNN over thousands of regions seperately, it runs CNN only once over the entire image.
+However, YOLO's way of segmenting the image is entirely different: instead of running CNN over thousands of regions seperately, it runs CNN only once over the entire image.
 This is a huge difference, which makes YOLO so much faster - YOLOv3 is 1000 times faster than R-CNN.
 
 So how is segmentation still achieved?
@@ -128,8 +128,64 @@ To enhence detection performance for smaller objects, YOLOv3 CNN generates simul
 The below block diagrams describe YOLOv3 `Forwarding` and `Training` operation.
 Following chapters of this article present a detailed description of the 2 operation modes.
 
+**YOLOv3 Block Diagrams: Forwarding and Training**
+
+![alt text](https://github.com/ronen-halevy/ronen-halevy.github.io/blob/master/assets/images/yolo/yolov3-flow-diagram.jpg)
+
+## Image Resize
+
+The input images should be resized to 416 x 416 x 3, but preserve the original aspect ratio.
+
+Here's a pseudo code for image resize. It is followed by an illustrative example.
+
+Note: `tf.resize` has a `preserve_aspect_ratio` attribute, so one could consider using it.
+
+`python
+
+    yolo_h, yolo_w    = 416
+    orig_h, orig_w _  = image.shape
+
+    scale = min(yolo_w/orig_w, yolo_h/orig_h)
+    scaled_w, scaled_h  = int(scale * orig_w), int(scale * orig_h)
+    resized_image = np.resize(image, (yolo_w, yolo_h))
+
+    padded_image = np.full(shape=[yolo_h, yolo_w, 3], fill_value=128.0)
+    d_w, d_h = (yolo_w - orig_w) // 2, (yolo_h - orig_h) // 2
+    padded_image[d_h:orig_h+d_h, d_w:orig_w+d_w, :] = resized_image
+    
+`
+
+**Example**
+
+Here's an illustration of the above pseudo code.
+
+**Input Image**
+
+![alt text](https://github.com/ronen-halevy/ronen-halevy.github.io/blob/master/assets/images/yolo/image-resize-1.jpg)
+
+orig_h, orig_w _  = 200, 300
+
+scale = min(416/300, 416/200)
+scale = 1.386666667
+
+scaled_w, scaled_h  = int(1.386666667 * 300), int(1.386666667 * 200)
+scaled_w, scaled_h  = 416, 277
+
+**Scaled Image**
+
+![alt text]((https://github.com/ronen-halevy/ronen-halevy.github.io/blob/master/assets/images/yolo/image-resize-2.jpg)
 
 
+**Padded Image Template**
+
+![alt text]((https://github.com/ronen-halevy/ronen-halevy.github.io/blob/master/assets/images/yolo/image-resize-3.jpg)
+
+
+d_w, d_h = 0, 69
+
+**Padded Image**
+
+![alt text]((https://github.com/ronen-halevy/ronen-halevy.github.io/blob/master/assets/images/yolo/image-resize-4.jpg)
 
 
 
