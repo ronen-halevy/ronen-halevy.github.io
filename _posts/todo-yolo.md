@@ -201,7 +201,7 @@ The network is FCN - Fully Convolution, so it is composed of convolution modules
 
 As mentioned before, the network generates outputs in 3 scales, with a 13x13, a 26x26 and a 52x52 grid size for the coarse, medium and fine grid scales respectively.
 
-The backbone of YOLOv3 network is Darknet-53. The later is a cascade of 52 fully convolutional layers. Why named `53`? Because it originally had 53 layers, but the fully connected output layer was omitted. The conv blocks are residual blocks - we'll see that shortly.
+The backbone of YOLOv3 network is the Darknet-53 network - details on darknet-32 are provided in a next paragraph. 
 
 So here's a higher level block scheme of the CNN:
 
@@ -225,9 +225,15 @@ Here below is a detailed diagram of the 13 x 13 grid path. It is followed by exp
 
 **Darknet-53**
 
-`Darknet-53, as depicted by the diagram above, is structured as a cascade of 5 blocks of modules marked as `Res-Blocks`, with 6 additional blocks of modules marked as `Conv Blocks`. The 2 diagrams below present the structures of a `Conv Block` and a `Res-Block`.
+- `Darknet-53, as depicted by the diagram above, is structured as a cascade of 5 blocks of modules marked as `Res-Blocks`, with 6 additional blocks of modules marked as `Conv Blocks`. The 2 diagrams below present the structures of a `Conv Block` and a `Res-Block`.
 
+- The `x1`, `x2`, `x8`, `x4` notations on top of the Res-Net blocks in the diagram above, indicate of the duplication number of the same module. 
 
+- Summing up the total number of conv2D elements in Darknet-53, (considering 2 conv2D elements in a Res-Block), we get:  1+1+2+1+4+1+16+1+16+1+8=52
+
+- BTW, name is Darknet-53 is because it had 53 layers, but the fully connected output layer at the top was omitted.
+
+- Each of the 5 ConvBlocks downsamples by 2 (stride=2), for a total stride 32. Accordingly, the 416x416 input image results in a 13x13 output grid.
 
 **Conv Block**
 
@@ -252,7 +258,7 @@ The Res-Block sums up the output of 2 Conv-Blocks with the input data x, aka `sk
 The `ResBlock` structure provides 2 contributions:
 
 1. It helps solving the vanishing gradient problem. (**Vanishing Gradient Reminder:**, during training back propogation, the gradients are calculated using the chain rule, so a gradient is a multiplication product of previous gradients with its conv block partial derivative. In case the network is deep, gradient values become smaller in layers closer to the top of the network.). since ResBlock's `skip` connection gradient is unity, the vanishing gradient is prevented.
-2. Help refining feature map by mixing the skip layer which holds more details with the convolutioned layers output, which extract more features.
+2. The mixing of skip layer with the convolutioned layers refines the feature extraction, which benefits from more details provided by the skipped data and features provided by convolutioned layers output.
 
 
 
