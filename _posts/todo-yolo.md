@@ -140,7 +140,7 @@ Here's a pseudo code for image resize. It is followed by an illustrative example
 
 Note: `tf.resize` has a `preserve_aspect_ratio` attribute, so one could consider using it.
 
-`python
+```python
 
     yolo_h, yolo_w    = 416
     orig_h, orig_w _  = image.shape
@@ -152,7 +152,7 @@ Note: `tf.resize` has a `preserve_aspect_ratio` attribute, so one could consider
     padded_image = np.full(shape=[yolo_h, yolo_w, 3], fill_value=128.0)
     d_w, d_h = (yolo_w - orig_w) // 2, (yolo_h - orig_h) // 2
     padded_image[d_h:orig_h+d_h, d_w:orig_w+d_w, :] = resized_image
-`    
+```  
 
 
 
@@ -165,7 +165,7 @@ Here's an illustration of the above pseudo code.
 
 ![alt text](https://github.com/ronen-halevy/ronen-halevy.github.io/blob/master/assets/images/yolo/image-resize-1.jpg)
 
-`python
+```python
 orig_h, orig_w _  = 200, 300
 
 scale = min(416/300, 416/200)
@@ -173,7 +173,7 @@ scale = 1.386666667
 
 scaled_w, scaled_h  = int(1.386666667 * 300), int(1.386666667 * 200)
 scaled_w, scaled_h  = 416, 277
-`
+```
 
 **Scaled Image**
 
@@ -184,9 +184,9 @@ scaled_w, scaled_h  = 416, 277
 
 ![alt text](https://github.com/ronen-halevy/ronen-halevy.github.io/blob/master/assets/images/yolo/image-resize-3.jpg)
 
-`python
+```python
 d_w, d_h = 0, 69
-`
+```
 
 **Final Resized Input Image**
 
