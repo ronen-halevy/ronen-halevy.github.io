@@ -262,8 +262,29 @@ The `ResBlock` structure provides 2 contributions:
 
 
 
+# Expanding View To All 3 Scales
 
+YOLOv3 most noticeable improvement is the 3 scales detection. This enhances smaller object detection performance, which btw, was a weakness of previous YOLO versions.
 
+Here below is a block diagram of the complete YOLOv3 network. As depicted by the diagram, the 3 scale paths are quite similar, each consists of 7 convolution blocks, but each path runs in a different scale and number of filters.
+
+The Medium path is fed by Darknet-35's 16 strides stage, while the fine path is fed by Darknet-35's 8 strides stage.
+
+The medium and fine grained paths have an extra concatenation block, (See diagram's 3rd and 4th rows from top). It concatenates data sourced by Darknet-32's intermidiate stage, together with upsampled data from the preceding scale level path. 
+
+![alt text](https://github.com/ronen-halevy/ronen-halevy.github.io/blob/master/assets/images/yolo/yolov3-model-p2.jpg)
+
+**Why Concatenatin?**
+The concatenation module's contribution is quite similar to the Res Block's effect on feature detection refinement. 
+Still, concatenation is applied and not summation, since the 2 datas are sourced by different network stages, which leaves no point for summation.
+
+## CNN Output Process
+
+The diagram below describes YOLOv3 process of CNN output
+
+**YOLOv3 Post Process**
+
+![alt text](https://github.com/ronen-halevy/ronen-halevy.github.io/blob/master/assets/images/yolo/YOLOv3%20Post%20Process.jpg)
 
 
 
