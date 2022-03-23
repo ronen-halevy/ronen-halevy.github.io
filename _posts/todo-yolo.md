@@ -215,48 +215,44 @@ Still, for the sake of simplicity, we'll present it gradually. We start with the
 
 Here below is a detailed diagram of the 13 x 13 grid path. It is followed by explainations on the main building blocks. Still, the reader is assumed to be familiar with standard Conv Net standard modules - `Relu` and `Batch Normalization` otherwise the reader can look those up.
 
+**YOLO CNN Coarse Grid Path**
+
+
+![alt text](https://github.com/ronen-halevy/ronen-halevy.github.io/blob/master/assets/images/yolo/yolov3-model-p1.jpg)
+
+
+### CNN Modules Description
+
+**Darknet-53**
+
+`Darknet-53, as depicted by the diagram above, is structured as a cascade of 5 blocks of modules marked as `Res-Blocks`, with 6 additional blocks of modules marked as `Conv Blocks`. The 2 diagrams below present the structures of a `Conv Block` and a `Res-Block`.
 
 
 
-![alt text](https://github.com/ronen-halevy/ronen-halevy.github.io/blob/master/assets/images/yolo/yolov3-Flow%20Forward%20Path.jpg)
+**Conv Block**
+
+![alt text](https://github.com/ronen-halevy/ronen-halevy.github.io/blob/master/assets/images/yolo/conv-block.jpg)
+
+- As depicted by the diagram, ConvBlock is a combination of Conv2D module, BatchNormalization module and a Relu activation.
+
+- Note that the conv blocks have come in 2 flavors: either with downsampling, with stride equals 2 and zero-padding , (this flavor is implemented only within the Darknet-53 block), and without downsampling, where stride is 1.
+
+- The ConBlock is terminated by a `Relu` activation, except for the output stages, where activation is not applied.
+
+- The kernel size inside Darknet-53 is 3, while after that it alternates between 1 x 1 with N=512 and 3 x 3 with N=1024.
+
+**Res-Block**
+
+![alt text](https://github.com/ronen-halevy/ronen-halevy.github.io/blob/master/assets/images/yolo/residual-block.jpg)
 
 
-Let's zoom into YOLO CNN output - it is illustrated in the following diagram:
+The Res-Block sums up the output of 2 Conv-Blocks with the input data x, aka `skipped` input.
+(If the ResBlocks look familiar - then it indeed is a reuse of the structure presented in the famous `ResNet` model. 
 
+The `ResBlock` structure provides 2 contributions:
 
-
-
-
-
-
-
-
-
-
-
-
-Suppose we have this image:
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+1. It helps solving the vanishing gradient problem. (**Vanishing Gradient Reminder:**, during training back propogation, the gradients are calculated using the chain rule, so a gradient is a multiplication product of previous gradients with its conv block partial derivative. In case the network is deep, gradient values become smaller in layers closer to the top of the network.). since ResBlock's `skip` connection gradient is unity, the vanishing gradient is prevented.
+2. Help refining feature map by mixing the skip layer which holds more details with the convolutioned layers output, which extract more features.
 
 
 
@@ -266,10 +262,34 @@ Suppose we have this image:
 
 
 
-https://morioh.com/p/9bca8f92d016 :
-How does YOLO work?
 
-YOLO is based on a single Convolutional Neural Network (CNN). The CNN divides an image into regions and then it predicts the boundary boxes and probabilities for each region. It simultaneously predicts multiple bounding boxes and probabilities for those classes. YOLO sees the entire image during training and test time so it implicitly encodes contextual information about classes as well as their appearance.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
