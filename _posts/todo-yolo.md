@@ -138,9 +138,6 @@ Following chapters of this article present a detailed description of the 2 opera
 ![alt text](https://github.com/ronen-halevy/ronen-halevy.github.io/blob/master/assets/images/yolo/YOLOv3-Training.jpg)
 
 
-![alt text](https://github.com/ronen-halevy/ronen-halevy.github.io/blob/master/assets/images/yolo/YOLOv3-Training.drawio.svg)
-
-
 ## Image Resize
 
 The input images should be resized to 416 x 416 x 3, but preserve the original aspect ratio.
