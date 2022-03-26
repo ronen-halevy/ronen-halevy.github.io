@@ -8,6 +8,10 @@ The task of a CNN object detection model is dual: It provides both classifies ob
 
 ![alt text](https://github.com/ronen-halevy/ronen-halevy.github.io/blob/master/assets/images/yolo/image-shapes-annotations.jpg)
 
+
+<img src="https://github.com/ronen-halevy/ronen-halevy.github.io/blob/master/assets/images/yolo/image-shapes-annotations.jpg" alt="drawing" width="200"/>
+
+
 A detection model normally outputs 2 vectors per each detected object:
 
 - A Classification output vector, with estimated probabilities of each dataset label. Vector length is \\(N_classes\\), i.e. number of classes in sdataset. Decision is mostly taken by applying a softmax operator on the vector.
