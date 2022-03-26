@@ -179,7 +179,12 @@ scale = 1.386666667
 
 scaled_w, scaled_h  = int(1.386666667 * 300), int(1.386666667 * 200)
 scaled_w, scaled_h  = 416, 277
+
+d_w, d_h = 0, 69
 ```
+
+![alt text](https://github.com/ronen-halevy/ronen-halevy.github.io/blob/master/assets/images/yolo/image-resize.jpg)
+
 
 **Scaled Image**
 
@@ -191,9 +196,6 @@ scaled_w, scaled_h  = 416, 277
 
 ![alt text](https://github.com/ronen-halevy/ronen-halevy.github.io/blob/master/assets/images/yolo/image-resize-3.jpg)
 
-```python
-d_w, d_h = 0, 69
-```
 
 **Final Resized Input Image**
 
