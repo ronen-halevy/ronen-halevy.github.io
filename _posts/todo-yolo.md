@@ -131,16 +131,11 @@ Following chapters of this article present a detailed description of the 2 opera
 **YOLOv3 Block Diagram: Forwarding**
 
 
-![alt text](https://github.com/ronen-halevy/ronen-halevy.github.io/blob/master/assets/images/yolo/YOLOv3%20Forwarding.jpg)
+![alt text](https://github.com/ronen-halevy/ronen-halevy.github.io/blob/master/assets/images/yolo/YOLOv3-Forwarding.jpg)
 
 **YOLOv3 Block Diagram: Training**
 
-![alt text](https://github.com/ronen-halevy/ronen-halevy.github.io/blob/master/assets/images/yolo/YOLOv3%20Training.jpg)
-
-**YOLOv3 Block Diagrams: Forwarding and Training**
-
-
-![alt text](https://github.com/ronen-halevy/ronen-halevy.github.io/blob/master/assets/images/yolo/yolov3-flow-diagram.jpg)
+![alt text](https://github.com/ronen-halevy/ronen-halevy.github.io/blob/master/assets/images/yolo/YOLOv3-Training.jpg)
 
 ## Image Resize
 
