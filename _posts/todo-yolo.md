@@ -6,9 +6,6 @@ The task of a CNN object detection model is dual: It provides both classifies ob
 
 **Input Image (Left), Output Annotation (Right)**
 
-![alt text](https://github.com/ronen-halevy/ronen-halevy.github.io/blob/master/assets/images/yolo/image-shapes-annotations.jpg)
-
-
 <img src="https://github.com/ronen-halevy/ronen-halevy.github.io/blob/master/assets/images/yolo/image-shapes-annotations.jpg" alt="drawing" width="50%"/>
 
 
@@ -89,6 +86,9 @@ As the illustrated gridded image below depicts, the detected objects are referen
 ![alt text](https://github.com/ronen-halevy/ronen-halevy.github.io/blob/master/assets/images/yolo/yolov3-input-image-cells-shapes.jpg)
 
 
+<img src="https://github.com/ronen-halevy/ronen-halevy.github.io/blob/master/assets/images/yolo/yolov3-input-image-cells-shapes.jpg" alt="drawing" width="50%"/>
+
+
 The CNN assigns a detection descriptor to each grid cell. The descriptor combines 2 vectors
 1. A Classification result vector with predicted probabilty for each dataset's class
 2. Bounding Box Location - $x_1, x1, w, ,h$, and also an Objective Prediction which indicates probabilty of an object in the cell.
@@ -115,6 +115,9 @@ The CNN assigns a detection descriptor to each grid cell, so for a 13x13 grid, t
 **YOLOv3 - CNN Output**
 
 ![alt text](https://github.com/ronen-halevy/ronen-halevy.github.io/blob/master/assets/images/yolo/yolov3%20output%20-cube-13.jpg)
+
+
+<img src="https://github.com/ronen-halevy/ronen-halevy.github.io/blob/master/assets/images/yolo/yolov3%20output%20-cube-13.jpg" alt="drawing" width="50%"/>
 
 
 ### Achieving the Grid Effect
