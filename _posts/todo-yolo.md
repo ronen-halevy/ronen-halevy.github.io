@@ -128,7 +128,17 @@ To enhence detection performance for smaller objects, YOLOv3 CNN generates simul
 The below block diagrams describe YOLOv3 `Forwarding` and `Training` operation.
 Following chapters of this article present a detailed description of the 2 operation modes.
 
+**YOLOv3 Block Diagram: Forwarding**
+
+
+![alt text](https://github.com/ronen-halevy/ronen-halevy.github.io/blob/master/assets/images/yolo/YOLOv3%20Forwarding.jpg)
+
+**YOLOv3 Block Diagram: Training**
+
+![alt text](https://github.com/ronen-halevy/ronen-halevy.github.io/blob/master/assets/images/yolo/YOLOv3%20Training.jpg)
+
 **YOLOv3 Block Diagrams: Forwarding and Training**
+
 
 ![alt text](https://github.com/ronen-halevy/ronen-halevy.github.io/blob/master/assets/images/yolo/yolov3-flow-diagram.jpg)
 
