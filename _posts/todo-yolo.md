@@ -9,7 +9,7 @@ The task of a CNN object detection model is dual: It provides both classifies ob
 ![alt text](https://github.com/ronen-halevy/ronen-halevy.github.io/blob/master/assets/images/yolo/image-shapes-annotations.jpg)
 
 
-<img src="https://github.com/ronen-halevy/ronen-halevy.github.io/blob/master/assets/images/yolo/image-shapes-annotations.jpg" alt="drawing" width="200"/>
+<img src="https://github.com/ronen-halevy/ronen-halevy.github.io/blob/master/assets/images/yolo/image-shapes-annotations.jpg" alt="drawing" width="50%"/>
 
 
 A detection model normally outputs 2 vectors per each detected object:
