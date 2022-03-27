@@ -137,8 +137,7 @@ Following chapters of this article present a detailed description of the 2 opera
 
 **YOLOv3 Block Diagram: Training**
 
-![alt text](https://github.com/ronen-halevy/ronen-halevy.github.io/blob/master/assets/images/yolo/YOLOv3-Training.jpg)
-
+![alt text](https://github.com/ronen-halevy/ronen-halevy.github.io/blob/master/assets/images/yolo/training.gif)
 
 ## Image Resize
 
