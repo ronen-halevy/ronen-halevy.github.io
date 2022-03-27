@@ -4,7 +4,7 @@
 
 The task of a CNN object detection model is dual: It provides both classifies objects within an image to dataset labels, and also provides an estimation to objects' bounding boxes locations. The diagram below illustrates an input image on the left, and classification with bounding box annotations results on the right.
 
-**Input Image (Left), Output Annotation (Right)**
+**Animation: Image Class and Bounding Box Annotations**
 
 <img src="https://github.com/ronen-halevy/ronen-halevy.github.io/blob/master/assets/images/yolo/image-shapes-annotations.gif" alt="drawing" width="100%"/>
 
@@ -16,36 +16,35 @@ A detection model normally outputs 2 vectors per each detected object:
 - A Classification output vector, with estimated probabilities of each dataset label. Vector length is \\(N_classes\\), i.e. number of classes in sdataset. Decision is mostly taken by applying a softmax operator on the vector.
 - A vector with the predicted location of a bounding box which encloses the object. The location can be represented in various formats as illustrated in the diagram below.
 
-**Representation Formats**: 
-ins
-- (1): $((x_1,y_1), (x_2,y_2))$
-- (2): $((x_c,y_c), (w,h))$
+**Representation Formats:  (1) Bbox Vertices. (2) Bbox Center + Dimenssions**: 
 
 ![alt text](https://github.com/ronen-halevy/ronen-halevy.github.io/blob/master/assets/images/yolo/circle-image.jpg)
 
 ## Object Detection Models
 
-As a baground to the presentation of YOLOv3 model, this section presents 
+YOLO was indeed an innovative break-through in the field of CNN Object Detection algorithims. This section briefly reviews 3 object detection algorithms before YOLO. 
 
 ### Plain CNN Model
 
-Using a conventional CNN classification model, by adding a regression predictor to it is a straight forward implementation. However, it is limitted to detect a single object only.
-See illustrative diagram below: The image consists of 3 shape objects. Assume that the dataset set of labels is: ['square', 'ellipse', 'triangle', 'hexagon', 'circle']. The model, at the best case, will detect one of the object shapes only.
+This is a conventional CNN classification model, but classification output stage is now enhanced by a regression predictor for the prediction of a bounding box. Implementation is simple. However, it is limitted to a detection of a single object.
+
+The illustrative diagram which follows presents an image with 3 shape objects. The model, at the best case, will detect one of the object shapes only. 
 Such detection models, with a detection capability of a sinlge object are often reffered to as `Object Localization` models.
 
-**Plain CNN Model**
+**Figure: Plain CNN Model**
 
 ![alt text](https://github.com/ronen-halevy/ronen-halevy.github.io/blob/master/assets/images/yolo/image-classification.jpg)
 
 
 ### Sliding Window Model
 
-In this model, the CNN is activated in the bounderies of a square windows which slides in straight lines along the image as illustrated in the animation diagram below.
-To fit various object size, multiple window sizes should be activated, as depicted in the animation, and/or multiple image scales.
+To address the single object detectio0n limitation, CNN is repeatedly activated inside the bounderies of a window, as it  slides along the image as illustrated in the animation diagram below.
+
+To fit various object sizes, multiple window sizes should be activated, as illustrated in the animation. Alternatively,  (or in addition to), the sliding window should run over multiple scaleds of the image.
 
 Location can be determined by window's region, and the offset of the bounding box within the sliding window position.
 
-**Sliding Window**
+**Figure: Sliding Window Animation**
 
 ![alt text](https://github.com/ronen-halevy/ronen-halevy.github.io/blob/master/assets/images/yolo/sliding-window-detection.gif)
 
@@ -59,7 +58,7 @@ The idea of R-CNN in essence is of a 3 steps process:
 2. Deploy CNN with bounding box regression over each proposed region.
 3. Classify each region - originally using Linear SVM, in later model's variants e.g. `Fast R-CNN`, `Softmax` was deployed.
 
-**Region Proposals**
+**Figure: Region Proposals**
 
 ![alt text](https://github.com/ronen-halevy/ronen-halevy.github.io/blob/master/assets/images/yolo/image-classification-rcnn.jpg)
 
@@ -70,18 +69,14 @@ This is just a brief description of the algorithm, which at that time, contribut
 
 This article is about YOLO (`You Only Look Once`), and specifically its 3rd version YOLOv3. [YOLOv3: An Incremental Improvement, Joseph Redmon, Ali Farhadi, 2018](https://arxiv.org/abs/1804.02767)
 
-The dominant common practice of CNN object detecton models before YOLO (e.g. Sliding Window and R-CNN), was to divide the image to regions, and run CNN on each. The computation cost required is huge.
+As presented above, the common practive in various algorithms prior to YOLO, was to run CNN ver many regions. This ptactices' computation cost is high.
 
-YOLO also uses the practice of segmentig the image, as due to that segmantation it can detect many objects in an image.
-However, YOLO's way of segmenting the image is entirely different: instead of running CNN over thousands of regions seperately, it runs CNN only once over the entire image.
+YOLO does segment the image as well. However, YOLO's way of segmenting the image is entirely different: instead of running CNN over thousands of regions seperately, it runs CNN only once over the entire image.
 This is a huge difference, which makes YOLO so much faster - YOLOv3 is 1000 times faster than R-CNN.
 
-So how is segmentation still achieved?
+So how can YOLO be so fast, while still segmenting the images?
 
-Let's see...
-
-
-As the illustrated gridded image below depicts, the detected objects are referenced to the grid cell which contain their center is. 
+Answer: YOLO functionally segments the image to a grid of cells. But rather than running CNN seperately on each cell, it runs CNN ones, but objects are still referenced to the grid cell which contain their center is. We will illustrate that - don't worry.
 
 **Gridded Image**
 
@@ -119,7 +114,7 @@ The CNN assigns a detection descriptor to each grid cell, so for a 13x13 grid, t
 
 So, how is the grid effect achieved?
 
-The grid effect is achieved by passing the image thru a FuLL CNN,  with 32 strides, such that the 416*416*3 input image results in a 13 x 13 x N shape output - this is the strcture illustrated in the above cube diagram, and 
+The grid effect is achieved by passing the image thru a `FuLL CNN,  with 32 strides, such that the 416*416*3 input image results in a 13 x 13 x N shape output - this is the strcture illustrated in the above cube diagram, and 
 $N=3 x (5+N_{classes})$ 
 
 To enhence detection performance for smaller objects, YOLOv3 CNN generates simultaneously output in 3 grid scales: 13 x 13 (as depicted above), and also 26 x 26 and 52 x 52.
