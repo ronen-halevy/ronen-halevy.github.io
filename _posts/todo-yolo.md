@@ -133,7 +133,7 @@ Following chapters of this article present a detailed description of the 2 opera
 **YOLOv3 Block Diagram: Forwarding**
 
 
-![alt text](https://github.com/ronen-halevy/ronen-halevy.github.io/blob/master/assets/images/yolo/YOLOv3-Forwarding.jpg)
+![alt text](https://github.com/ronen-halevy/ronen-halevy.github.io/blob/master/assets/images/yolo/forwarding.gif)
 
 **YOLOv3 Block Diagram: Training**
 
