@@ -76,49 +76,58 @@ This is a huge difference, which makes YOLO so much faster - YOLOv3 is 1000 time
 
 So how can YOLO be so fast, while still segmenting the images?
 
-Answer: YOLO functionally segments the image to a grid of cells. But rather than running CNN seperately on each cell, it runs CNN ones, but objects are still referenced to the grid cell which contain their center is. We will illustrate that - don't worry.
+Answer: YOLO functionally segments the image to a grid of cells. But rather than running CNN seperately on each cell, it runs CNN ones.  
 
-**Gridded Image**
+YOLO's CNN predicts a detection descriptors to each grid cell. A descriptor combines 2 vectors:
+1. A Classification result vector which holds a classification probabilty for each of the dataset's classes.
+2. The Bounding Box Location $x_1, x1, w, ,h$, along with the Objective Prediction which indicates probabilty of an object resides in the Bbox.
 
-![alt text](https://github.com/ronen-halevy/ronen-halevy.github.io/blob/master/assets/images/yolo/yolov3-input-image-cells-shapes.jpg)
+
+Animation below illustrates Bounding Boxes parameters, which consist of the center location \\(c_x, c_y\\), and Width and Height.
 
 
-The CNN assigns a detection descriptor to each grid cell. The descriptor combines 2 vectors
-1. A Classification result vector with predicted probabilty for each dataset's class
-2. Bounding Box Location - $x_1, x1, w, ,h$, and also an Objective Prediction which indicates probabilty of an object in the cell.
+**Gridded Image Animation:** Center location \\(c_x, c_y\\), Width and Height
 
-Diagram below illustrates that.
+![alt text](https://github.com/ronen-halevy/ronen-halevy.github.io/blob/master/assets/images/yolo/grid-image-shapes.gif)
+
+
+
+Following is a diagram which illustrates a detection descriptor which YOLO predicts per a detected object. The descriptor consists of 5 words, 4 of which describe the bounding box location, then the Objective probability, and then N classes probabilities.
 
 **Detection Descriptor**
 
 ![alt text](https://github.com/ronen-halevy/ronen-halevy.github.io/blob/master/assets/images/yolo/yolov3-single-output-cell-fields.jpg)
 
+As a matter of fact, YOLOv3 supports not just a single detection per cell, but it supports 3 detections per a cell. 
+Accordingly, YOLO's predicted descriptor per cell is as illustrated in the diagram below.
 
-
-As a matter of fact, YOLOv3 supports 3 detections per a cell - the corrected descriptors illustration diagram follows.
 
 **Detection 3 Descriptors**
+
 
 ![alt text](https://github.com/ronen-halevy/ronen-halevy.github.io/blob/master/assets/images/yolo/yolov3%20output-cell-with-fields.jpg)
 
 
-Now let's combine the descriptors with the entire grid of cells:
-
-The CNN assigns a detection descriptor to each grid cell, so for a 13x13 grid, the CNN output looks like this:
+So that was the output for a single grid cell. 
+But CNN assigns such a detection descriptor to each of the grid cells. Considering a 13x13 grid, the CNN output looks like this:
 
 **YOLOv3 - CNN Output**
 
 ![alt text](https://github.com/ronen-halevy/ronen-halevy.github.io/blob/master/assets/images/yolo/yolov3%20output%20-cube-13.jpg)
 
-### Achieving the Grid Effect
+### Grid Construction
 
-So, how is the grid effect achieved?
+So, how is the grid constructed?
 
-The grid effect is achieved by passing the image thru a `FuLL CNN,  with 32 strides, such that the 416*416*3 input image results in a 13 x 13 x N shape output - this is the strcture illustrated in the above cube diagram, and 
+The grid is constructed by passing the image thru a CNN, with a downsampling stride. Image size is 416*416*3, so assuming 
+a 32 strides downsampling (which is actually the case), the output dimenssions would be a 13 x 13 x N box.
+Where:
+
 $N=3 x (5+N_{classes})$ 
 
-To enhence detection performance for smaller objects, YOLOv3 CNN generates simultaneously output in 3 grid scales: 13 x 13 (as depicted above), and also 26 x 26 and 52 x 52.
+That output structure is the illustrated above box diagram.
 
+To enhence detection performance for smaller objects, YOLOv3 CNN generates output in 3 grid scales simultaneously: a 13 x 13 grid (as depicted above), and also 26 x 26 and 52 x 52 grids.
 
 ### YOLOv3 Block Diagrams
 
