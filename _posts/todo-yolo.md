@@ -6,7 +6,9 @@ The task of a CNN object detection model is dual: It provides both classifies ob
 
 **Input Image (Left), Output Annotation (Right)**
 
-<img src="https://github.com/ronen-halevy/ronen-halevy.github.io/blob/master/assets/images/yolo/image-shapes-annotations.jpg" alt="drawing" width="100%"/>
+<img src="https://github.com/ronen-halevy/ronen-halevy.github.io/blob/master/assets/images/yolo/image-shapes-annotations.gif" alt="drawing" width="100%"/>
+
+
 
 
 A detection model normally outputs 2 vectors per each detected object:
@@ -183,23 +185,9 @@ scaled_w, scaled_h  = 416, 277
 d_w, d_h = 0, 69
 ```
 
-![alt text](https://github.com/ronen-halevy/ronen-halevy.github.io/blob/master/assets/images/yolo/image-resize.jpg)
+**Illustrating Animation**
 
-
-**Scaled Image**
-
-![alt text](https://github.com/ronen-halevy/ronen-halevy.github.io/blob/master/assets/images/yolo/image-resize-2.jpg)
-
-
-
-**Padded Image Template**
-
-![alt text](https://github.com/ronen-halevy/ronen-halevy.github.io/blob/master/assets/images/yolo/image-resize-3.jpg)
-
-
-**Final Resized Input Image**
-
-![alt text](https://github.com/ronen-halevy/ronen-halevy.github.io/blob/master/assets/images/yolo/image-resize-4.jpg)
+![alt text](https://github.com/ronen-halevy/ronen-halevy.github.io/blob/master/assets/images/yolo/image-resize-new.gif)
 
 
 
