@@ -129,7 +129,9 @@ That output structure is the illustrated above box diagram.
 
 To enhence detection performance for smaller objects, YOLOv3 CNN generates output in 3 grid scales simultaneously: a 13 x 13 grid (as depicted above), and also 26 x 26 and 52 x 52 grids.
 
-### YOLOv3 Block Diagrams
+## YOLOv3 Block Diagrams
+
+YOLOv3 Block Diagrams
 
 The below block diagrams describe YOLOv3 `Forwarding` and `Training` operation.
 Following chapters of this article present a detailed description of the 2 operation modes.
@@ -137,13 +139,29 @@ Following chapters of this article present a detailed description of the 2 opera
 **YOLOv3 Block Diagram: Forwarding**
 
 
-![alt text](https://github.com/ronen-halevy/ronen-halevy.github.io/blob/master/assets/images/yolo/forwarding.gif)
+![alt text](https://github.com/ronen-halevy/ronen-halevy.github.io/blob/master/assets/images/yolo/YOLOv3-Forwarding.jpg)
 
 **YOLOv3 Block Diagram: Training**
 
-![alt text](https://github.com/ronen-halevy/ronen-halevy.github.io/blob/master/assets/images/yolo/training.gif)
+![alt text](https://github.com/ronen-halevy/ronen-halevy.github.io/blob/master/assets/images/yolo/YOLOv3-Training.jpg)
 
-## Image Resize
+The next 2 chapters detail the functionality of Training and Forwarding modes diagrams, following the presented above block diagrams.
+
+## YOLOv3 Training Functionality
+
+This section details YOLOv3 Training functionality, following the presented above Training block diagram:
+
+1. Training Dataset
+2. Pre-Process Image
+3. CNN Model and Decode
+4. Loss Calculation
+5. Gradient Descent Update
+
+### 1. Training Dataset
+
+
+### 2. Pre-Process Image
+Image Resize
 
 The input images should be resized to 416 x 416 x 3, but preserve the original aspect ratio.
 
