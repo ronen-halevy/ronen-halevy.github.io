@@ -159,6 +159,11 @@ This section details YOLOv3 Training functionality, following the presented abov
 
 ### 1. Training Dataset
 
+The training dataset consists of training images with text meta data which holds the class labels and bounding boxes locations.
+
+The implementation discussed here expects the datafile to hold a row per image. The structure of a row is as follows:
+
+
 
 ### 2. Pre-Process Image
 Image Resize
