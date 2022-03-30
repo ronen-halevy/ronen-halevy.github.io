@@ -173,12 +173,31 @@ Let's illustrate the generation of that metadata with an example:
 
 Herebelow is a training image example:
 
+Note: Assume the dataset consists of 6 classes: Trapezoid, Circle Heagon, Ellipse, Square and Triangle
 **Training Image Example with Bounding Box Attonations**
 
 https://github.com/ronen-halevy/ronen-halevy.github.io/blob/master/assets/images/yolo/yolov3-input-image-example.jpg
 
 
-The example's image contains 4 objects. We will assing a training record for each object, in each of the 3 scales.A training label ch object is a candidate so there are 4 candidates label
+The example's image contains 4 objects. The table below presents label data per each object:
+
+| # | x   | y   | w   | h   | objective | Class     |
+|---|-----|-----|-----|-----|-----------|-----------|
+| 1 | 104 | 144 | 112 | 64  | 1         | Trapezoid |
+| 2 | 250 | 180 | 98  | 104 | 1         | Circle    |
+| 3 | 120 | 272 | 108 | 77  | 1         | Hexagon   |
+| 4 | 278 | 336 | 115 | 83  | 1         | Ellipse   |
+
+
+The Class data should be arrana
+
+
+
+record for each of the 3 scales. Let's 
+Let's show that:
+
+
+We will assing a training record for each object, in each of the 3 scales.A training label ch object is a candidate so there are 4 candidates label
 
 As depicted by the above training record diagram, it should consist of: x, y, w, h, Objective, class 
 priorities.
