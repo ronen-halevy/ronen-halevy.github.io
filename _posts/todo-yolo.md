@@ -159,7 +159,79 @@ This section details YOLOv3 Training functionality, following the presented abov
 
 ### 1. Training Dataset
 
-The training dataset consists of training images with text meta data which holds the class labels and bounding boxes locations.
+The training dataset consists of both images examples and their related metadata. The metadata is created per each of the 3 scales.
+The metadata is arranged to have the same structure like that of the detection descriptor presented in the YOLOv3 introduction section. 
+
+For convininence the diagram is posted herebelow again:
+
+**Training Arranged Metadata**
+
+![alt text](https://github.com/ronen-halevy/ronen-halevy.github.io/blob/master/assets/images/yolo/yolov3%20output-cell-with-fields.jpg)
+
+
+Let's illustrate the generation of that metadata with an example:
+
+Herebelow is a training image example:
+
+**Training Image Example with Bounding Box Attonations**
+
+https://github.com/ronen-halevy/ronen-halevy.github.io/blob/master/assets/images/yolo/yolov3-input-image-example.jpg
+
+As depicted by the above training records diagram, it should consist of: x,y,w,h,Objective, class Priorities
+
+So here we have 4 bounding boxes for the training examples:
+
+Trapezoid:
+104, 144, 112, 64
+
+Circle:
+250, 180, 98, 104
+
+Hexagon:
+120, 272, 108, 77
+
+Ellipse:
+
+278, 336, 115, 83
+
+
+
+
+
+
+
+
+The training data is used for loss function computatiot at 3 scaled down output stages: 52x52, 26x26 and 13x13.
+
+The diagram below shows a 13x13 grid over the image:
+
+**Training Image with Attonations with a 13x13 Grid**
+
+https://github.com/ronen-halevy/ronen-halevy.github.io/blob/master/assets/images/yolo/yolov3-input-image-example-grid.jpg
+
+
+The Training Metadata dataset is arranged in a Tensor with a shape: 
+
+Batch x NumOfScales x 13 x 13 x (5+NumOfClasses)
+
+
+
+
+
+
+
+
+
+
+
+For is structured in just like the  tto the diagram below presesnts a metadata record for a single training image example:
+
+
+
+
+
+
+of training images with metadata which holds the class labels and bounding boxes locations.
 
 The implementation discussed here expects the datafile to hold a row per image. The structure of a row is as follows:
 
