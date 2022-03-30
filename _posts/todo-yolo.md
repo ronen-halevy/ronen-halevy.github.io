@@ -177,9 +177,20 @@ Herebelow is a training image example:
 
 https://github.com/ronen-halevy/ronen-halevy.github.io/blob/master/assets/images/yolo/yolov3-input-image-example.jpg
 
-As depicted by the above training records diagram, it should consist of: x,y,w,h,Objective, class Priorities
 
-So here we have 4 bounding boxes for the training examples:
+The example's image contains 4 objects. We will assing a training record for each object, in each of the 3 scales.A training label ch object is a candidate so there are 4 candidates label
+
+As depicted by the above training record diagram, it should consist of: x, y, w, h, Objective, class 
+priorities.
+
+Each training example is represented by 3 training records, one per a grid scale. 
+As depicted by the above training record diagram, each record consists of: x, y, w, h, Objective and class 
+priorities.
+
+
+A trainiong record should be generated for each 
+
+So we have 4 bounding boxes for the training examples:
 
 Trapezoid:
 104, 144, 112, 64
