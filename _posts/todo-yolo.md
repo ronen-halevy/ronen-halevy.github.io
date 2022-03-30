@@ -173,13 +173,12 @@ Let's illustrate the generation of that metadata with an example:
 
 Herebelow is a training image example:
 
-Note: Assume the dataset consists of 6 classes: Trapezoid, Circle Heagon, Ellipse, Square and Triangle
 **Training Image Example with Bounding Box Attonations**
 
 https://github.com/ronen-halevy/ronen-halevy.github.io/blob/master/assets/images/yolo/yolov3-input-image-example.jpg
 
 
-The example's image contains 4 objects. The table below presents label data per each object:
+The table below presents theimage's 4 objects data:
 
 | # | x   | y   | w   | h   | objective | Class     |
 |---|-----|-----|-----|-----|-----------|-----------|
@@ -187,6 +186,24 @@ The example's image contains 4 objects. The table below presents label data per 
 | 2 | 250 | 180 | 98  | 104 | 1         | Circle    |
 | 3 | 120 | 272 | 108 | 77  | 1         | Hexagon   |
 | 4 | 278 | 336 | 115 | 83  | 1         | Ellipse   |
+
+To construct the training label records some arrangements should be taken:
+
+**Class Data** - Should be arranged as a list of class priorities. 
+
+Assume the dataset consists of 6 classes: Trapezoid, Circle Heagon, Ellipse, Square and Triangle, the presentation should be of a one hot format like so:
+Trapezoid: 1, 0, 0, 0, 0, 0
+Circle:    0, 1, 0, 0, 0, 0
+Hexagon:   0, 0, 1, 0, 0, 0
+Square:    0, 0, 0, 1, 0, 0
+
+We will apply Label Smoothing on the above one hot presentation.
+Label Smoothing is a regularization technique that introduces noise for the labels. This accounts for the fact that datasets may have mistakes in them, so maximizing the likelihood of  directly can be harmful. Assume for a small constant , the training set label  is correct with probability  and incorrect otherwise. Label Smoothing regularizes a model based on a softmax with  output values by replacing the hard  and  classification targets with targets of 
+ 
+ and  respectively.
+
+Source: Deep Learning, Goodfellow et al
+
 
 
 The Class data should be arrana
