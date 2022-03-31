@@ -450,7 +450,12 @@ Still, concatenation is applied and not summation, since the 2 datas are sourced
 
 ### Decode Module
 
+Decode module receives CNN's output, which concatenates bbox x,y,w,h,objective and class predictions.
+
+
+- 
 `Decode` processes CNN outputs, before being fed to Loss Function computation.
+
 
 Table below summerizes the module's operations.
 
