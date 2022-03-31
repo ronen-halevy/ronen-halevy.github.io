@@ -178,7 +178,7 @@ Herebelow is a training image example:
 https://github.com/ronen-halevy/ronen-halevy.github.io/blob/master/assets/images/yolo/yolov3-input-image-example.jpg
 
 
-The table below presents theimage's 4 objects data:
+The table below presents the 4 objects' metadata:
 
 | # | x   | y   | w   | h   | objective | Class     |
 |---|-----|-----|-----|-----|-----------|-----------|
@@ -187,68 +187,41 @@ The table below presents theimage's 4 objects data:
 | 3 | 120 | 272 | 108 | 77  | 1         | Hexagon   |
 | 4 | 278 | 336 | 115 | 83  | 1         | Ellipse   |
 
-To construct the training label records some arrangements should be taken:
+To construct the training label records, some data arrangements should be taken:
 
-**Class Data** - Should be arranged as a list of class priorities. 
+**Class Data** - Should be arranged as a list of $N_{class}$ priorities. Here $N_{class}$ is 6, since dataset consists of 6 classes: Trapezoid, Circle Heagon, Ellipse, Square and Triangle.
 
-Assume the dataset consists of 6 classes: Trapezoid, Circle Heagon, Ellipse, Square and Triangle, the presentation should be of a one hot format like so:
+So presentation should be of a one hot format like so:
+
 Trapezoid: 1, 0, 0, 0, 0, 0
 Circle:    0, 1, 0, 0, 0, 0
 Hexagon:   0, 0, 1, 0, 0, 0
 Square:    0, 0, 0, 1, 0, 0
 
-We will apply Label Smoothing on the above one hot presentation.
-Label Smoothing is a regularization technique that introduces noise for the labels. This accounts for the fact that datasets may have mistakes in them, so maximizing the likelihood of  directly can be harmful. Assume for a small constant , the training set label  is correct with probability  and incorrect otherwise. Label Smoothing regularizes a model based on a softmax with  output values by replacing the hard  and  classification targets with targets of 
- 
- and  respectively.
+Still, to improve performance, we apply `Label Smoothing`, as was proposed in `Rethinking the Inception Architecture for Computer Vision`by Szegedy et al in [Rethinking the Inception Architecture for Computer Vision](https://arxiv.org/abs/1512.00567).
 
-Source: Deep Learning, Goodfellow et al
+with Label Smmothing, the one-hot probability of y given x, (marked by \\((p(y|x) =delta_{y,x}\\) ), is smoothed according the formula below:
 
+**Label Smoothing Formula**
 
+\\(p{_smoothed}(y|x)=(1-\epsilon)\delta_{y,x}+\epsilon  * u(y)\\)
 
-The Class data should be arrana
+Where:
 
+- \\(\delta(y|x) \\) is the original one-hot probability
+- \\(\epsilon\\) is the smoothing parameter, taken as \\(\epsilon=0.01\\) 
+- \\(u(y)\\) is the distribution over lables, here assumed uniform distribution, i.e. \\(u(y)=\frac{1}{6}\\).
 
+Pluging that in gives:
 
-record for each of the 3 scales. Let's 
-Let's show that:
-
-
-We will assing a training record for each object, in each of the 3 scales.A training label ch object is a candidate so there are 4 candidates label
-
-As depicted by the above training record diagram, it should consist of: x, y, w, h, Objective, class 
-priorities.
-
-Each training example is represented by 3 training records, one per a grid scale. 
-As depicted by the above training record diagram, each record consists of: x, y, w, h, Objective and class 
-priorities.
+Trapezoid: 0.990125, 1.25e-4, 1.25e-4, 1.25e-4, 1.25e-4, 1.25e-4
+Circle:    1.25e-4, 0.990125, 1.25e-4, 1.25e-4, 1.25e-4, 1.25e-4
+Hexagon:   1.25e-4, 1.25e-4, 0.990125, 1.25e-4, 1.25e-4, 1.25e-4
+Square:    1.25e-4, 1.25e-4, 1.25e-4, 0.990125, 1.25e-4, 1.25e-4
 
 
-A trainiong record should be generated for each 
-
-So we have 4 bounding boxes for the training examples:
-
-Trapezoid:
-104, 144, 112, 64
-
-Circle:
-250, 180, 98, 104
-
-Hexagon:
-120, 272, 108, 77
-
-Ellipse:
-
-278, 336, 115, 83
-
-
-
-
-
-
-
-
-The training data is used for loss function computatiot at 3 scaled down output stages: 52x52, 26x26 and 13x13.
+The training data is used for loss function computation for the 3 grid scales.
+To make training data ready for this loss computations, we pack the training labels in 3 label arrays, each relate to a grid scale.
 
 The diagram below shows a 13x13 grid over the image:
 
@@ -257,35 +230,86 @@ The diagram below shows a 13x13 grid over the image:
 https://github.com/ronen-halevy/ronen-halevy.github.io/blob/master/assets/images/yolo/yolov3-input-image-example-grid.jpg
 
 
-The Training Metadata dataset is arranged in a Tensor with a shape: 
+The coarse 13x13 grid diagram shows that the 4 objects are located at cells (3, 4), (7, 5), (3, 8) and (8, 10).
 
-Batch x NumOfScales x 13 x 13 x (5+NumOfClasses)
+Table below presents the objects related cells per each of the 3 grids.
 
-
-
-
-
-
-
-
+| #Grid Size | Cell Location Object #1 | Cell Location Object #2 | Cell Location Object #3 | Cell Location Object #4 |
+|------------|-------------------------|-------------------------|-------------------------|-------------------------|
+| 13x13      | 3, 4                    | 7, 5                    | 3, 8                    | 8, 10                   |
+| 26x26      | 6, 8                    | 14, 10                  | 6, 16                   | 16, 20                  |
+| 52x52      | 12, 16                  | 28, 20                  | 12, 32                  | 32, 40                  |
 
 
 
-For is structured in just like the  tto the diagram below presesnts a metadata record for a single training image example:
+To make training data ready for loss computations, we pack it in 3 label arrays, with shape:
+
+\\\text{labels.shape=Batch} *  \text{Grid Size} * N_{boxes} * (5+N_{classes})\\)
+
+In our example:
+
+\\\text{coarse-lables.shape=Batch} *  13*13*3 * 11\\)
+
+\\\text{medium-lables.shape=Batch} * 26*26*3 * 11\\)
+
+\\\text{fine-lables.shape=Batch} * 52*52*3 * 11\\)
 
 
 
+Now let's fill in the data to the lable arrays:
+
+**coarse-grid lables**
+
+The network path to the coarse grid output passes through 32 strides, so accordingly the related grid cells indices are:
+
+index_x1, index_y1 = int(104/32), int(144/32)
+index_x2, index_y2 = int(250/32), int(180/32)
+index_x3, index_y3 = int(120/32), int(272/32)
+index_x4, index_y4 = int(278/32), int(336/32)
+
+index_x1, index_y1 = 3, 4
+index_x2, index_y2 = 7, 5
+index_x3, index_y3 = 3, 8
+index_x4, index_y4 = 8, 10
+
+**medium-grid lables**
+
+The network path to the coarse grid output passes through 16 strides, so accordingly the related grid cells indices are:
+
+index_x1, index_y1 = 6, 8
+index_x2, index_y2 = 14, 10
+index_x3, index_y3 = 6, 16
+index_x4, index_y4 = 16, 20
 
 
+**fine-grid lables**
 
-of training images with metadata which holds the class labels and bounding boxes locations.
+The network path to the coarse grid output passes through 16 strides, so accordingly the related grid cells indices are:
 
-The implementation discussed here expects the datafile to hold a row per image. The structure of a row is as follows:
+index_x1, index_y1 = 12, 16
+index_x2, index_y2 = 28, 20
+index_x3, index_y3 = 12, 32
+index_x4, index_y4 = 32, 40
 
+Let Batch=0:
+
+coarse-grid-lables[0,3,4,0,:] =  (0,104,144,112,64,1,0.990125,1.25e-4,1.25e-4,1.25e-4,1.25e-4,1.25e-4)
+coarse-grid-lables[0,7,5,0,:] = (0,250,180,98,104,1,0.990125,1.25e-4,1.25e-4,1.25e-4,1.25e-4,1.25e-4)
+coarse-grid-lables[0,3,8,0,:] = (0,120,272,108,77,1,0.990125,1.25e-4,1.25e-4,1.25e-4,1.25e-4,1.25e-4)
+coarse-grid-lables[0,8,10,0,:] = (0,278,336,115,83,1,0.990125,1.25e-4,1.25e-4,1.25e-4,1.25e-4,1.25e-4)
+
+medium-grid-lables[0,6,8,0,:] =  (0,104,144,112,64,1,0.990125,1.25e-4,1.25e-4,1.25e-4,1.25e-4,1.25e-4)
+medium-grid-lables[0,14,10,0,:] = (0,250,180,98,104,1,0.990125,1.25e-4,1.25e-4,1.25e-4,1.25e-4,1.25e-4)
+medium-grid-lables[0,6,18,0,:] = (0,120,272,108,77,1,0.990125,1.25e-4,1.25e-4,1.25e-4,1.25e-4,1.25e-4)
+medium-grid-lables[0,16,20,0,:] = (0,278,336,115,83,1,0.990125,1.25e-4,1.25e-4,1.25e-4,1.25e-4,1.25e-4)
+
+fine-grid-lables[0,6,8,0,:] =  (0,104,144,112,64,1,0.990125,1.25e-4,1.25e-4,1.25e-4,1.25e-4,1.25e-4)
+coarse-grid-lables[0,15,10,0,:] = (0,250,180,98,104,1,0.990125,1.25e-4,1.25e-4,1.25e-4,1.25e-4,1.25e-4)
+coarse-grid-lables[0,6,16,0,:] = (0,120,272,108,77,1,0.990125,1.25e-4,1.25e-4,1.25e-4,1.25e-4,1.25e-4)
+coarse-grid-lables[0,16,20,0,:] = (0,278,336,115,83,1,0.990125,1.25e-4,1.25e-4,1.25e-4,1.25e-4,1.25e-4)
 
 
 ### 2. Pre-Process Image
-Image Resize
 
 The input images should be resized to 416 x 416 x 3, but preserve the original aspect ratio.
 
@@ -335,23 +359,27 @@ d_w, d_h = 0, 69
 ![alt text](https://github.com/ronen-halevy/ronen-halevy.github.io/blob/master/assets/images/yolo/image-resize-new.gif)
 
 
+## 3. CNN Model and Decode
 
-## YOLOv3 CNN
+This section presents YOLOv3 CNN, along with its output decoding part, both are parts of the model's graph.
 
-The network is FCN - Fully Convolution, so it is composed of convolution modules only, without any fully connected component. 
+YOLOv3 CNN is an FCN - A Fully Convolution Network, as it is composed of convolution modules only, without any fully connected component. 
 
-As mentioned before, the network generates outputs in 3 scales, with a 13x13, a 26x26 and a 52x52 grid size for the coarse, medium and fine grid scales respectively.
+The CNN is based on Darknet-53 network as its backbone.
+Here's a high level block scheme of the CNN:
 
-The backbone of YOLOv3 network is the Darknet-53 network - details on darknet-32 are provided in a next paragraph. 
-
-So here's a higher level block scheme of the CNN:
-
-**CNN Higer Level Diagram**
+**CNN Hige Level Diagram**
 
 ![alt text](https://github.com/ronen-halevy/ronen-halevy.github.io/blob/master/assets/images/yolo/yolov3-cnn-higer-level.jpg)
 
+The diagram above contains 3 sub-module types:
+1. Darknet-53, CNN's backbone.
+2. Three CNN paths, one per each grid scale
+3. Decode modules which make a post-process on CNN's output, before loss function computation.
 
-Let's now drill in towards the presentation of a more detailed diagram of the CNN.
+Rest of this article's section drills deeper into those sub-modules. For the sake of simplicity, the drill is 
+
+Let's now drill into the  towards the presentation of a more detailed diagram of the CNN.
 Still, for the sake of simplicity, we'll present it gradually. We start with the 13x13 output path. After that, we will add the rest of the network and present the entire picture.
 
 Here below is a detailed diagram of the 13 x 13 grid path. It is followed by explainations on the main building blocks. Still, the reader is assumed to be familiar with standard Conv Net standard modules - `Relu` and `Batch Normalization` otherwise the reader can look those up.
