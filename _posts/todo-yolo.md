@@ -366,57 +366,53 @@ This section presents YOLOv3 CNN, along with its output decoding part, both are 
 YOLOv3 CNN is an FCN - A Fully Convolution Network, as it is composed of convolution modules only, without any fully connected component. 
 
 The CNN is based on Darknet-53 network as its backbone.
-Here's a high level block scheme of the CNN:
 
-**CNN Hige Level Diagram**
+Here below is a high level block scheme of the YOLOv3 CNN. It is followed by a more detailed diagram of same YOLOv3 CNN.
+
+**YOLOv3 CNN Hige Level Block Diagram**
 
 ![alt text](https://github.com/ronen-halevy/ronen-halevy.github.io/blob/master/assets/images/yolo/yolov3-cnn-higer-level.jpg)
 
-The diagram above contains 3 sub-module types:
+**YOLOv3 CNN Detailed Block Diagram**
+
+![alt text](https://github.com/ronen-halevy/ronen-halevy.github.io/blob/master/assets/images/yolo/yolov3-model-p2.jpg)
+
+
+Looking at the above diagrams, one can observe 3 sub-module types:
+
 1. Darknet-53, CNN's backbone.
 2. Three CNN paths, one per each grid scale
 3. Decode modules which make a post-process on CNN's output, before loss function computation.
 
-Rest of this article's section drills deeper into those sub-modules. For the sake of simplicity, the drill is 
-
-Let's now drill into the  towards the presentation of a more detailed diagram of the CNN.
-Still, for the sake of simplicity, we'll present it gradually. We start with the 13x13 output path. After that, we will add the rest of the network and present the entire picture.
-
-Here below is a detailed diagram of the 13 x 13 grid path. It is followed by explainations on the main building blocks. Still, the reader is assumed to be familiar with standard Conv Net standard modules - `Relu` and `Batch Normalization` otherwise the reader can look those up.
-
-**YOLO CNN Coarse Grid Path**
+Next section drills inside the modules, providing detailed insights on architecture.
 
 
-![alt text](https://github.com/ronen-halevy/ronen-halevy.github.io/blob/master/assets/images/yolo/yolov3-model-p1.jpg)
+### Darknet-53**
+
+Take a look at the Darknet-53 part in the above block diagram and note that:
+
+- Darknet-53 is structured as a cascade of ConvBlocks and ResBlocks.
+- The `x1`, `x2`, `x8`, `x4` notations on top of the ResNet blocks in the diagram above, indicate of the duplication number of the same module. 
+- Each of the 5 ConvBlocks downsamples by 2 (stride=2), for a total stride 32 at the top stage, and 16 and 8 at the stages before. Those stages feed the coarse, medium and fine scale grids respectively.
+
+Here below is a Block diagrams of ConvBlock. ResBlock follows after.
 
 
-### CNN Modules Description
 
-**Darknet-53**
-
-- `Darknet-53, as depicted by the diagram above, is structured as a cascade of 5 blocks of modules marked as `Res-Blocks`, with 6 additional blocks of modules marked as `Conv Blocks`. The 2 diagrams below present the structures of a `Conv Block` and a `Res-Block`.
-
-- The `x1`, `x2`, `x8`, `x4` notations on top of the Res-Net blocks in the diagram above, indicate of the duplication number of the same module. 
-
-- Summing up the total number of conv2D elements in Darknet-53, (considering 2 conv2D elements in a Res-Block), we get:  1+1+2+1+4+1+16+1+16+1+8=52
-
-- BTW, name is Darknet-53 is because it had 53 layers, but the fully connected output layer at the top was omitted.
-
-- Each of the 5 ConvBlocks downsamples by 2 (stride=2), for a total stride 32. Accordingly, the 416x416 input image results in a 13x13 output grid.
-
-**Conv Block**
+**ConvBlock**
 
 ![alt text](https://github.com/ronen-halevy/ronen-halevy.github.io/blob/master/assets/images/yolo/conv-block.jpg)
 
-- As depicted by the diagram, ConvBlock is a combination of Conv2D module, BatchNormalization module and a Relu activation.
+- As depicted by the diagram, ConvBlock is a structure which combines a Conv2D module, a BatchNormalization module and a Relu Activation at the top - except for the output stages, where activation is not applied.
 
-- Note that the conv blocks have come in 2 flavors: either with downsampling, with stride equals 2 and zero-padding , (this flavor is implemented only within the Darknet-53 block), and without downsampling, where stride is 1.
+- ConvBlocks have 2 flavors: either with or without downsampling. The downsampling with stride=2 flavor is implemented only within the Darknet-53 block.
 
-- The ConBlock is terminated by a `Relu` activation, except for the output stages, where activation is not applied.
+- ConvBlocks' kernel size is 3 inside Darknet-53, while after that, kernel size alternates between 1 x 1 with N=512 and 3 x 3 with N=1024.
 
-- The kernel size inside Darknet-53 is 3, while after that it alternates between 1 x 1 with N=512 and 3 x 3 with N=1024.
 
-**Res-Block**
+
+
+**ResBlock**
 
 ![alt text](https://github.com/ronen-halevy/ronen-halevy.github.io/blob/master/assets/images/yolo/residual-block.jpg)
 
@@ -430,22 +426,72 @@ The `ResBlock` structure provides 2 contributions:
 2. The mixing of skip layer with the convolutioned layers refines the feature extraction, which benefits from more details provided by the skipped data and features provided by convolutioned layers output.
 
 
+**Why named Darknet-53?**
 
-# Expanding View To All 3 Scales
+Darknet-53 is because it had 53 layers. However, count of all conv2D elements in Darknet-53, (considering 2 conv2D elements in a ResBlock), sums up to:  1+1+2+1+4+1+16+1+16+1+8=52, not 53.
 
-YOLOv3 most noticeable improvement is the 3 scales detection. This enhances smaller object detection performance, which btw, was a weakness of previous YOLO versions.
+Still, it had 53 layers, but the fully connected output layer at the top was omitted when deployed in YOLOv3.
 
-Here below is a block diagram of the complete YOLOv3 network. As depicted by the diagram, the 3 scale paths are quite similar, each consists of 7 convolution blocks, but each path runs in a different scale and number of filters.
+### 3 Scale Paths
 
-The Medium path is fed by Darknet-35's 16 strides stage, while the fine path is fed by Darknet-35's 8 strides stage.
+YOLOv3 most noticeable improvement wrt earlier YOLOs, was the detection in 3 scales. This improvement enhanced smaller object detection performance, which was a weakness of previous YOLO versions.
 
-The medium and fine grained paths have an extra concatenation block, (See diagram's 3rd and 4th rows from top). It concatenates data sourced by Darknet-32's intermidiate stage, together with upsampled data from the preceding scale level path. 
+As depicted by the above CNN diagram, the 3 scale paths are similarly structured, each with 7 convolution blocks. However, each scale is reduced by a factor of 2 in input data strides and ConvBlocks' number of filters.
+
+**The Concatenation Block**
+
+The medium and fine grained paths have an extra Concatenation Block, (See diagram's 3rd and 4th rows from top). It concatenates data sourced by Darknet-32's intermidiate stage, together with upsampled data from the preceding scale level path. 
 
 ![alt text](https://github.com/ronen-halevy/ronen-halevy.github.io/blob/master/assets/images/yolo/yolov3-model-p2.jpg)
 
-**Why Concatenatin?**
+Why Concatenating?
 The concatenation module's contribution is quite similar to the Res Block's effect on feature detection refinement. 
 Still, concatenation is applied and not summation, since the 2 datas are sourced by different network stages, which leaves no point for summation.
+
+### Decode Module
+
+`Decode` processes CNN outputs, before being fed to Loss Function computation.
+
+Table below summerizes the module's operations.
+
+
+
+
+Preprocessing of Bounding Box Parameters
+
+The bounding box outputs from the CNN, i.e. center coordinates and dimenssons are postprocessed calculated like so:
+
+x=sigmoid(x)+cx 
+
+y=sigmoid(y)+cy 
+
+w =  ew∗anchorw 
+
+h =  eh∗anchorh 
+
+Where  cxandcy  are the containing cell upper left corner coordinates, sigmoid(x) and sigmoid(y) are offsets of bounding box center within the containing cell.
+
+In the illustration diagram below, the object center is within cell (2,4), so accordingly:
+
+cy=1 
+
+cx=3 
+
+The expression for bounding box width and height is given next:
+
+w=exp(w)∗anchor_w
+
+h=exp(h)∗anchor_h
+
+Where the terms anchor_w and anchor_h are explained next.
+
+The objectness which relates to the probability of an object within the cell and class prob, which represents the probability of each class, are subject to sigmoid too.
+
+objectness=sigmoid(objectness)
+
+class prob=sigmoid(class prob) RONEN TBD SOFTMAX
+
+
 
 ## CNN Output Process
 
