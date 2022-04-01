@@ -450,24 +450,55 @@ Still, concatenation is applied and not summation, since the 2 datas are sourced
 
 ### Decode Module
 
-Decode module prepares CNN's output for Loss Function computation.
+Decode module is applied on CNN output, namely x,y,w,h,Objective,Class Priorities, preparing it for Loss Function computation.
 
-| Input                 | Operation                                                                                       | Output                |
-|-----------------------|-------------------------------------------------------------------------------------------------|-----------------------|
-| x,y                   | Apply Sigmoid to limit results 0<=x,y<=1 by Sigmoid, Upscale Coordinates to Image Original Size | x,y, in 416*416 scale |
-| w,h                   | Apply w,h mapping function, Upscale Coordinates to Image Original Size                          | w,h in 416*416 scale  |
-| Objective Probability | Limit value to 0<=Obj<=1 by applying Sigmodi()                                                  | 0<=Obj<=1             |
-| Class Probabilities   | Limit value to 0<=P<=1 by applying Sigmodi()                                                    | 0<=Probabilities<=1   |
+Table below summerizes Decode functionality over the data. It is followed by a detailed description of Decode.
 
 
-, which concatenates bbox x,y,w,h,objective and class predictions.
+| Input                 | Operation                                                                            | Output                |
+|-----------------------|--------------------------------------------------------------------------------------|-----------------------|
+| x,y                   | Limit results to 0<=x,y<=1 by applying Sigmoid. Upscale Coordinates to Original Size | x,y, in 416*416 scale |
+| w,h                   | Decode  w,h values, Upscale Coordinates to Image Original Size                       | w,h in 416*416 scale  |
+| Objective Probability | Limit value to 0<=Obj<=1 by applying Sigmoid()                                       | 0<=Obj<=1             |
+| Class Probabilities   | Limit values to 0<=P<=1 by applying Sigmoid()                                        | 0<=Probabilities<=1   |
+
+ 
+#### Decode x,y Coordinates
+
+Let x,y be the CNN predicted values for the location of a bounding box center.
+Given that x and y, the bounding box center can be computed as presented in the diagram below and in the expression which follows.
 
 
-- 
-`Decode` processes CNN outputs, before being fed to Loss Function computation.
+![alt text](https://github.com/ronen-halevy/ronen-halevy.github.io/blob/master/assets/images/yolo/postprocess-box-coordinates_s.jpg)
 
 
-Table below summerizes the module's operations.
+$x_c = c_x + \sigma(x)$
+
+$y_c = c_y + \sigma(y)$
+
+
+#### Decode w,h Coordinates
+
+Amongst all decoded parameters, only w, h are not activated by Sigmoid, as w,h are not restricted to be less than 1.
+
+The decoding expressions for w,h are:
+
+$w=exp(w)*\textrm{anchor_w}$
+
+$h=exp(h)*\textrm{anchor_h}$
+
+
+Where $anchor_w$ and $$anchor_h$
+
+
+To improve performance of bounding box predicton, YOLOv3 uses anchorsfor for bounding boxes width and height prediction. Accordingly, the CNN does not compute width and height directly, but only parameters for the formula based on anchor values. The anchor values are the typycally expected bounding box values.
+
+There are total of 9 anchors in the set. Each cell is assigned with the same anchors set. The 9 anchors are distributed between the cell's 9 bounding boxes in a decending order - the largest is assigned to the first bounding box for the coarse scale. The anchors should be computed by the k-means algorithm. An example is provided here.
+
+
+YOLOv3 relates to x,y as an offset inside the grid cell. A Sigmoide is applied to confirm value is in the expected range of  0<=x,y<=1 .
+
+
 
 
 
