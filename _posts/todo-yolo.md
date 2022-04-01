@@ -387,7 +387,7 @@ Looking at the above diagrams, one can observe 3 sub-module types:
 Next section drills inside the modules, providing detailed insights on architecture.
 
 
-### Darknet-53**
+### Darknet-53
 
 Take a look at the Darknet-53 part in the above block diagram and note that:
 
@@ -450,7 +450,17 @@ Still, concatenation is applied and not summation, since the 2 datas are sourced
 
 ### Decode Module
 
-Decode module receives CNN's output, which concatenates bbox x,y,w,h,objective and class predictions.
+Decode module prepares CNN's output for Loss Function computation.
+
+| Input                 | Operation                                                                                       | Output                |
+|-----------------------|-------------------------------------------------------------------------------------------------|-----------------------|
+| x,y                   | Apply Sigmoid to limit results 0<=x,y<=1 by Sigmoid, Upscale Coordinates to Image Original Size | x,y, in 416*416 scale |
+| w,h                   | Apply w,h mapping function, Upscale Coordinates to Image Original Size                          | w,h in 416*416 scale  |
+| Objective Probability | Limit value to 0<=Obj<=1 by applying Sigmodi()                                                  | 0<=Obj<=1             |
+| Class Probabilities   | Limit value to 0<=P<=1 by applying Sigmodi()                                                    | 0<=Probabilities<=1   |
+
+
+, which concatenates bbox x,y,w,h,objective and class predictions.
 
 
 - 
