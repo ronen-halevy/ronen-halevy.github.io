@@ -80,7 +80,7 @@ Answer: YOLO functionally segments the image to a grid of cells. But rather than
 
 YOLO's CNN predicts a detection descriptors to each grid cell. A descriptor combines 2 vectors:
 1. A Classification result vector which holds a classification probabilty for each of the dataset's classes.
-2. The Bounding Box Location $x_1, x1, w, ,h$, along with the Objective Prediction which indicates probabilty of an object resides in the Bbox.
+2. The Bounding Box Location $x_1, x1, w, ,h$, along with the Objectness Prediction which indicates probabilty of an object resides in the Bbox.
 
 
 Animation below illustrates Bounding Boxes parameters, which consist of the center location \\(c_x, c_y\\), and Width and Height.
@@ -92,7 +92,7 @@ Animation below illustrates Bounding Boxes parameters, which consist of the cent
 
 
 
-Following is a diagram which illustrates a detection descriptor which YOLO predicts per a detected object. The descriptor consists of 5 words, 4 of which describe the bounding box location, then the Objective probability, and then N classes probabilities.
+Following is a diagram which illustrates a detection descriptor which YOLO predicts per a detected object. The descriptor consists of 5 words, 4 of which describe the bounding box location, then the Objectness probability, and then N classes probabilities.
 
 **Detection Descriptor**
 
@@ -180,7 +180,7 @@ https://github.com/ronen-halevy/ronen-halevy.github.io/blob/master/assets/images
 
 The table below presents the 4 objects' metadata:
 
-| # | x   | y   | w   | h   | objective | Class     |
+| # | x   | y   | w   | h   | Objectness | Class     |
 |---|-----|-----|-----|-----|-----------|-----------|
 | 1 | 104 | 144 | 112 | 64  | 1         | Trapezoid |
 | 2 | 250 | 180 | 98  | 104 | 1         | Circle    |
@@ -447,10 +447,9 @@ The medium and fine grained paths have an extra Concatenation Block, (See diagra
 Why Concatenating?
 The concatenation module's contribution is quite similar to the Res Block's effect on feature detection refinement. 
 Still, concatenation is applied and not summation, since the 2 datas are sourced by different network stages, which leaves no point for summation.
-
 ### Decode Module
 
-Decode module is applied on CNN output, namely x,y,w,h,Objective,Class Priorities, preparing it for Loss Function computation.
+Decode module is applied on CNN output, namely x,y,w,h,Objectness,Class Priorities, preparing it for Loss Function computation.
 
 Table below summerizes Decode functionality over the data. It is followed by a detailed description of Decode.
 
@@ -459,7 +458,7 @@ Table below summerizes Decode functionality over the data. It is followed by a d
 |-----------------------|--------------------------------------------------------------------------------------|-----------------------|
 | x,y                   | Limit results to 0<=x,y<=1 by applying Sigmoid. Upscale Coordinates to Original Size | x,y, in 416*416 scale |
 | w,h                   | Decode  w,h values, Upscale Coordinates to Image Original Size                       | w,h in 416*416 scale  |
-| Objective Probability | Limit value to 0<=Obj<=1 by applying Sigmoid()                                       | 0<=Obj<=1             |
+| Objectness Probability | Limit value to 0<=Obj<=1 by applying Sigmoid()                                       | 0<=Obj<=1             |
 | Class Probabilities   | Limit values to 0<=P<=1 by applying Sigmoid()                                        | 0<=Probabilities<=1   |
 
  
@@ -495,7 +494,21 @@ Accordingly, the CNN does not compute width and height directly, but only parame
 BTW, amongst all decoded parameters, only w, h are the not activated by Sigmoid, as their value is restricted to be less equal 1.
 
 
+#### Decode Objectness
 
+Objectness holds the probability of an object within the cell.
+Decode applies a Sigmoid on this parameter, thus confirming value in range 0 <=Objectness <=1
+
+$objectness = sigmoid(objectness)$
+
+
+
+#### Decode Class Probability
+
+Class Probability is also activated by a Sigmoid. Alternatively, a Softmax could be activated, which would require a different Loss Function than we will use here.
+
+
+$\textrm{class prob} = sigmoid(\textrm{class prob} )$
 
 
 
