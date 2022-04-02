@@ -591,34 +591,58 @@ Animated diagrams below illustrate $S_{enclosed}$ as a function of boxes clossne
 ![alt text](https://github.com/ronen-halevy/ronen-halevy.github.io/blob/master/assets/images/yolo/giou-s-enclosed.gif)
 
 
-The expression for `GIoU Loss` is:
+The final expression used for `GIoU Loss` adds the consideration of whether there is indeed an object in the cell. This is expressed by $Objectness_{true}$, the ground truth objectness, which value is True if an object indeed exists in the cell, and False otherwise.
 
-$giou_{loss} = Obj_{true} *\gamma_{bbox} * (1-giou) $
+$giou_{loss} = Objectness_{true} * (1-giou) $
 
-Where:
+**!!!! RONEN REMOVE GAMA from CODe gives weights to small area!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1**
 
-- $\mathbf{Obj_{true}}$ equals 1 if an object indeed exists, otherwise it is 0, so loss is not considered.
+**GIoU Loss - Array Shape**
 
-- $\mathbf{\gamma_{bbox} = 2 - (h_{box}*w_{box})/S_{img} = 2 - (h_{box}*w_{box})/416^2}$ 
-is a coefficient which gives more weight to small boxes - ronen - remove this!
-
-
-Where:
-
-
-###GIoU Loss Shape
-The GIoU Loss is calulated per each bounding box. The shape is:
+GIoU Loss, same as the 2 other losesm  is calulated per each bounding box. Accordingly, lose shape is:
 - Batch * 13 *13 *3 for coarse grid
 - Batch * 26 *26 *3 for medium grid
 - Batch * 52 *52f *3 for medium grid
 
 
 
-
-
-
-
 #### Objectness Prediction Loss
+
+Objectness expresses the probability of an object exisiting in the cell.
+The Objectness CNN output passes through a Sigmoid activation block - as detailed in the Decoder section of this article.
+
+Consequently, the loss function can be computed by tf.sigmoid_cross_entropy_with_logits():
+
+$\textbf{sigmoid_cross_entropy_with_logits(labels=objectness_true, logits=objectness_pred)}$
+
+
+The Objectness Loss is ignored in case there is no object in the cell, i.e. $$objectness_{groundTruth} = False$$ but  maxIoU is above threshold.
+
+Table below lists the various states:
+
+
+
+
+
+
+
+
+considered includes the following factors:
+
+1. Objectness Ground Truth value equals `True`, i.e. there is an object in the cell.
+
+2. Objectness Ground Truth value equals `False` and maxIoU is below threshold (maxiou < IouLossThresh), i.e. false detection.
+
+(maxIoU is the maximal IoU per each of the 3 bounding boxes in each grid cell. 
+Shape of IoU: grid size x grid size x 3 x max_boxes
+Shape of maxIoU: grid size x grid size x 3 x 1
+
+
+Following the above, Objectness loss is expressed by:
+
+$obj_{loss} = (obj_{true}  +(1.0 -  Obj_{true}) * ( maxIoU < IoULossThresh) )
+* \text{sigmoid_cross_entropy_with_logits}(obj_{true}, obj_{pred})$
+
 
 
 ### 5.Gradient Descent Update
