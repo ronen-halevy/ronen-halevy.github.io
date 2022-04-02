@@ -599,7 +599,7 @@ $giou_{loss} = Objectness_{true} * (1-giou) $
 
 **GIoU Loss - Array Shape**
 
-GIoU Loss, same as the 2 other losesm  is calulated per each bounding box. Accordingly, lose shape is:
+GIoU Loss, same as the 2 other loss functions,  is calulated per each bounding box. Accordingly, lose shape is:
 - Batch * 13 *13 *3 for coarse grid
 - Batch * 26 *26 *3 for medium grid
 - Batch * 52 *52f *3 for medium grid
@@ -616,33 +616,69 @@ Consequently, the loss function can be computed by tf.sigmoid_cross_entropy_with
 $\textbf{sigmoid_cross_entropy_with_logits(labels=objectness_true, logits=objectness_pred)}$
 
 
-The Objectness Loss is ignored in case there is no object in the cell, i.e. $$objectness_{groundTruth} = False$$ but  maxIoU is above threshold.
+The Objectness Loss is ignored in case if there is no object in the cell, but maxIoU (The maximal IoU computed for this cell) is above threshold, i.e. it may indicate of an object. 
 
 Table below lists the various states:
 
+| Objectness Ground Truth | maxIoU < IoULossThresh | Objectness Loss |
+|-------------------------|------------------------|-----------------|
+| True                    | True                   | Valid           |
+| True                    | False                  | Valid           |
+| False                   | True                   | Valid           |
+| False                   | False                  | Ignore          |
 
 
+Final expression for Objectness Loss:
 
 
+$objectness_{loss} = (objectness_{true}  +(1.0 -  objectness_{true}) * ( maxIoU < IoULossThresh) )
+* \text{sigmoid_cross_entropy_with_logits}(objectness_{true}, objectness_{pred})$
 
 
+#### Class Prediction Loss 
 
-considered includes the following factors:
+Similar to the Objectness prediction, The classification predictions are also passed through `Sigmoid` activation - as detailed in the `Decoder` section. 
 
-1. Objectness Ground Truth value equals `True`, i.e. there is an object in the cell.
+Consequencly, tf.sigmoid_cross_entropy_with_logits() is used here too as the loss function.
 
-2. Objectness Ground Truth value equals `False` and maxIoU is below threshold (maxiou < IouLossThresh), i.e. false detection.
+The Classification Loss is ignored if there is no object in the cell i.e. 
 
-(maxIoU is the maximal IoU per each of the 3 bounding boxes in each grid cell. 
-Shape of IoU: grid size x grid size x 3 x max_boxes
-Shape of maxIoU: grid size x grid size x 3 x 1
+The Class loss are considered only when Objectness ground true value is True, i.e. there is an object in the cell.
+
+The expression for class loss follows: $(objectness_{true} = False$.
+
+So the final expression for Classification Loss is:
+
+$class_{loss} = obj_{true}  * \text{sigmoid_cross_entropy_with_logits}(obj_{true}, obj_{pred})$
+
+**Classification Loss Shape**
+
+Classification Loss, as the 2 other loss functions,  is calulated per each bounding box. Accordingly, shape is:
+
+$Classification_{loss}.shape$ = Batch x grid_size x grid_size x 3 x num_of_classes
 
 
-Following the above, Objectness loss is expressed by:
+- Batch * 13 *13 *3 for coarse grid
+- Batch * 26 *26 *3 for medium grid
+- Batch * 52 *52f *3 for medium grid
 
-$obj_{loss} = (obj_{true}  +(1.0 -  Obj_{true}) * ( maxIoU < IoULossThresh) )
-* \text{sigmoid_cross_entropy_with_logits}(obj_{true}, obj_{pred})$
 
+The Classification Loss is calulated per each bounding box. The shape is:
+- Batch x grid_size x grid_size x 3 x num_of_classes
+
+Where:
+
+grid_size; 13, 26, 52 for coarse, medium and fine grid respectively.
+num_of_classes: e.g. 80 for coco dataset
+
+#### Cost Functions
+Cost functions are the averaged value of Loss function, in our case average is over all axes i.e. all boxes, in all regions in all batche's examples:
+
+gioucost=mean(giouloss) 
+
+objectivecost=mean(objectiveloss) 
+
+classcost=mean(classloss)
 
 
 ### 5.Gradient Descent Update
