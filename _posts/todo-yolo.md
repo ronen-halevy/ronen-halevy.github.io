@@ -546,26 +546,52 @@ $N_{bbox} = BatchSize * GridSize * BoxesInGridCell$
 (e.g. For the Coarse Scale Grid, where BatchSize=10, GridSize=13x13, BoxesInGridCell=3, $N_{bbox}=10*169*3=5070$)
 
 
+But as noted, here we use `IOU` for Bounding Box Loss calculation.
 
-Commonly, `IOU` is used for Bounding Box Loss calculation like so:
+**IOU In Brief**:
+IOU (Intersection over Union) is a term used to describe the extent of overlap of two boxes. The greater the region of overlap, the greater the IOU
+
+IOU is a metric used in object detection benchmarks to evaluate how close the predicted and ground truth bounding boxes are. IOU, as its name indicates, is expressed as the ratio between the intersection area and the union area of the 2 boxes. IOU expression is listed below, followed by an illustrative diagram.
+
+$IOU=\frac{S_{true}\cap S_{pred}}{S_{true} \cup S_{pred}}$
+
+
+![alt text](https://github.com/ronen-halevy/ronen-halevy.github.io/blob/master/assets/images/yolo/iou1.gif)
+
+
+**IOU Loss Function**
 
 $iou_{loss} = 1 - iou$
 
 
-###GIOU
+Now that IOU is clear, here's an IOU  drawback: it is indifferent for all zero intersection - it is always 0 as illustrated in the diagram below.
 
-IOU evaluates how close are the predicted and ground truth bounding boxes:
 
-$IOU=\frac{S_{true}\cap S_{pred}}{S_{true} \cup S_{pred}}$
+**IOU Zero Intersection**
 
-However, `IOU`is indifferent for all zero intersection as illustrated in the diagram below. It is always 0:
 
+
+![alt text](https://github.com/ronen-halevy/ronen-halevy.github.io/blob/master/assets/images/yolo/iou_zero.gif)
+
+
+To overcome this drawback, we introduce `GIOUI` - a modified IOU algorithm, [Hamid Rezatofighi et al, Generalized Intersection over Union: A Metric and A Loss for Bounding Box Regression](https://arxiv.org/abs/1902.09630.
+
+
+
+**GIOU**
 
 GIOU stands for Generalized IOU. It adds the bounding boxes clossness criteria by considering the difference between the minimal area which encloses the boxes and the boxes union area:
 
-GIoU=IoU−Senclosed−(Strue∪Spred)Senclosed
+$GIoU=IoU - \frac{S_{enclosed} - {(S_{true} \cup S_{pred})}}{S_{enclosed}}$
 
-The expression for `GIoU Loss` is as follows:
+
+Animated diagrams below illustrate $S_{enclosed}$ as a function of boxes clossness.
+
+
+![alt text](https://github.com/ronen-halevy/ronen-halevy.github.io/blob/master/assets/images/yolo/giou-s-enclosed.gif)
+
+
+The expression for `GIoU Loss` is:
 
 $giou_{loss} = Obj_{true} *\gamma_{bbox} * (1-giou) $
 
@@ -575,6 +601,10 @@ Where:
 
 - $\mathbf{\gamma_{bbox} = 2 - (h_{box}*w_{box})/S_{img} = 2 - (h_{box}*w_{box})/416^2}$ 
 is a coefficient which gives more weight to small boxes - ronen - remove this!
+
+
+Where:
+
 
 ###GIoU Loss Shape
 The GIoU Loss is calulated per each bounding box. The shape is:
