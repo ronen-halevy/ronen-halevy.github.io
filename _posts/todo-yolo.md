@@ -511,6 +511,90 @@ Class Probability is also activated by a Sigmoid. Alternatively, a Softmax could
 $\textrm{class prob} = sigmoid(\textrm{class prob} )$
 
 
+### 4. Loss Calculation
+
+Loss Function determines the difference between the expected results and the predicted output. Final objective is to minimize this difference. Thw minimization is produced by an optimization algorithm, which is the next block, covered in the next section.
+
+The overall loss is a sum of all prediction losses, i.e.:
+
+- Bounding Box Prediction Loss
+- Objectness Prediction Loss
+- Class Prediction Loss
+
+Subsection which follow detail each of the 3.
+
+
+#### Bounding Box Prediction Loss
+
+Bounding Box Prediction Loss is dependent on 4 prediction parameters loss, i.e. x,y,w,h. There are various candidates for Loss Functions. Here we will use IOU.
+
+
+Alternatively, the loss could be taken directly as a sum of x,y,w,h prediction errors like so:
+
+$x_{loss} = \sum_{i=0}^{N_{bbox}}(x^i_{true} - x^i_{predicted})^2$
+
+$y_{loss} = \sum_{i=0}^{N_{bbox}}(y^i_{true} - y^i_{predicted})^2$
+
+$w_{loss} = \sum_{i=0}^{N_{bbox}}(w^i_{true} - w^i_{predicted})^2$
+
+$h_{loss} = \sum_{i=0}^{N_{bbox}}(h^i_{true} - h^i_{predicted})^2$
+
+**Where** number of bounding boxes is:
+
+$N_{bbox} = BatchSize * GridSize * BoxesInGridCell$
+
+(e.g. For the Coarse Scale Grid, where BatchSize=10, GridSize=13x13, BoxesInGridCell=3, $N_{bbox}=10*169*3=5070$)
+
+
+
+Commonly, `IOU` is used for Bounding Box Loss calculation like so:
+
+$iou_{loss} = 1 - iou$
+
+
+###GIOU
+
+IOU evaluates how close are the predicted and ground truth bounding boxes:
+
+$IOU=\frac{S_{true}\cap S_{pred}}{S_{true} \cup S_{pred}}$
+
+However, `IOU`is indifferent for all zero intersection as illustrated in the diagram below. It is always 0:
+
+
+GIOU stands for Generalized IOU. It adds the bounding boxes clossness criteria by considering the difference between the minimal area which encloses the boxes and the boxes union area:
+
+GIoU=IoU−Senclosed−(Strue∪Spred)Senclosed
+
+The expression for `GIoU Loss` is as follows:
+
+$giou_{loss} = Obj_{true} *\gamma_{bbox} * (1-giou) $
+
+Where:
+
+- $\mathbf{Obj_{true}}$ equals 1 if an object indeed exists, otherwise it is 0, so loss is not considered.
+
+- $\mathbf{\gamma_{bbox} = 2 - (h_{box}*w_{box})/S_{img} = 2 - (h_{box}*w_{box})/416^2}$ 
+is a coefficient which gives more weight to small boxes - ronen - remove this!
+
+###GIoU Loss Shape
+The GIoU Loss is calulated per each bounding box. The shape is:
+- Batch * 13 *13 *3 for coarse grid
+- Batch * 26 *26 *3 for medium grid
+- Batch * 52 *52f *3 for medium grid
+
+
+
+
+
+
+
+#### Objectness Prediction Loss
+
+
+### 5.Gradient Descent Update
+
+
+
 
 Where  cxandcy  are the containing cell upper left corner coordinates, sigmoid(x) and sigmoid(y) are offsets of bounding box center within the containing cell.
 
