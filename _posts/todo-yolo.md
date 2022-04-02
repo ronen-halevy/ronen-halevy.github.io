@@ -671,54 +671,13 @@ Where:
 grid_size; 13, 26, 52 for coarse, medium and fine grid respectively.
 num_of_classes: e.g. 80 for coco dataset
 
-#### Cost Functions
-Cost functions are the averaged value of Loss function, in our case average is over all axes i.e. all boxes, in all regions in all batche's examples:
+#### Total Loss Function
 
-gioucost=mean(giouloss) 
+The total Loss is the sum of all 3 losses in all grid cells, in all 3 grid scales/
 
-objectivecost=mean(objectiveloss) 
-
-classcost=mean(classloss)
-
+total_loss = giou_loss + conf_loss + prob_loss
 
 ### 5.Gradient Descent Update
-
-
-
-
-Where  cxandcy  are the containing cell upper left corner coordinates, sigmoid(x) and sigmoid(y) are offsets of bounding box center within the containing cell.
-
-In the illustration diagram below, the object center is within cell (2,4), so accordingly:
-
-cy=1 
-
-cx=3 
-
-The expression for bounding box width and height is given next:
-
-w=exp(w)∗anchor_w
-
-h=exp(h)∗anchor_h
-
-Where the terms anchor_w and anchor_h are explained next.
-
-The objectness which relates to the probability of an object within the cell and class prob, which represents the probability of each class, are subject to sigmoid too.
-
-objectness=sigmoid(objectness)
-
-class prob=sigmoid(class prob) RONEN TBD SOFTMAX
-
-
-
-## CNN Output Process
-
-The diagram below describes YOLOv3 process of CNN output
-
-**YOLOv3 Post Process**
-
-![alt text](https://github.com/ronen-halevy/ronen-halevy.github.io/blob/master/assets/images/yolo/YOLOv3%20Post%20Process.jpg)
-
-
 
 
 
