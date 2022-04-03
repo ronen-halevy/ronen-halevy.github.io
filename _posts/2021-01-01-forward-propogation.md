@@ -3,6 +3,10 @@ layout: default
 nav_order: 6
 title: Introduction to Forward Propogation
 ---
+
+![alt text](../assets/images/yolo/yolov3%20output%20-cube-13.jpg)
+
+
 # Forward Propogation
 
 ## Introduction
