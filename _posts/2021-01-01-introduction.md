@@ -5,6 +5,15 @@ title: Introduction
 ---
 # Introduction
 
+$$$$$
+Add like this:
+chrome-extension://gphandlahdpffmccakmbngmbjnjiiahp/https://vision.cornell.edu/se3/wp-content/uploads/2016/08/learning-detect-match.pdf :
+The extraction of effective features is a key step in many machine learning and computervision algorithms and their applications. In computer vision, one form of feature extraction isconcerned with the detection and description of important image regions. Traditionally, thesefeatures are extracted using hand engineered detectors and descriptors. Approaches adoptingthis paradigm are generally referred to askeypoint-basedorfeature-basedapproaches.Recently, the reintroduction of neural networks into many computer vision tasks broadlyreplaced hand-engineered feature-based approaches. Neural network based approaches gen-erally learn the feature extraction as part of an end-to-end pipeline. While these approacheshave shown great success in tasks such as scene recognition, object detection and classifica-tion, other tasks such as structure-from-motion still depend on purely engineered features,e.g. SIFT [18], to detect and describe keypoints.
+
+$$$$$$$
+
+
+
 
 Here's is my first post on machine learning and deep learning. It will be followed by posts both on theory and implementation topics. So, this is a kind of an intro.
 If so, I should start with a definitoion of 'What Machine Learning is'. Here's the definition:  Machine Learning, (or I’d prefer to speak of Machine Learning Algorithms), are computer algorithms which improve automatically through reference from data.
