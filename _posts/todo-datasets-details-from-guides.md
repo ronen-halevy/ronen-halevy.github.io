@@ -1,5 +1,10 @@
 https://www.tensorflow.org/api_docs/python/tf/data/Dataset
+##
+iterator = iter(dataset)
+And get the next batch of values:
 
+batch = iterator.get_next()
+##
 
 build tensorflow input pipelines
 
