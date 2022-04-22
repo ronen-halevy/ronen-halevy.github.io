@@ -23,6 +23,6 @@ https://keunwoochoi.wordpress.com/2020/02/21/tensorflow-parse-tfrecords-tf-io-va
 
 
 
-
+https://www.tensorflow.org/guide/data_performance
 
 
