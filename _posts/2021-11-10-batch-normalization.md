@@ -164,3 +164,22 @@ print("non_trainable_weights:", len(layer.non_trainable_weights))
 weights: 4
 trainable_weights: 2**
 non_trainable_weights: 2
+
+
+!!p.s. note (2022 june):
+https://www.tensorflow.org/api_docs/python/tf/keras/layers/BatchNormalization
+
+Importantly, batch normalization works differently during training and during inference.
+
+During training (i.e. when using fit() or when calling the layer/model with the argument training=True), the layer normalizes its output using the mean and standard deviation of the current batch of inputs. That is to say, for each channel being normalized, the layer returns gamma * (batch - mean(batch)) / sqrt(var(batch) + epsilon) + beta, where:
+
+epsilon is small constant (configurable as part of the constructor arguments)
+gamma is a learned scaling factor (initialized as 1), which can be disabled by passing scale=False to the constructor.
+beta is a learned offset factor (initialized as 0), which can be disabled by passing center=False to the constructor.
+During inference (i.e. when using evaluate() or predict() or when calling the layer/model with the argument training=False (which is the default), the layer normalizes its output using a moving average of the mean and standard deviation of the batches it has seen during training. That is to say, it returns gamma * (batch - self.moving_mean) / sqrt(self.moving_var + epsilon) + beta.
+
+self.moving_mean and self.moving_var are non-trainable variables that are updated each time the layer in called in training mode, as such:
+
+moving_mean = moving_mean * momentum + mean(batch) * (1 - momentum)
+moving_var = moving_var * momentum + var(batch) * (1 - momentum)
+As such, the layer will only normalize its inputs during inference after having been trained on data that has similar statistics as the inference data.
