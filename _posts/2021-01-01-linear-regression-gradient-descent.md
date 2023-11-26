@@ -210,4 +210,6 @@ Figure 10 presents an animation of Linear Regression modeling for a 1 dimenssion
 
 ![gradient_descent_14_iteration](../assets/images/linear-regression/linear_regression.gif)
 
-
+todo:
+Link:
+https://medium.com/@evertongomede/gradient-descent-a-fundamental-optimization-algorithm-95227f320f9c
