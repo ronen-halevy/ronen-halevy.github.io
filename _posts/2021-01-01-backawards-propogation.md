@@ -294,3 +294,8 @@ Here's the process:
 
 
 List the whole sequence
+
+#####
+todo check link
+[List the whole sequence
+](https://medium.com/@jorgecardete/backpropagation-2eeb25201095)https://medium.com/@jorgecardete/backpropagation-2eeb25201095
