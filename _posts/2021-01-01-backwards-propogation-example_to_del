@@ -327,7 +327,8 @@ w_{41}^{[2]} & w_{42}^{[2]} & w_{43}^{[2]}
 1\\)
 \\(dim(dA^{[1]})=n^{[1]} \cdot n^{[2]}\\) ???
 
-
+#####
+todo:
 
 link to check:
 https://medium.com/@jorgecardete/backpropagation-2eeb25201095
